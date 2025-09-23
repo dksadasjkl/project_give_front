@@ -10,15 +10,15 @@ import PageContainer from './components/Page/PageContainer/PageContainer';
 function App() {
   return (
     <RootLayout>
-      <RootContainer>
         <RootHeader />  
+      <RootContainer>
         <PageContainer>
           <Routes>
             <Route path="/*" element={<DonationRoute />} />
           </Routes>
         </PageContainer>
-      </RootContainer>
       <RootFooter />
+      </RootContainer>
     </RootLayout>
   );
 }

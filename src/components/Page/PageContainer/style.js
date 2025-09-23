@@ -3,8 +3,9 @@ import { css } from "@emotion/react";
 export const container = css`
     box-sizing: border-box;
     position: relative;
+    width: 100%;   
     flex-grow: 1;
-    width: 100%;    
+    padding-top: 80px;
 `;
 
 export const font = css`
