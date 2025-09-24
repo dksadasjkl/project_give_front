@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import { useQuery } from '@tanstack/react-query';
-import { getDonationProjectsRequest } from '../../../apis/Donation/donation';
+import { getDonationProjectsRequest } from '../../../apis/api/Donation/donation';
 
 function DonationPage() {
 const [ donationList, setDonationList ] = useState([]);

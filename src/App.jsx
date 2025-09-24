@@ -6,6 +6,7 @@ import { RootHeader } from './components/Root/RootHeader/RootHeader';
 import RootContainer from './components/Root/RootContainer/RootContainer';
 import { RootFooter } from './components/Root/RootFooter/RootFooter';
 import PageContainer from './components/Page/PageContainer/PageContainer';
+import AccountRoute from './routes/AccountRoute/AccountRoute';
 
 function App() {
   return (
@@ -14,7 +15,12 @@ function App() {
       <RootContainer>
         <PageContainer>
           <Routes>
-            <Route path="/*" element={<DonationRoute />} />
+            <Route path="/*" element={
+              <>
+                <DonationRoute />
+                <AccountRoute />
+              </>
+              } />
           </Routes>
         </PageContainer>
       <RootFooter />

@@ -31,3 +31,11 @@ export const header = css`
         }
     }
 `;
+
+export const link = css`
+    text-decoration: none;  
+    color: #333;            
+    font-weight: bold;     
+    padding: 8px 16px;      
+    transition: all 0.3s ease;
+`;
