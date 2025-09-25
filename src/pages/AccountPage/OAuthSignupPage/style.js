@@ -14,7 +14,7 @@ export const container = css`
     border-radius: 15px;
 `;
 
-export const header = (authState) => css`
+export const header = css`
     box-sizing: border-box;
     display: flex;
     width: 100%;
@@ -24,33 +24,18 @@ export const header = (authState) => css`
     color: #eeeeee;
     
     & > div {
-        width: 50%;
+        width:100%;
         background-color: rgba(0, 128, 49, 0.89);
         text-align: center;
         line-height: 50px;
-    }
 
-    & > div:nth-of-type(1) {
-        box-sizing: border-box;
-        border-top-left-radius: 15px;
-        border-right: 1px solid #eeeeee;
-        cursor: pointer;
-        &:hover{
-            background-color: rgba(2, 173, 68, 0.89);
-        }
-    }
-
-    & > div:nth-of-type(2) {
         box-sizing: border-box;
         border-top-right-radius: 15px;
+        border-top-left-radius: 15px;
         cursor: pointer;
         &:hover{
             background-color: rgba(2, 173, 68, 0.89);
         }
-    }
-
-    & > div:nth-of-type(${authState}) {
-        background-color: rgba(0, 128, 49, 0.89);
     }
 `;
 

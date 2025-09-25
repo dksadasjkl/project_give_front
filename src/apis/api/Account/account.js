@@ -6,5 +6,9 @@ export const authLoginRequest = async (data) => {
 }
 
 export const authSignupRequest = async (data) => {
-    return await instance.post("/users", data);
+    return await instance.post("/user", data);
+}
+
+export const oAuth2SignupRequest = async (data) => {
+    return await instance.post("/user/oauth2/sign-up", data);
 }

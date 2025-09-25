@@ -51,6 +51,7 @@ function AuthenticationPage() {
             navigate("/");
         },
         onError: error => {
+            alert(error);
         } 
     });
 
@@ -130,10 +131,9 @@ function AuthenticationPage() {
                                 <div css={s.signUp}>
                                     계정이 없으신가요? <span onClick={() => setAuthState(2)}>회원가입</span>
                                 </div>
-                                {/* oauth */}
-                                {/* <div css={s.oauth}>
+                                 <div css={s.oauth}>
                                     <a href={`http://${getServerAddress()}/oauth2/authorization/google`}>
-                                        <img src="https://d1nuzc1w51n1es.cloudfront.net/d99d8628713bb69bd142.png" alt="google"/>
+                                        <img src="https://img.icons8.com/color/512/google-logo.png" alt="google"/>
                                     </a>
                                     <a href={`http://${getServerAddress()}/oauth2/authorization/kakao`}>
                                         <img src="https://d1nuzc1w51n1es.cloudfront.net/c9b51919f15c93b05ae8.png" alt="kakao"/>
@@ -141,7 +141,7 @@ function AuthenticationPage() {
                                     <a href={`http://${getServerAddress()}/oauth2/authorization/naver`}>
                                         <img src="https://d1nuzc1w51n1es.cloudfront.net/6e4f331986317290b3ee.png" alt="naver"/>
                                     </a>
-                                </div> */}
+                                </div>
                             </> 
                             : 
                             <>
