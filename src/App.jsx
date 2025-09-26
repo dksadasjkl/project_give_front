@@ -7,11 +7,25 @@ import RootContainer from './components/Root/RootContainer/RootContainer';
 import { RootFooter } from './components/Root/RootFooter/RootFooter';
 import PageContainer from './components/Page/PageContainer/PageContainer';
 import AccountRoute from './routes/AccountRoute/AccountRoute';
+import { useQuery } from '@tanstack/react-query';
+import { getPrincipalRequest } from './apis/api/Account/account';
 
 function App() {
+
+  const principalQuery = useQuery(
+    ["principalQuery"], 
+    getPrincipalRequest,
+    {
+      retry: 0,
+      refetchOnWindowFocus: false,
+      onSuccess: (response) => {},
+      onError: (error) => {},
+    }
+  );
+
   return (
     <RootLayout>
-        <RootHeader />  
+      <RootHeader />  
       <RootContainer>
         <PageContainer>
           <Routes>
@@ -23,8 +37,8 @@ function App() {
               } />
           </Routes>
         </PageContainer>
-      <RootFooter />
       </RootContainer>
+      <RootFooter />
     </RootLayout>
   );
 }

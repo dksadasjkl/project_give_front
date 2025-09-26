@@ -12,3 +12,7 @@ export const authSignupRequest = async (data) => {
 export const oAuth2SignupRequest = async (data) => {
     return await instance.post("/user/oauth2/sign-up", data);
 }
+
+export const getPrincipalRequest = async () => {
+    return await instance.get("/account/principal");
+}
