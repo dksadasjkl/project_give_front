@@ -26,3 +26,13 @@ export const checkNicknameRequest = async (data) => {
   const response = await instance.post(`/account/nickname-check`, data);
   return response.data; 
 };
+
+export const findUsernameRequest = async (data) => {
+  const response = await instance.post(`/account/find-username`, data);
+  return response.data; 
+};
+
+export const resetPasswordRequest = async (data) => {
+  const response = await instance.put("/account/passwordReset", data);
+  return response.data; 
+};

@@ -7,6 +7,8 @@ import { authLoginRequest, authSignupRequest, checkNicknameRequest, checkUsernam
 import getServerAddress from "../../../constants/serverAddress";
 import { useMutation } from "@tanstack/react-query";
 import AuthPageInput from "../../../components/Account/AuthPageInput/AuthPageInput";
+import FindIdModal from "../../../components/Modal/FindIdModal";
+import FindPasswordModal from "../../../components/Modal/FindPasswordModal";
 
 function AuthenticationPage() {
     const navigate = useNavigate();
@@ -23,6 +25,10 @@ function AuthenticationPage() {
     const [ phone, phoneChange, phoneMessage ] = useInput("phone");
     const [ nickname, nicknameChange, nicknameMessage, setNicknameMessage ] = useInput("nickname");
     const [ checkPasswordMessage, setCheckPasswordMessage ] = useState(null);
+    // 아이디 찾기 모달 상태
+    const [isFindIdModalOpen, setIsFindIdModalOpen] = useState(false);
+    // 비밀번호 찾기 모달 상태
+    const [isFindPwModalOpen, setIsFindPwModalOpen] = useState(false);
 
     const authLoginMutation = useMutation({
         mutationKey: "authLoginMutation",
@@ -224,9 +230,9 @@ function AuthenticationPage() {
                                     <button css={s.logInButton} onClick={handleLoginSubmit}>로그인</button>
                                 </div>
                                 <div css={s.signUp}>
-                                    <span>아이디 찾기</span>
+                                    <span onClick={() => setIsFindIdModalOpen(true)}>아이디 찾기 </span>
                                     <span>|</span>
-                                    <span>비밀번호 찾기</span>
+                                    <span onClick={() => setIsFindPwModalOpen(true)}>비밀번호 찾기</span>
                                     <span>|</span>
                                     <span onClick={() => setAuthState(2)}>회원가입</span>
                                 </div>
@@ -266,6 +272,14 @@ function AuthenticationPage() {
                                 </div>
                             </> 
                     }
+                    <FindIdModal
+                        isOpen={isFindIdModalOpen}
+                        onClose={() => setIsFindIdModalOpen(false)}
+                    />
+                    <FindPasswordModal
+                        isOpen={isFindPwModalOpen}
+                        onClose={() => setIsFindPwModalOpen(false)}
+                    />
                 </div>
             </div>
         </div>

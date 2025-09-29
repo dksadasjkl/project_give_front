@@ -60,7 +60,6 @@ export const headerTitle = css`
 `;
 
 export const inputLayout = css`
-    margin-top: 15px;
     display: flex;
     padding: 0px 20px;
 `;
@@ -75,7 +74,7 @@ export const input = css`
 export const logInButton = css`
     margin-left: 10px;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     width: 140px;
     font-size: 16px;
     font-weight: 700;
@@ -88,8 +87,8 @@ export const logInButton = css`
 `
 
 export const signUp = css`
-    margin-top: 10px;
     padding-left: 20px;
+    padding-top: 10px;
     color: #333333;
     cursor: default;
 
@@ -151,7 +150,7 @@ export const idCheckButton = css`
     width: 100px;
     height: 38px;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     background-color: rgba(0, 128, 49, 0.89);
     font-weight: 700;
     color: #eeeeee;
@@ -173,7 +172,7 @@ export const signUpLayoutInputList = css`
 
 export const regiseterButton = css`
     padding: 0px 20px;
-    margin-top: 25px;
+    margin-top: 10px;
     margin-bottom: 25px;
     display: flex;
     justify-content: center;
@@ -186,7 +185,7 @@ export const regiseterButton = css`
         font-weight: 800;
         font-size: 18px;
         color: #eeeeee;
-        border-radius: 5px;
+        border-radius: 8px;
         border: none;
     }
 
