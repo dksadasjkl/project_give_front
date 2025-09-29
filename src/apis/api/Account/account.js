@@ -6,13 +6,23 @@ export const authLoginRequest = async (data) => {
 }
 
 export const authSignupRequest = async (data) => {
-    return await instance.post("/user", data);
+    return await instance.post("/users", data);
 }
 
 export const oAuth2SignupRequest = async (data) => {
-    return await instance.post("/user/oauth2/sign-up", data);
+    return await instance.post("/users/oauth2/sign-up", data);
 }
 
 export const getPrincipalRequest = async () => {
     return await instance.get("/account/principal");
 }
+
+export const checkUsernameRequest = async (data) => {
+  const response = await instance.post("/account/username-check", data);
+  return response.data; // true/false
+};
+
+export const checkNicknameRequest = async (data) => {
+  const response = await instance.post(`/account/nickname-check`, data);
+  return response.data; 
+};

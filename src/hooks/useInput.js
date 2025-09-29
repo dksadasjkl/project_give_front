@@ -31,11 +31,11 @@ export const useInput = (property) => {
                 }
             }
         }
-    }, [value])
+    }, [value, property])
 
     const handleOnChange = (e) => {
         setValue(() => e.target.value);
     }
 
-    return [value, handleOnChange, message, setValue, setMessage];
+    return [value, handleOnChange, message, setMessage, setValue];
 }

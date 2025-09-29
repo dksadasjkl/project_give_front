@@ -16,6 +16,7 @@ export const container = css`
 
 export const header = (authState) => css`
     box-sizing: border-box;
+    margin-bottom: 15px;
     display: flex;
     width: 100%;
     height: 50px;
@@ -89,17 +90,31 @@ export const logInButton = css`
 export const signUp = css`
     margin-top: 10px;
     padding-left: 20px;
-    font-weight: 600;
     color: #333333;
     cursor: default;
 
-    & > span {
-        font-weight: 800;
+    & > span:nth-child(1),
+    & > span:nth-child(3),
+    & > span:nth-child(5) {
+        margin: 5px;
+        font-weight: 600;
         color: #212121;
         cursor: pointer;
     }
 
-    & > span:hover {
+    & > span:nth-child(2) {
+        margin: 5px;
+        color: #212121;
+    }   
+
+    & > span:nth-child(4) {
+        margin: 5px;
+        color: #333333;
+    }  
+
+    & > span:nth-child(1):hover,
+    & > span:nth-child(3):hover,
+    & > span:nth-child(5):hover {
         border-bottom: 3px solid rgba(2, 173, 68, 0.89);
     }
 `;
@@ -127,23 +142,22 @@ export const oauth = css`
 `;
 
 export const signUpLayout = css`
-    margin-top: 15px;
     display: flex;
     padding: 0px 20px;
 `;
 
 export const idCheckButton = css`
     margin-left: 5px;
-    width: 130px;
+    width: 100px;
     height: 38px;
     border: none;
     border-radius: 5px;
-    background-color: #212121;
+    background-color: rgba(0, 128, 49, 0.89);
     font-weight: 700;
     color: #eeeeee;
 
     &:hover {
-        background-color: #121212;
+        background-color:  rgba(2, 173, 68, 0.89);
     }
 `;
 

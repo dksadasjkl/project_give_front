@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import * as s from "./style";
 import { useNavigate } from "react-router-dom";
 import { useInput } from "../../../hooks/useInput";
-import { authLoginRequest, authSignupRequest } from "../../../apis/api/Account/account";
+import { authLoginRequest, authSignupRequest, checkNicknameRequest, checkUsernameRequest } from "../../../apis/api/Account/account";
 import getServerAddress from "../../../constants/serverAddress";
 import { useMutation } from "@tanstack/react-query";
 import AuthPageInput from "../../../components/Account/AuthPageInput/AuthPageInput";
@@ -11,15 +11,17 @@ import AuthPageInput from "../../../components/Account/AuthPageInput/AuthPageInp
 function AuthenticationPage() {
     const navigate = useNavigate();
     const [ authState, setAuthState ] = useState(1); // 1 : 로그인 2 : 회원가입
-    const [ username, usernameChange ] = useInput();
-    const [ password, passwordChange ] = useInput();
+    // 로그인
+    const [ username, usernameChange ] = useInput(); 
+    const [ password, passwordChange ] = useInput(); 
+    // 회원가입
+     const [ userName, userNameChange, userNameMessage, setUserNameMessage ] = useInput("username");
+     const [ passWord, passWordChange, passWordMessage ] = useInput("password");
     const [ checkPassword, checkPasswordChange ] = useInput("checkPassword");
-    const [ userName, userNameChange, userNameMessage ] = useInput("username");
-    const [ passWord, passWordChange, passWordMessage ] = useInput("password");
     const [ email, emailChange, emailMessage ] = useInput("email");
     const [ name, nameChange, nameMessage ] = useInput("name");
     const [ phone, phoneChange, phoneMessage ] = useInput("phone");
-    const [ nickname, nicknameChange, nicknameMessage ] = useInput("nickname");
+    const [ nickname, nicknameChange, nicknameMessage, setNicknameMessage ] = useInput("nickname");
     const [ checkPasswordMessage, setCheckPasswordMessage ] = useState(null);
 
     const authLoginMutation = useMutation({
@@ -108,6 +110,99 @@ function AuthenticationPage() {
             handleLoginSubmit();
         }
     }
+    const checkUsernameMutation = useMutation({
+    mutationKey: ["checkUsernameMutation"],
+    mutationFn: checkUsernameRequest,
+    onSuccess: (exists) => {
+        if (exists) {
+        setUserNameMessage({
+            type: "error",
+            text: "이미 사용 중인 아이디입니다."
+        });
+        } else {
+        setUserNameMessage({
+            type: "success",
+            text: "사용 가능한 아이디입니다."
+        });
+        }
+    },
+
+    onError: (error) => {
+        const errors = error.response?.data?.errors;
+           if (errors?.username) {
+        setUserNameMessage({
+            type: "error",
+            text: errors.username
+        });
+        } else {
+        setUserNameMessage({
+            type: "error",
+            text: "중복체크 실패"
+        });
+        }
+    },
+    });
+
+    const handleUsernameCheck = () => {
+          if (!userName.trim()) {
+            setUserNameMessage({
+            type: "error",
+            text: "아이디를 입력해주세요."
+            });
+            return;
+        }
+        checkUsernameMutation.mutate({
+            username:userName
+        })
+    }
+
+    
+    const checkNicknameMutation = useMutation({
+    mutationKey: ["checkNicknameMutation"],
+    mutationFn: checkNicknameRequest, // API 요청 함수
+    onSuccess: (exists) => {
+        if (exists) {
+        setNicknameMessage({
+            type: "error",
+            text: "이미 사용 중인 닉네임입니다."
+        });
+        } else {
+        setNicknameMessage({
+            type: "success",
+            text: "사용 가능한 닉네임입니다."
+        });
+        }
+    },
+    onError: (error) => {
+        // 백엔드 ValidException에서 보내는 field별 메시지 확인
+        const errors = error.response?.data?.errors;
+        if (errors?.nickname) {
+        setNicknameMessage({
+            type: "error",
+            text: errors.nickname
+        });
+        } else {
+        setNicknameMessage({
+            type: "error",
+            text: "중복체크 실패"
+        });
+        }
+    },
+    });
+
+
+    const handleNicknameCheck = () => {
+    if (!nickname.trim()) {
+        setNicknameMessage({
+        type: "error",
+        text: "닉네임을 입력해주세요."
+        });
+        return;
+    }
+    checkNicknameMutation.mutate({
+        nickname:nickname
+    });
+    };
 
 
   return (
@@ -129,7 +224,11 @@ function AuthenticationPage() {
                                     <button css={s.logInButton} onClick={handleLoginSubmit}>로그인</button>
                                 </div>
                                 <div css={s.signUp}>
-                                    계정이 없으신가요? <span onClick={() => setAuthState(2)}>회원가입</span>
+                                    <span>아이디 찾기</span>
+                                    <span>|</span>
+                                    <span>비밀번호 찾기</span>
+                                    <span>|</span>
+                                    <span onClick={() => setAuthState(2)}>회원가입</span>
                                 </div>
                                  <div css={s.oauth}>
                                     <a href={`http://${getServerAddress()}/oauth2/authorization/google`}>
@@ -147,15 +246,19 @@ function AuthenticationPage() {
                             <>
                                 <div css={s.signUpLayout}>
                                     <AuthPageInput type={"text"} name={"username"} placeholder={"사용자이름"} value={userName} onChange={userNameChange} message={userNameMessage} />
+                                     <button css={s.idCheckButton} onClick={handleUsernameCheck}>중복체크</button>
                                 </div>
                                 <div css={s.signUpLayoutInputList}>
                                     <AuthPageInput type={"password"} name={"password"} placeholder={"비밀번호"} value={passWord} onChange={passWordChange} message={passWordMessage} />
                                     <AuthPageInput type={"password"} name={"checkPassword"} placeholder={"비밀번호 확인"} value={checkPassword} onChange={checkPasswordChange} message={checkPasswordMessage} />
                                     <AuthPageInput type={"text"} name={"name"} placeholder={"성명"} value={name} onChange={nameChange} message={nameMessage} />
                                 </div>
+                                 <div css={s.signUpLayout}>
+                                    <AuthPageInput type={"text"} name={"nickname"} placeholder={"닉네임"} value={nickname} onChange={nicknameChange} message={nicknameMessage} />
+                                    <button css={s.idCheckButton} onClick={handleNicknameCheck}>중복체크</button>
+                                </div>
                                 <div css={s.signUpLayoutInputList}>
                                     <AuthPageInput type={"text"} name={"phone"} placeholder={"전화번호"} value={phone} onChange={phoneChange} message={phoneMessage} />
-                                    <AuthPageInput type={"text"} name={"nickname"} placeholder={"닉네임"} value={nickname} onChange={nicknameChange} message={nicknameMessage} />
                                     <AuthPageInput type={"text"} name={"email"} placeholder={"이메일"} value={email} onChange={emailChange} message={emailMessage} />
                                 </div>
                                 <div css={s.regiseterButton}>
