@@ -1,25 +1,32 @@
-// DonationCard.jsx
 /** @jsxImportSource @emotion/react */
 import * as s from './style';
 
-function DonationCard({ title, organization, percent, amount,contentImg  }) {
-    const imgRegex = /<img[^>]+>/;
-    const img = imgRegex.exec(contentImg);
-
+function DonationCard({ title, organization, amount, percent, contentImg }) {
+  const imgSrc = contentImg || '';
 
   return (
-    <div>
-        <div>
-           {contentImg}
+      <div css={s.boardCard}>
+        <div css={s.imageBox}>
+          {/* 임시로 더미 데이터 넣을 예정 */}
+          {imgSrc && <img src="https://happybean-phinf.pstatic.net/20250924_266/1758695703567FnujK_PNG/image.png?type=a360" />} 
         </div>
+      <div css={s.contentBox}>
         <div>
-            <div>{title}</div>
-            <div>{organization}</div>
-            <div>{percent}%</div>
-            <div>{amount}</div>
+          <div css={s.title}>{title}</div>
+          <div css={s.organization}>{organization}</div>
         </div>
+        <div css={s.progressBox}>
+          <div css={s.progressBar}>
+            <div css={s.progressFill(percent)} />
+          </div>
+        </div>
+        <div css={s.amountBox}>
+          <div>{percent}%</div>
+          <div>{amount.toLocaleString()}원</div>
+        </div>
+      </div>
     </div>
   );
-};
+}
 
 export default DonationCard;

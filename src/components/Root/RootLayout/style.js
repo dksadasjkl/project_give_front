@@ -13,8 +13,6 @@ export const background = css`
 
 export const layout = css`
     box-sizing: border-box;
-    position: relative;
     width: 100%;
-    height: 100%;
     background-color: transparent;
 `;
