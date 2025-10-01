@@ -109,13 +109,9 @@ function DonationPage() {
 
       {/* 카테고리 */}
       <div css={s.categoryBar}>
-        <div
+        <div css={s.category(selectedCategory, 0)}
           key={0}
           onClick={() => handleCategoryClick(0)}
-          style={{
-      backgroundColor: selectedCategory === 0 ? "#34db3c" : "transparent",
-      color: selectedCategory === 0 ? "#fff" : "#000"
-    }}
         >
           <span>
             <TbInnerShadowBottomRight 
@@ -133,6 +129,7 @@ function DonationPage() {
             <div
               key={category.donationCategoryId}
               onClick={() => handleCategoryClick(category.donationCategoryId)}
+              css={s.category(selectedCategory, category.donationCategoryId)}
             > 
               <span>
                 <IconComponent  

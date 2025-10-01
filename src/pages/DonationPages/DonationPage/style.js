@@ -31,6 +31,13 @@ export const categoryBar = css`
 
 `;
 
+export const category = (selectedCategory, categoryId) => css`
+  border: 1px solid ${selectedCategory === categoryId ? "#03a94d" : "#e5e5e5"};
+  background-color: ${selectedCategory === categoryId ? "#03a94d" : "transparent"};
+  color: ${selectedCategory === categoryId ? "#fff" : "#000"};
+
+`;
+
 export const headerBar = css`
     display: flex;
     justify-content: space-between; /* 좌우 끝 배치 */
