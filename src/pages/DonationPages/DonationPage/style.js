@@ -8,7 +8,27 @@ export const layout = css`
 export const categoryBar = css`
     display: flex;
     gap: 16px; /* 카테고리 간격 */
-    margin: 0 20px;
+    margin: 50px auto 30px;
+    font-family: "Pretendard, sans-serif";
+    font-size: 16px;
+    color: #000000;
+
+    & > div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 42px;
+        padding: 0 11px;
+        border: 1px solid #e5e5e5;
+        border-radius: 30px;
+        cursor: pointer;    
+
+        &:hover{
+            border: 1px solid rgba(0, 0, 0, 0.55)
+        }
+    }
+
+
 `;
 
 export const headerBar = css`
@@ -48,6 +68,10 @@ export const buttons = css`
     cursor: pointer;
 `;
 
+export const Buttonlayout = css`
+    margin: 32px 0;
+`;
+
 export const plusButton = css`
     box-sizing: border-box;
     width: 140px;
@@ -55,7 +79,7 @@ export const plusButton = css`
     display: flex;
     align-items: center; 
     justify-content : center;
-    margin: 32px auto;
+    margin: 0 auto;
     border: 1px solid #d9d9d9;
     border-radius: 40px;
     font-size: 16px;

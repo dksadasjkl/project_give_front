@@ -5,7 +5,7 @@ export const footer = css`
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 50px;
+    gap: 200px;
     border-top: 1px solid #dbdbdb;
     padding: 20px;
     width: 100%;

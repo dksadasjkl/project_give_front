@@ -7,8 +7,8 @@ function DonationCard({ title, organization, amount, percent, contentImg }) {
   return (
       <div css={s.boardCard}>
         <div css={s.imageBox}>
-          {/* 임시로 더미 데이터 넣을 예정 */}
-          {imgSrc && <img src="https://happybean-phinf.pstatic.net/20250924_266/1758695703567FnujK_PNG/image.png?type=a360" />} 
+          {/* 더미 데이터 넣을 예정 */}
+          {imgSrc && <img src={contentImg} />} 
         </div>
       <div css={s.contentBox}>
         <div>

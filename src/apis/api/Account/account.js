@@ -36,3 +36,9 @@ export const resetPasswordRequest = async (data) => {
   const response = await instance.put("/account/passwordReset", data);
   return response.data; 
 };
+
+export const getDonationCategoriesRequest = async () => {
+  const response = await instance.get("/donation-categories");
+  return response.data; 
+}
+
