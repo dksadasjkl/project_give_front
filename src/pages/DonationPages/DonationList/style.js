@@ -8,7 +8,7 @@ export const layout = css`
 export const categoryBar = css`
     display: flex;
     gap: 16px; /* 카테고리 간격 */
-    margin: 50px auto 30px;
+    margin: 40px auto 30px;
     font-family: "Pretendard, sans-serif";
     font-size: 16px;
     color: #000000;

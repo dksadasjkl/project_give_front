@@ -1,11 +1,11 @@
 /** @jsxImportSource @emotion/react */
 import * as s from './style';
 
-function DonationCard({ title, organization, amount, percent, contentImg }) {
+function DonationCard({ title, organization, amount, percent, contentImg, onClick }) {
   const imgSrc = contentImg || '';
 
   return (
-      <div css={s.boardCard}>
+      <div onClick={onClick} css={s.boardCard}>
         <div css={s.imageBox}>
           {/* 더미 데이터 넣을 예정 */}
           {imgSrc && <img src={contentImg} />} 
