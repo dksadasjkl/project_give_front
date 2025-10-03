@@ -72,7 +72,7 @@ function FindIdModal({ isOpen, onClose }) {
             content: {
             width: "400px",
             height: "500px",
-            margin: "0px auto",
+            margin: "70px auto",
             display: "flex",
             flexDirection:"column",
             alignItems: "center",

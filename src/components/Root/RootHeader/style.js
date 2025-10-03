@@ -1,22 +1,23 @@
 import { css } from "@emotion/react";
 
 export const layout = css`
-    box-sizing: border-box;
     display: flex;
     justify-content: center;
     background-color: white;
 `;
 
 export const header = css`
-    box-sizing: border-box;
     position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    background: white;
+    border-bottom: 1px solid #e5e5e5;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    height: 80px;
     z-index: 100;
-    background-color: white;
 
       & div {
         margin: 30px; //임시

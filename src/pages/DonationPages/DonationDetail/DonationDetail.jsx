@@ -5,6 +5,7 @@ import { useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { getDonationProjectDatatilRequest } from '../../../apis/api/Donation/donationDatail';
 import DonationBanner from "../../../components/DonationDtail/DonationBanner/DonationBanner";
+import DonationTabs from "../../../components/DonationDtail/DonationTabs/DonationTabs";
 
 function DonationDetail() {
   const { donationProjectId } = useParams();
@@ -44,10 +45,14 @@ function DonationDetail() {
         {/* DonationTabs 
               - DonationAction(기부하기) 기부하기 버튼 → 클릭 시 모달
         컴포넌트 분리 예정 */}
-        <div>
+
+        <div > {/* sticky를 감싸는 wrapper */}
+          <DonationTabs />
+        </div>
+        {/* <div>
           <div>모금소개</div>
           <div>기부하기</div> 
-        </div>
+        </div> */}
 
         {/* 모금 소개 내용 및 사용계획 */}
         <div>

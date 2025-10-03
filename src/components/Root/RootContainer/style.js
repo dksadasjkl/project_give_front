@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
 export const container = css`
-    box-sizing: border-box;
-    border: none;
+    flex-grow: 1;
     width: 100%;
+    overflow-y: visible;
 `;

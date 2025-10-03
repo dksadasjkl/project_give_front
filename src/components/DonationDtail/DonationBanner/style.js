@@ -20,7 +20,7 @@ export const bannerWrapper = (imgUrl) => css`
     align-items: center;
     justify-content: center;
     border-radius: 16px; 
-    overflow: hidden
+    overflow: visible;
 `;
 
 export const overlay = css`
