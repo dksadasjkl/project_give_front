@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 import { getDonationProjectDatatilRequest } from '../../../apis/api/Donation/donationDatail';
 import DonationBanner from "../../../components/DonationDtail/DonationBanner/DonationBanner";
 import DonationTabs from "../../../components/DonationDtail/DonationTabs/DonationTabs";
+import DonationIntroduction from "../../../components/DonationDtail/DonationIntroduction/DonationIntroduction";
 
 function DonationDetail() {
   const { donationProjectId } = useParams();
@@ -40,32 +41,18 @@ function DonationDetail() {
           currentAmount={donationDetails[0]?.donationProjectCurrentAmount}
           targetAmount={donationDetails[0]?.donationProjectTargetAmount}
         />
+        <DonationTabs />
+        {/* 모금소개 및 기부하기 */}
+        {/* DonationTabs - 모달은 기부 내역 조회와 함께 진행예정 기본적은 css적용 완료 */}
 
-        {/* 모금소개 및 기부하기(Post요청) */}
-        {/* DonationTabs 
-              - DonationAction(기부하기) 기부하기 버튼 → 클릭 시 모달
-        컴포넌트 분리 예정 */}
 
-        <div > {/* sticky를 감싸는 wrapper */}
-          <DonationTabs />
-        </div>
-        {/* <div>
-          <div>모금소개</div>
-          <div>기부하기</div> 
-        </div> */}
 
         {/* 모금 소개 내용 및 사용계획 */}
         <div>
-          {/* DonationIntroduction 컴포넌트 분리 예정 */}
-          {donationDetails.map(detail => (
-            <div key={detail.donationProjectDetailId}>
-              <h4>{detail.donationProjectDetailSubtitle}</h4>
-              <p>{detail.donationProjectDetailContent}</p>
-              <img src={detail.donationProjectDetailImageUrl} alt={detail.donationProjectDetailSubtitle} />
-            </div>
-          ))}
+          {/* 모금 소개 내용 */}
+          <DonationIntroduction details={donationDetails} />
 
-        
+          {/* 사용계획 */}
           {/* DonationPlan 컴포넌트 분리 예정 */}
           <div>
             <div>이렇게 진행됩니다</div>
@@ -93,12 +80,6 @@ function DonationDetail() {
         <div>
           <div> useState(1); // 1 : 참여내역(기부내역) 2 : 댓글 기본값 1 </div>
         </div>
-      
-      {/* {donationDetails.map((detail) => (
-        <div key={detail.donationProjectDetailId}>
-
-        </div>
-      ))} */}
     </div>
   )
 }

@@ -19,7 +19,7 @@ export const bannerWrapper = (imgUrl) => css`
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 16px; 
+    border-radius: 10px; 
     overflow: visible;
 `;
 
@@ -27,6 +27,7 @@ export const overlay = css`
     width: 100%;
     height: 100%;
     background: rgba(0,0,0,0.4); /* 어두운 오버레이 */
+    border-radius: 10px; 
     color: #fff;
     display: flex;
     flex-direction: column;  

@@ -1,31 +1,46 @@
 import { css } from "@emotion/react";
 
-export const layout = css;
-export const donationTabsWrapper = css`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  position: relative; 
+export const donationTabs = css` 
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+    background-color: #fff;
+    font-family: "Pretendard", "sans-serif";
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
+    color: #202020; 
+
+    margin-left: 50%;
+    transform: translateX(-50%);
 `;
 
-export const donationTabs = css`  
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
-  max-width: 600px;
-  background-color: #fff;
-  border-bottom: 1px solid #ddd;
-  padding: 10px 0;
-
-  position: sticky;
-  top: 80;
-  z-index: 50;
-
-  & > div {
-    flex-grow: 1;
+export const tabIntro = css`
+    width: 130px;
+    position: relative;
+    line-height: 60px;
     text-align: center;
-    padding: 5px 0;
+
+    &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 2px; 
+        background-color: #202020;
+    }
+`;
+
+export const tabDonate = css` 
+    width: 290px;
+    line-height: 60px;
+    border-radius: 10px; 
+    background-color: #03a94d;
+    color: #fff;
     cursor: pointer;
-    font-weight: 600;
-  }
 `;
