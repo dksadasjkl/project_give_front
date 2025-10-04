@@ -7,6 +7,7 @@ import { getDonationProjectDatatilRequest } from '../../../apis/api/Donation/don
 import DonationBanner from "../../../components/DonationDtail/DonationBanner/DonationBanner";
 import DonationTabs from "../../../components/DonationDtail/DonationTabs/DonationTabs";
 import DonationIntroduction from "../../../components/DonationDtail/DonationIntroduction/DonationIntroduction";
+import DonationPlan from "../../../components/DonationDtail/DonationPlan/DonationPlan";
 
 function DonationDetail() {
   const { donationProjectId } = useParams();
@@ -41,11 +42,9 @@ function DonationDetail() {
           currentAmount={donationDetails[0]?.donationProjectCurrentAmount}
           targetAmount={donationDetails[0]?.donationProjectTargetAmount}
         />
-        <DonationTabs />
         {/* 모금소개 및 기부하기 */}
         {/* DonationTabs - 모달은 기부 내역 조회와 함께 진행예정 기본적은 css적용 완료 */}
-
-
+        <DonationTabs />
 
         {/* 모금 소개 내용 및 사용계획 */}
         <div>
@@ -54,32 +53,34 @@ function DonationDetail() {
 
           {/* 사용계획 */}
           {/* DonationPlan 컴포넌트 분리 예정 */}
-          <div>
-            <div>이렇게 진행됩니다</div>
-            <div>
-              <div>모금기간</div>
-              <div>{donationDetails[0]?.donationProjectStartDate} ~ {donationDetails[0]?.donationProjectEndDate}</div>
-            </div>
-            <div>
-              <div>목표금액</div>
-              <div>{donationDetails[0]?.donationProjectTargetAmount?.toLocaleString()}원</div>
-            </div>
-            <div>
-              <img src={donationDetails[0]?.donationProjectOrganizationImageUrl} alt={donationDetails[0]?.donationProjectOrganizationImageUrl} />
-              <div>{donationDetails[0]?.donationProjectOrganization}</div>
-            </div>
-            <div>
-              <span>아이콘</span>
-              <div>목표금액 미달 시</div>
-              <div>사업계획을 조정해 모금액 규모에 맞게 사업을 진행하겠습니다.</div>
-            </div>
-          </div>
+          <DonationPlan 
+            startDate={donationDetails[0]?.donationProjectStartDate}
+            endDate={donationDetails[0]?.donationProjectEndDate}
+            amount={donationDetails[0]?.donationProjectTargetAmount}
+          />
         </div>
 
         {/* DonationActivity 참여내역 및 댓글 */}
-        <div>
+          <div
+            style={{
+              marginTop: '40px',
+              paddingTop: '40px',
+              borderTop: '1px solid #e5e5e5',
+            }}>
           <div> useState(1); // 1 : 참여내역(기부내역) 2 : 댓글 기본값 1 </div>
         </div>
+
+          {/* <div>
+              <img src={donationDetails[0]?.donationProjectOrganizationImageUrl} alt={donationDetails[0]?.donationProjectOrganizationImageUrl} />
+              <div>{donationDetails[0]?.donationProjectOrganization}</div>
+          </div>
+          <div>
+            <div>지금 해피빈에 기부하세요!</div>
+            <div>
+              <div>아이콘</div>
+              <div>수수료 없이 모두 전달</div>
+            </div>
+          </div> */}
     </div>
   )
 }

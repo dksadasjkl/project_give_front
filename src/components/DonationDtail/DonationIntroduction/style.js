@@ -13,6 +13,7 @@ export const subtitle = css`
 `;
 
 export const text = css` 
+    width: 800px;
     margin-top: 20px;
     font-size: 18px;
     color: #424242;
@@ -24,7 +25,7 @@ export const imgBox = css`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 700px;
+    width: 800px;
     height: 420px;
     
     cursor: pointer;
