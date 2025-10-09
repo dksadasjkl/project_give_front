@@ -12,8 +12,13 @@ export const title = css`
     color: #202020;
 `;
 
-export const tableWrapper = css`
+export const flexWrapper = css`
     margin-top: 20px;
+    display: flex;
+    gap: 30px; 
+`;
+
+export const tableWrapper = css`
     width: 40%;
     border: 1px solid #e5e5e5;
     border-radius: 10px;
@@ -42,18 +47,40 @@ export const value = css`
     color: #1c1c1c;
 `;
 
-export const amountBox = css`
-    padding-top: 6px;
+
+export const organizationBox = css`
+    width: 250px; 
+    height: 80px;
+    padding: 11px 10px 12px 0px;
+    border: 1px solid #e5e5e5;
     display: flex;
+    justify-content: center;
     align-items: center;
+    border-radius: 10px; /* 박스 자체 둥글게 */
+
+    & > div {
+        font-size: 16px;
+        font-weight: 600;
+        text-align: center;
+        padding-left: 11px
+    }
+
 `;
 
-export const donationSection = css`
-    padding-top: 6px;
+export const imgBox = css`
     display: flex;
+    justify-content: center;
     align-items: center;
-`;
+    width: 55px;
+    height: 55px;    
 
+    & > img {
+        height: 100%;
+        width: 100%;
+        border: 1px solid rgba(0, 0, 0, .05);
+        border-radius: 50%;
+    }
+`;
 
 
 export const noticeBox = css`
@@ -81,3 +108,4 @@ export const noticeDesc = css`
     margin-top: 10px;
     color: #1c1c1c;
 `;
+

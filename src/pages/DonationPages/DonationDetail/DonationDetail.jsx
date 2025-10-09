@@ -52,35 +52,24 @@ function DonationDetail() {
           <DonationIntroduction details={donationDetails} />
 
           {/* 사용계획 */}
-          {/* DonationPlan 컴포넌트 분리 예정 */}
           <DonationPlan 
             startDate={donationDetails[0]?.donationProjectStartDate}
             endDate={donationDetails[0]?.donationProjectEndDate}
             amount={donationDetails[0]?.donationProjectTargetAmount}
+            organizationImageUrl={donationDetails[0]?.donationProjectOrganizationImageUrl}
+            organization={donationDetails[0]?.donationProjectOrganization}
           />
         </div>
 
-        {/* DonationActivity 참여내역 및 댓글 */}
+        {/* DonationActivity 참여내역 및 댓글 임시 css적용 */}
           <div
             style={{
               marginTop: '40px',
               paddingTop: '40px',
               borderTop: '1px solid #e5e5e5',
             }}>
-          <div> useState(1); // 1 : 참여내역(기부내역) 2 : 댓글 기본값 1 </div>
+          {/* <div> useState(1); // 1 : 참여내역(기부내역) 2 : 댓글 기본값 1 </div> */}
         </div>
-
-          {/* <div>
-              <img src={donationDetails[0]?.donationProjectOrganizationImageUrl} alt={donationDetails[0]?.donationProjectOrganizationImageUrl} />
-              <div>{donationDetails[0]?.donationProjectOrganization}</div>
-          </div>
-          <div>
-            <div>지금 해피빈에 기부하세요!</div>
-            <div>
-              <div>아이콘</div>
-              <div>수수료 없이 모두 전달</div>
-            </div>
-          </div> */}
     </div>
   )
 }

@@ -2,11 +2,14 @@ import React from 'react'/** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import { FaRegCheckCircle } from "react-icons/fa";
 
-function DonationPlan({ startDate, endDate, amount }) {
+function DonationPlan({ startDate, endDate, amount, organizationImageUrl, organization }) {
   return (
         <div css={s.layout}>
             <div css={s.title}>이렇게 진행됩니다</div>
 
+            {/* 테이블 + 조직정보 한 줄 2칸 */}
+        <div css={s.flexWrapper}>
+            {/* 좌측 테이블 */}
             <div css={s.tableWrapper}>
                 <div css={s.rowBox}>
                     <div css={s.label}>모금기간</div>
@@ -23,6 +26,16 @@ function DonationPlan({ startDate, endDate, amount }) {
                     <div css={s.value}>일반기부금</div>
                 </div>
             </div>
+
+            {/* 우측 조직 정보 */}
+            <div css={s.organizationBox}>
+                <div css={s.imgBox}>
+                    <img src={organizationImageUrl} alt={organization} />
+                </div>
+                <div>{organization}</div>
+            </div>
+        </div>
+
 
             <div css={s.noticeBox}>
                 <span css={s.noticeIcon}><FaRegCheckCircle /></span>
