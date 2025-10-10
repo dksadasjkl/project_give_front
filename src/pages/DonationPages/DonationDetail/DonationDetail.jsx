@@ -8,16 +8,29 @@ import DonationBanner from "../../../components/DonationDtail/DonationBanner/Don
 import DonationTabs from "../../../components/DonationDtail/DonationTabs/DonationTabs";
 import DonationIntroduction from "../../../components/DonationDtail/DonationIntroduction/DonationIntroduction";
 import DonationPlan from "../../../components/DonationDtail/DonationPlan/DonationPlan";
+import DonationHistory from "../../../components/DonationDtail/DonationHistory/DonationHistory";
+import DonationComments from "../../../components/DonationDtail/DonationComments/DonationComments";
+import { getContributionCountRequest, getContributionLoadMoreRequest } from "../../../apis/api/Donation/donationContribution";
 
 function DonationDetail() {
   const { donationProjectId } = useParams();
-  const [ donationDetails, setDonationDetails ] = useState([]);
+
+  // 상세페이지 데이터
+  const [ donationDetails, setDonationDetails ] = useState([]); 
+  
+  // 참여내역
+  const [ contributions, setContributions ] = useState([]);
+  const [ page, setPage ] = useState(1);
+  const countPerPage = 2; // 임시 2 -> 10
+  const [ totalCount, setTotalCount ] = useState(0); // 전체 데이터 수 (예: 21개)
+  const [ totalLoadCount, setTotalLoadCount ] = useState(0); // 총 페이지 수 (예: 3페이지)
+
+  // 탭 상태 1: 참여내역(기부내역), 2: 댓글
+  const [ tab, setTab ] = useState(1); 
 
   const getDonationProjectDatatilQuery = useQuery(
     ["getDonationProjectDatatilQuery", donationProjectId],
-    async () => await getDonationProjectDatatilRequest(
-      donationProjectId
-    ),
+    async () => await getDonationProjectDatatilRequest(donationProjectId),
     {
       retry: 0,
       refetchOnWindowFocus: false,
@@ -25,11 +38,50 @@ function DonationDetail() {
         setDonationDetails(response.data)
       },
       onError: (error) => {
-          console.log(error);
+        console.log(error);
       }
     }
   )
 
+   const contributionsLoadMoreQuery = useQuery(
+    ["contributionsLoadMoreQuery", donationProjectId, page],
+    async () => await getContributionLoadMoreRequest({
+          startIndex: (page - 1) * countPerPage, 
+          count: countPerPage,  
+          donationProjectId: donationProjectId
+        }),
+    {
+      keepPreviousData: true,
+      retry: 0,
+      refetchOnWindowFocus: false,
+      onSuccess: (response) => {
+        if (page === 1) {
+          setContributions(response.data);
+        } else {
+          setContributions((prev) => [...prev, ...response.data]);
+        }
+      },
+      onError: (err) => console.error(err),
+    }
+  );
+
+  const getContributionCountRequestQuery = useQuery(
+      ["getContributionCountRequestQuery", contributionsLoadMoreQuery.data], // 쿼리 key
+      async () => await getContributionCountRequest({
+          count: countPerPage,  
+          donationProjectId: donationProjectId
+      }),
+      {
+        refetchOnWindowFocus: false,
+        onSuccess: (response) => {
+          setTotalCount(response.data.totalCount); // totalCount 상태 업데이트
+          setTotalLoadCount(response.data.totalLoadCount) // 최대 페이지
+        },
+        onError: (error) => {
+          console.error(error);
+        }
+      }
+    );
 
   return (
     <div css={s.layout}>
@@ -61,14 +113,23 @@ function DonationDetail() {
           />
         </div>
 
-        {/* DonationActivity 참여내역 및 댓글 임시 css적용 */}
-          <div
-            style={{
-              marginTop: '40px',
-              paddingTop: '40px',
-              borderTop: '1px solid #e5e5e5',
-            }}>
-          {/* <div> useState(1); // 1 : 참여내역(기부내역) 2 : 댓글 기본값 1 </div> */}
+        {/* DonationHistory, DonationComments */}
+          <div css={s.tapLayout}>
+            <div css={s.tapBox}>
+              <div css={[s.taps, tab === 1 && s.active]} onClick={() => setTab(1)}>참여내역</div>
+              <div css={[s.taps, tab === 2 && s.active]} onClick={() => setTab(2)}>댓글</div>
+            </div>
+            <div css={s.tabContent}>
+              { tab === 1 
+                ? <DonationHistory 
+                    contributions={contributions} 
+                    onLoadMore={() => setPage(prev => prev + 1)} 
+                    hasMore={page < totalLoadCount} 
+                />
+                : <DonationComments />
+              }
+            </div>
+
         </div>
     </div>
   )

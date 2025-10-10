@@ -49,7 +49,7 @@ export const value = css`
 
 
 export const organizationBox = css`
-    width: 250px; 
+    width: 20%; 
     height: 80px;
     padding: 11px 10px 12px 0px;
     border: 1px solid #e5e5e5;
