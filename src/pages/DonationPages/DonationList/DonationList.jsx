@@ -9,6 +9,8 @@
   import { TbInnerShadowBottomRight } from "react-icons/tb";
   import { PiGlobe, PiLeaf, PiWheelchair, PiBaby, PiDog, PiHeart, PiBuilding , PiUserCircleGear, PiQuestion, PiHandshake } from "react-icons/pi";
   import { useNavigate } from 'react-router-dom';
+import { categoryIcons } from '../../../constants/categories';
+import { sortOptions } from '../../../constants/sortOptions';
 
 
 
@@ -24,28 +26,6 @@
     const [totalLoadCount, setTotalLoadCount] = useState(0); // 총 페이지 수 (예: 3페이지)
     const [sortDropdownOpen, setSortDropdownOpen] = useState(false);
     
-    // 아이콘 매핑
-    const categoryIcons = {
-      "지구촌": PiGlobe,
-      "아동•청소년": PiBaby,
-      "동물": PiDog,
-      "환경": PiLeaf,
-      "장애인": PiWheelchair,
-      "가족•여성": PiHeart,
-      "시민사회": PiBuilding,
-      "어르신": PiUserCircleGear,
-      "다문화": PiHandshake,
-      "기타": PiQuestion
-    };
-
-    const sortOptions = [
-      { id: 1, label: "최신순" },
-      { id: 2, label: "모금액 많은순" },
-      { id: 3, label: "모금액 적은순" },
-      { id: 4, label: "모금률 높은순" },
-      { id: 5, label: "종료임박순" }
-    ];
-
     // 카테고리 조회
     const getDonationCategoryRequestQuery = useQuery(
       ["getDonationCategoryRequestQuery"], 
