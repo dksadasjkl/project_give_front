@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
-import { useQuery } from '@tanstack/react-query';
+import { useQuery} from '@tanstack/react-query';
 import { useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { getDonationProjectDatatilRequest } from '../../../apis/api/Donation/donationDatail';
@@ -11,22 +11,31 @@ import DonationPlan from "../../../components/DonationDtail/DonationPlan/Donatio
 import DonationHistory from "../../../components/DonationDtail/DonationHistory/DonationHistory";
 import DonationComments from "../../../components/DonationDtail/DonationComments/DonationComments";
 import { getContributionCountRequest, getContributionLoadMoreRequest } from "../../../apis/api/Donation/donationContribution";
+import { getCommentCountRequest, getCommentLoadMoreRequest } from "../../../apis/api/Donation/donationComment";
 
-function DonationDetail() {
+function DonationDetail({ principal }) {
   const { donationProjectId } = useParams();
 
   // 상세페이지 데이터
   const [ donationDetails, setDonationDetails ] = useState([]); 
   
-  // 참여내역
-  const [ contributions, setContributions ] = useState([]);
-  const [ page, setPage ] = useState(1);
-  const countPerPage = 2; // 임시 2 -> 10
-  const [ totalCount, setTotalCount ] = useState(0); // 전체 데이터 수 (예: 21개)
-  const [ totalLoadCount, setTotalLoadCount ] = useState(0); // 총 페이지 수 (예: 3페이지)
-
   // 탭 상태 1: 참여내역(기부내역), 2: 댓글
   const [ tab, setTab ] = useState(1); 
+
+  const [ page, setPage ] = useState(1);
+  const countPerPage = 5;  
+
+  // 참여내역
+  const [ contributions, setContributions ] = useState([]);
+  const [ contributionPage, setContributionPage ] = useState(1);
+  const [ contributionTotalCount, setContributionTotalCount ] = useState(0);   // 참여내역 전체 수
+  const [ contributionTotalLoadCount, setContributionTotalLoadCount ] = useState(0); // 참여내역 총 페이지
+  
+  // 댓글
+  const [ comments, setComments ] = useState([]);
+  const [ commentPage, setCommentPage ] = useState(1);
+  const [ commentTotalCount, setCommentTotalCount] = useState(0);   // 댓글 전체 수
+  const [ commentTotalLoadCount, setCommentTotalLoadCount] = useState(0); // 댓글 총 페이지
 
   const getDonationProjectDatatilQuery = useQuery(
     ["getDonationProjectDatatilQuery", donationProjectId],
@@ -43,10 +52,10 @@ function DonationDetail() {
     }
   )
 
-   const contributionsLoadMoreQuery = useQuery(
-    ["contributionsLoadMoreQuery", donationProjectId, page],
+   const getContributionsLoadMoreQuery = useQuery(
+    ["getContributionsLoadMoreQuery", donationProjectId, contributionPage],
     async () => await getContributionLoadMoreRequest({
-          startIndex: (page - 1) * countPerPage, 
+          startIndex: (contributionPage - 1) * countPerPage, 
           count: countPerPage,  
           donationProjectId: donationProjectId
         }),
@@ -55,7 +64,7 @@ function DonationDetail() {
       retry: 0,
       refetchOnWindowFocus: false,
       onSuccess: (response) => {
-        if (page === 1) {
+        if (contributionPage === 1) {
           setContributions(response.data);
         } else {
           setContributions((prev) => [...prev, ...response.data]);
@@ -66,7 +75,7 @@ function DonationDetail() {
   );
 
   const getContributionCountRequestQuery = useQuery(
-      ["getContributionCountRequestQuery", contributionsLoadMoreQuery.data], // 쿼리 key
+      ["getContributionCountRequestQuery", getContributionsLoadMoreQuery.data], // 쿼리 key
       async () => await getContributionCountRequest({
           count: countPerPage,  
           donationProjectId: donationProjectId
@@ -74,14 +83,58 @@ function DonationDetail() {
       {
         refetchOnWindowFocus: false,
         onSuccess: (response) => {
-          setTotalCount(response.data.totalCount); // totalCount 상태 업데이트
-          setTotalLoadCount(response.data.totalLoadCount) // 최대 페이지
+          setContributionTotalCount(response.data.totalCount); // totalCount 상태 업데이트
+          setContributionTotalLoadCount(response.data.totalLoadCount) // 최대 페이지
         },
         onError: (error) => {
           console.error(error);
         }
       }
     );
+
+     const getCommentLoadMoreQuery = useQuery(
+    ["getCommentLoadMoreQuery", donationProjectId, commentPage],
+    async () => await getCommentLoadMoreRequest({
+          startIndex: (commentPage - 1) * countPerPage, 
+          count: countPerPage,  
+          donationProjectId: donationProjectId
+        }),
+    {
+      keepPreviousData: true,
+      retry: 0,
+      refetchOnWindowFocus: false,
+      onSuccess: (response) => {
+        if (commentPage === 1) {
+          setComments(response.data);
+        } else {
+          setComments((prev) => [...prev, ...response.data]);
+        }
+      },
+      onError: (err) => console.error(err),
+    }
+  );
+
+  const getCommentCountRequestQuery = useQuery(
+      ["getCommentCountRequestQuery", getCommentLoadMoreQuery.data], // 쿼리 key
+      async () => await getCommentCountRequest({
+          count: countPerPage,  
+          donationProjectId: donationProjectId
+      }),
+      {
+        refetchOnWindowFocus: false,
+        onSuccess: (response) => {
+          setCommentTotalCount(response.data.totalCount); // totalCount 상태 업데이트
+          setCommentTotalLoadCount(response.data.totalLoadCount) // 최대 페이지
+        },
+        onError: (error) => {
+          console.error(error);
+        }
+      }
+    );
+    
+
+
+
 
   return (
     <div css={s.layout}>
@@ -120,14 +173,25 @@ function DonationDetail() {
               <div css={[s.taps, tab === 2 && s.active]} onClick={() => setTab(2)}>댓글</div>
             </div>
             <div css={s.tabContent}>
-              { tab === 1 
-                ? <DonationHistory 
-                    contributions={contributions} 
-                    onLoadMore={() => setPage(prev => prev + 1)} 
-                    hasMore={page < totalLoadCount} 
+              { tab === 1  && (
+               <DonationHistory 
+                    contributions={contributions}
+                    totalCount={contributionTotalCount}
+                    onLoadMore={() => setContributionPage(prev => prev + 1)} 
+                    hasMore={contributionPage < contributionTotalLoadCount} 
                 />
-                : <DonationComments />
-              }
+              )}
+              {tab === 2 && (
+                <DonationComments 
+                  comments={comments}
+                  totalCount={commentTotalCount}
+                  onLoadMore={() => setCommentPage(prev => prev + 1)}
+                  hasMore={commentPage < commentTotalLoadCount}
+                  contributions={contributions} 
+                  principal={principal}
+                  donationProjectId={donationProjectId}
+                />
+              )}
             </div>
 
         </div>

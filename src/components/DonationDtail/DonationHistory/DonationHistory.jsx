@@ -13,7 +13,7 @@ function formatDate(dateString) {
   return `${year}.${month}.${day} ${hours}:${minutes}`;
 }
 
-function DonationHistory({ contributions, onLoadMore, hasMore }) {
+function DonationHistory({ contributions, totalCount, onLoadMore, hasMore }) {
     
 
 
@@ -26,7 +26,7 @@ function DonationHistory({ contributions, onLoadMore, hasMore }) {
     return (
         <div css={s.historyLayout}>
             <div css={s.totalCount}>
-                총 <span>{contributions.length}</span>건 기부되었습니다
+                총 <span>{totalCount}</span>건 기부되었습니다
             </div>
             {contributions.map((contribution) => (
                 <div key={contribution.donationProjectContributionId} css={s.historyItem}>

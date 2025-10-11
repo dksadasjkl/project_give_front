@@ -22,7 +22,7 @@ function App() {
       onError: (error) => {},
     }
   );
-
+  console.log("App principalQuery.data:", principalQuery.data);
   return (
     <RootLayout>
       <RootHeader />  
@@ -31,7 +31,7 @@ function App() {
           <Routes>
             <Route path="/*" element={
               <>
-                <DonationRoute />
+                <DonationRoute principal={principalQuery.data?.data?.principal}/>
                 <AccountRoute />
               </>
               } />

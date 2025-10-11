@@ -3,12 +3,12 @@ import DonationList from '../DonationList/DonationList'
 import DonationDetail from '../DonationDetail/DonationDetail'
 import { Route, Routes } from 'react-router-dom'
 
-function DonationPage() {
+function DonationPage({ principal }) {
   return (
     <>
       <Routes>
         <Route path="/" element={ <DonationList /> } />
-        <Route path=":donationProjectId" element={<DonationDetail />} />
+        <Route path=":donationProjectId" element={<DonationDetail  principal={principal}/>} />
       </Routes>
     </>
   )

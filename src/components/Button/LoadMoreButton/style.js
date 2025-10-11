@@ -21,4 +21,8 @@ export const plusButton = css`
         height: 40px;
         font-size: 14px;
     }
+
+    &:hover {
+        background-color: #f7f7f786;
+    }
 `;
