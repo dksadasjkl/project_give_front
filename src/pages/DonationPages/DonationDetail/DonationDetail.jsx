@@ -75,7 +75,7 @@ function DonationDetail({ principal }) {
   );
 
   const getContributionCountRequestQuery = useQuery(
-      ["getContributionCountRequestQuery", getContributionsLoadMoreQuery.data], // 쿼리 key
+      ["getContributionCountRequestQuery", getContributionsLoadMoreQuery.data], 
       async () => await getContributionCountRequest({
           count: countPerPage,  
           donationProjectId: donationProjectId
@@ -149,7 +149,7 @@ function DonationDetail({ principal }) {
         />
         {/* 모금소개 및 기부하기 */}
         {/* DonationTabs - 모달은 기부 내역 조회와 함께 진행예정 기본적은 css적용 완료 */}
-        <DonationTabs />
+        <DonationTabs principal={principal} donationProjectId={donationProjectId}/>
 
         {/* 모금 소개 내용 및 사용계획 */}
         <div>
