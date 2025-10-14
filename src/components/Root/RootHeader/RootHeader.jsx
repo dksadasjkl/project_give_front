@@ -5,6 +5,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import instance from "../../../apis/utills/instance";
 import getServerAddress from "../../../constants/serverAddress";
+import logoHome from "../../../assets/logo_home.png";
 
 export const RootHeader = () => {
   const [ isLogin, setLogin ] = useState(false);
@@ -33,7 +34,9 @@ export const RootHeader = () => {
   return (
     <div css={s.layout}>
         <div css={s.header}>
-            <Link css={s.link} to="/">기부 로고 홈</Link>
+            <Link css={s.logoBox} to="/">
+                <img src={logoHome} alt="기부 로고 홈" css={s.logoimage} />
+            </Link>
             <Link css={s.link} to="/donation">기부</Link>
             <Link css={s.link} to="/">펀딩</Link>
             <Link css={s.link} to="/">쇼핑</Link>

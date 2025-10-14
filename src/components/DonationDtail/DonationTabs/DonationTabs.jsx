@@ -27,7 +27,6 @@ function DonationTabs({ principal, donationProjectId }) {
         userId: principal.userId,
         donationProjectContributionAmount: Number(donationAmount),
       };
-
       try {
         await postOrderRequest(dto);
         alert("🎉 기부가 정상적으로 완료되었습니다. 감사합니다!");
@@ -46,24 +45,22 @@ function DonationTabs({ principal, donationProjectId }) {
   // 결제 시작: 모달 닫고 PortOne 호출
   const handleConfirm = () => {
     setIsModalOpen(false); 
-     setTimeout(() => {
+
      portOneMutation.mutate({
       orderName: `기부_${donationProjectId}`,
       totalAmount: Number(donationAmount),
-    });
-    }, 100); 
+    }); 
     
   };
 
   const handleCancel = () => setIsModalOpen(false);
 
   return (
-    <>
+    <div>
       <div css={s.donationTabs}>
         <div css={s.tabIntro}>모금소개</div>
         <div css={s.tabDonate} onClick={handleDonateClick}>기부하기</div>
-      </div>
-
+      </div>  
       {isModalOpen && (
         <DonationModal
           donationAmount={donationAmount}
@@ -73,7 +70,7 @@ function DonationTabs({ principal, donationProjectId }) {
           message={message}
         />
       )}
-    </>
+    </div>
   );
 }
 

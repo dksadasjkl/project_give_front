@@ -23,7 +23,7 @@ export const header = css`
 
   & div,
   & a {
-    margin: 30px;
+    margin: 0 40px 0;
     text-decoration: none;
     color: black;
     font-weight: 600;
@@ -72,7 +72,26 @@ export const header = css`
       font-size: 0.85rem;
     }
   }
+  `;
+  export const logoBox = css`
+      box-sizing: border-box;
+      width: 90px;
+  `;
+
+export const logoimage = css`
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    & > img {
+        width: 100%;
+        height: 100%;
+    }
 `;
+
 
 export const link = css`
   text-decoration: none;
