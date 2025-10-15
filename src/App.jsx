@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import DonationRoute from './routes/DonationRoute/DonationRoute';
 import RootLayout from './components/Root/RootLayout/RootLayout';
 import { RootHeader } from './components/Root/RootHeader/RootHeader';
@@ -9,6 +9,7 @@ import PageContainer from './components/Page/PageContainer/PageContainer';
 import AccountRoute from './routes/AccountRoute/AccountRoute';
 import { useQuery } from '@tanstack/react-query';
 import { getPrincipalRequest } from './apis/api/Account/account';
+import MyPageRoute from './routes/MyPageRoute/MyPageRoute';
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
     }
   );
   console.log("App principalQuery.data:", principalQuery.data);
+  
   return (
     <RootLayout>
       <RootHeader />  
@@ -33,6 +35,7 @@ function App() {
               <>
                 <DonationRoute principal={principalQuery.data?.data?.principal}/>
                 <AccountRoute />
+                <MyPageRoute />
               </>
               } />
           </Routes>

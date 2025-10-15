@@ -1,97 +1,78 @@
 import { css } from "@emotion/react";
 
-export const layout = css`
-  display: flex;
-  justify-content: center;
-  background-color: white;
-  width: 100%;
-`;
-
-export const header = css`
+export const headerFull = css`
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 80px;
+  width: 100%;          /* 화면 전체 */
   background: white;
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e5e5e5; /* 밑선 전체 */
+  z-index: 100;
+`;
+
+export const header = css`
+  max-width: 1200px;    /* 중앙 내용 제한 */
+  margin: 0 auto;  
+  height: 80px;
+  background: transparent;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: space-between;
+  padding-right: 20px;
   z-index: 100;
   transition: all 0.3s ease;
 
-  & div,
-  & a {
-    margin: 0 40px 0;
-    text-decoration: none;
-    color: black;
-    font-weight: 600;
-    transition: all 0.3s;
-    cursor: pointer;
-
-    &:hover {
-      color: rgba(138, 248, 65, 1);
-    }
-  }
-
-  /* 💻 태블릿 (최대 1024px) */
   @media (max-width: 1024px) {
     height: 70px;
-
-    & div,
-    & a {
-      margin: 20px;
-      font-size: 0.95rem;
-    }
+    padding: 0 20px;
   }
 
-  /* 📱 모바일 (최대 768px) */
   @media (max-width: 768px) {
     flex-wrap: wrap;
-    justify-content: space-around;
-    height: auto;
-    padding: 10px 0;
-
-    & div,
-    & a {
-      margin: 12px 10px;
-      font-size: 0.9rem;
-    }
+    padding: 10px 20px;
   }
 
-  /* 📱 작은 모바일 (최대 480px) */
   @media (max-width: 480px) {
     flex-direction: column;
-    height: auto;
-    padding: 8px 0;
-
-    & div,
-    & a {
-      margin: 8px 0;
-      font-size: 0.85rem;
-    }
-  }
-  `;
-  export const logoBox = css`
-      box-sizing: border-box;
-      width: 90px;
-  `;
-
-export const logoimage = css`
-    box-sizing: border-box;
-    display: flex;
-    justify-content: center;
     align-items: center;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    & > img {
-        width: 100%;
-        height: 100%;
-    }
+    padding: 8px 10px;
+  }
 `;
 
+export const logoBox = css`
+  width: 90px;
+`;
+
+export const logoimage = css`
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+`;
+
+export const centerMenu = css`
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+
+  @media (max-width: 768px) {
+    gap: 20px;
+  }
+
+  @media (max-width: 480px) {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+`;
+
+export const rightBox = css`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  @media (max-width: 768px) {
+    margin-top: 6px;
+  }
+`;
 
 export const link = css`
   text-decoration: none;
@@ -115,27 +96,10 @@ export const link = css`
   }
 `;
 
-export const loginBox = css`
-  display: flex;
-  align-items: center;
-  gap: 12px;
-
-  @media (max-width: 768px) {
-    margin-top: 6px;
-    gap: 8px;
-  }
-`;
-
-export const accountItems = css`
-  display: flex;
-  align-items: center;
-`;
-
 export const login = css`
   text-decoration: none;
   color: #333333;
   font-weight: bold;
-  padding: 8px 16px;
   transition: all 0.3s ease;
 
   &:hover {
@@ -143,12 +107,10 @@ export const login = css`
   }
 
   @media (max-width: 768px) {
-    padding: 6px 12px;
     font-size: 0.9rem;
   }
 
   @media (max-width: 480px) {
-    padding: 4px 8px;
     font-size: 0.85rem;
   }
 `;
