@@ -35,7 +35,7 @@ function App() {
               <>
                 <DonationRoute principal={principalQuery.data?.data?.principal}/>
                 <AccountRoute />
-                <MyPageRoute />
+                <MyPageRoute principal={principalQuery.data?.data?.principal}/>
               </>
               } />
           </Routes>

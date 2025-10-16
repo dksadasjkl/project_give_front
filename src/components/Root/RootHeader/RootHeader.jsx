@@ -64,7 +64,7 @@ export const RootHeader = () => {
             </a>
           ) : (
             <>
-              <Link css={s.login} to="/mypage/profile">
+              <Link css={s.login} to="/mypage/account">
                 MY
               </Link>
                 <a css={s.login} onClick={handleLogoutClick} href="/">
