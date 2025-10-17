@@ -13,10 +13,10 @@ function ProfileView({ nickname, email, profileImageUrl, onEditClick }) {
                     />
                 </div>
             </div>
-            <div>
+            <div css={s.userBox} >
               <div>{nickname}</div>
               <div>{email}</div>
-              <button css={s.buttons3} onClick={onEditClick}>수정</button>
+              <button css={s.button} onClick={onEditClick}>수정</button>
             </div>
         </div>
     );

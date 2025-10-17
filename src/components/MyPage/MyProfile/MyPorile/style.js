@@ -12,18 +12,19 @@ export const userDetails = css`
     box-sizing: border-box;
     height: 100%;
     padding: 0px 80px 80px 40px;
-    color: #263747;
-    font-weight: 700;
+    color: #202020;
     font-size: 18px;
+    font-family: "NanumSquareWebFont, dotum, Sans-serif";
 `;
 
 export const title = css`
-    font-size: 25px;
-    margin-bottom: 24px;
+    font-size: 22px;
+    margin-bottom: 20px;
+    font-weight: 700;
 `;
 
-export const box = css`
-    margin: 10px 0px;
+export const profileBox = css`
+    margin-bottom: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -35,114 +36,7 @@ export const box = css`
     background-color: #ffffff;
 `;
 
-export const imgBox = css`
-    box-sizing: border-box;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 124px;
-    height: 124px;
-    direction: none;
+export const subTitle = css`
+    margin-bottom: 20px;
+    font-weight: 700;
 `;
-
-export const editimgBox = css`
-    box-sizing: border-box;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 124px;
-    height: 124px;
-    cursor: pointer;
-    position: relative;
-    
-    & > div:nth-of-type(2) {
-        box-sizing: border-box;
-        position: absolute;
-        bottom: 0; 
-        right: 0; 
-        font-size: 30px; 
-    }
-`;
-
-
-
-export const nicknameEditBox = css`
-    display: flex;
-    width: 100%;
-`;
-
-export const nicknameEdit = css`
-    width: 100%;
-    color: #333333;
-    font-size: 12px;
-    font-weight : 600;
-`;
-
-export const nickInputEdit = css`
-    flex-grow: 1;
-    padding: 10px 20px;
-    margin-right: 15px;
-    border: 2px solid #e6eef5;
-    border-radius: 5px;
-    width: 80%;
-    color: #333333;
-    font-size: 12px;
-    background-color: #fbfbfd;
-`;
-
-export const nickCheckButton = css`
-    width: 15%;
-    height: 38px;
-    margin-left: 10px;
-    padding: 10px 20px;
-    border: 1px solid #0e004a24;
-    border-radius: 5px;
-    background-color: white;
-    font-weight: 600;
-    color: #222222;
-    text-decoration: none;
-    cursor: pointer;
-
-    &:hover {
-        color: rgb(255, 64, 129);
-        background-color: #dbdbdb29;
-    }
-`;
-
-
-export const profileImg = css`
-    box-sizing: border-box;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid #dbdbdb;
-    border-radius: 50%;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    & > img {
-        height: 100%;   
-    }  
-`;
-
-export const fileEditbutton = css`
-    &>* {
-        color : #00005cff;
-    }
-`;
-
-export const passwordEdit = css`
-    margin-bottom: 10px;
-`;
-
-export const passwordBox = css`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid #d7e2eb;
-    border-radius: 15px;
-    padding: 40px;
-    row-gap: 10px;
-    background-color: #ffffff;   
-`

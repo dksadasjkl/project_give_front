@@ -15,18 +15,20 @@ function AuthPageInput({ type, name, placeholder, value, onChange, ref, message,
                 ref={ref}
                 onKeyDown={onKeyDown}
             />
-            { 
-                !!message && 
+         { 
+            !!message?.text && (
                 <div css={s.inputIcon(message.type)}>
                     {message.type === "error" ? <MdErrorOutline /> : <MdCheckCircleOutline />}
                 </div>
-            }
-            { 
-                !!message && 
+            )
+        }
+        { 
+            !!message?.text && (
                 <div css={s.messageBox(message.type)}>
                     { message.text }
                 </div>
-            }
+            )
+        }
             
         </div>
     );

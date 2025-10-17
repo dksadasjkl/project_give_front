@@ -42,6 +42,10 @@ export const getDonationCategoriesRequest = async () => {
   return response.data; 
 }
 
+export const profileUpdateRequest = async (data) => {
+  return await instance.put("/account/profile", data);
+}
+
 export const passwordEditRequest = async (data) => {
     return await instance.put("/account/password", data);
 }
