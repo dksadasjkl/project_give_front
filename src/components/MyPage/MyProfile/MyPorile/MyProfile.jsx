@@ -60,31 +60,25 @@ function MyProfile({ principal }) {
         });
     };
 
-
+    // 비밀번호 변경
     const passwordEdit = useMutation({
         mutationKey: "passwordEdit",
         mutationFn: passwordEditRequest,
         onSuccess: () => {
             alert("비밀번호 수정이 완료되었습니다.");
             localStorage.removeItem("AccessToken");
-            window.location.replace("/auth/authentication");
+            window.location.replace("/account");
         },
-    onError: (error) => {
-        const errors = error.response?.data?.errors;
+        onError: (error) => {
+            const errors = error.response?.data?.errors;
 
-        if (errors) {
-            if (errors.oldPassword) {
-                const message = { type: "error", text: errors.oldPassword };
-                setOldPasswordMessage(message);
-            }
-            if (errors.newPassword) {
-                setNewPasswordMessage({ type: "error", text: errors.newPassword });
-            }
-            if (errors.newPasswordCheck) {
-                setNewPasswordCheckMessage({ type: "error", text: errors.newPasswordCheck });
+            // 각 인풋 밑에 메시지 표시
+            if (errors) {
+                if (errors.oldPassword) setOldPasswordMessage({ type: "error", text: errors.oldPassword });
+                if (errors.newPassword) setNewPasswordMessage({ type: "error", text: errors.newPassword });
+                if (errors.newPasswordCheck) setNewPasswordCheckMessage({ type: "error", text: errors.newPasswordCheck });
             }
         }
-    }
     });
 
     const handleFileChange = (e) => {

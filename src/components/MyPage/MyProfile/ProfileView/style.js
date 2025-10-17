@@ -51,8 +51,7 @@ export const button = css`
     box-sizing: border-box;
     border: 1px solid #0e004a24;
     border-radius: 5px;
-    width: 100px;
-    padding: 10px 20px;
+    padding: 10px 25px;
     margin-right: 5px;
     background-color: white;
     color: #222222;
@@ -60,7 +59,7 @@ export const button = css`
     cursor: pointer;
 
     &:hover {
-        color: rgb(255, 64, 129);
-        background-color: #dbdbdb29;
+        font-weight: 700    ;
+        background-color: #f7f7f7cc; 
     }
 `;

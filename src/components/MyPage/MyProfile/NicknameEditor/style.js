@@ -23,7 +23,6 @@ export const nicknameEditorInputGroup = css`
     display: flex;
     justify-content: center;
 `;
-
 export const profileActionButton = css`
     box-sizing: border-box;
     border: 1px solid #0e004a24;
@@ -33,11 +32,12 @@ export const profileActionButton = css`
     background-color: white;
     color: #222222;
     font-weight: 600;
+    transition: background-color 0.25s ease, color 0.25s ease, transform 0.2s ease;
     cursor: pointer;
 
     &:hover {
-        color: rgb(255, 64, 129);
-        background-color: #dbdbdb29;
+        font-weight: 700;
+        background-color: #f7f7f7cc; 
     }
 `;
 
@@ -51,10 +51,11 @@ export const nicknameCheckButton = css`
     background-color: white;
     color: #222222;
     font-weight: 600;
+    transition: all 0.3s ease;
     cursor: pointer;
 
     &:hover {
-        color: rgb(255, 64, 129);
-        background-color: #dbdbdb29;
+        font-weight: 700;
+        background-color: #f7f7f7cc; 
     }
 `;
