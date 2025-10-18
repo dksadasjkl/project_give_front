@@ -11,3 +11,8 @@ export const getDonationProjectsPagingRequest = async (params) => {
 export const getDonationProjectCountRequest = async (params) => {
   return await instance.get("/donations/count", { params });
 };
+
+export const getMyDonationsRequest = async () => {
+  return await instance.get("/mypage/donations");
+};
+

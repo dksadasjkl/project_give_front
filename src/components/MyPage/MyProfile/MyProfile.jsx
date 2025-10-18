@@ -1,19 +1,16 @@
 /** @jsxImportSource @emotion/react */
 import * as s from "./style"
 import { useEffect, useRef, useState } from "react";
-import { useInput } from "../../../../hooks/useInput";
-import MyPageSidebar from "../../MyPageSidebar/MyPageSidebar"
 import { useMutation } from "@tanstack/react-query";
-import { checkNicknameRequest, passwordEditRequest, profileUpdateRequest } from "../../../../apis/api/Account/account";
-import AuthPageInput from "../../../Account/AuthPageInput/AuthPageInput";
-import { HiOutlinePencilAlt } from "react-icons/hi";
 import { v4 as uuid } from "uuid";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import { storage } from "../../../../apis/firebase/firebaseConfig";
-import PasswordEditor from "../PasswordEditor/PasswordEditor";
-import ProfileView from "../ProfileView/ProfileView";
-import ProfileImageEditor from "../ProfileImageEditor/ProfileImageEditor";
-import NicknameEditor from "../NicknameEditor/NicknameEditor";
+import { storage } from "./../../../apis/firebase/firebaseConfig";
+import PasswordEditor from "./PasswordEditor/PasswordEditor";
+import ProfileView from "./ProfileView/ProfileView";
+import ProfileImageEditor from "./ProfileImageEditor/ProfileImageEditor";
+import NicknameEditor from "./NicknameEditor/NicknameEditor";
+import { useInput } from "../../../hooks/useInput";
+import { passwordEditRequest, profileUpdateRequest } from "../../../apis/api/Account/account";
 
 function MyProfile({ principal }) {
     const [isEditing, setIsEditing] = useState(false);

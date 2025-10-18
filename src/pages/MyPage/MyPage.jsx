@@ -3,10 +3,10 @@ import * as s from "./style";
 import React from 'react'
 import MyPageSidebar from '../../components/MyPage/MyPageSidebar/MyPageSidebar'
 import MyDonationList from '../../components/MyPage/MyDonationList/MyDonationList'
-import MyProfile from '../../components/MyPage/MyProfile/MyPorile/MyProfile';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import MyPostsList from '../../components/MyPage/MyPostsList/MyPostsList';
 import MyCommentsList from '../../components/MyPage/MyCommentsList/MyCommentsList';
+import MyProfile from "../../components/MyPage/MyProfile/MyProfile";
 
 function MyPage({ principal }) {
   return (

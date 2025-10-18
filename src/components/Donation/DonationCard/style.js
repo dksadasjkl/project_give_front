@@ -1,22 +1,23 @@
 import { css } from "@emotion/react";
 
-export const boardCard = css`   
-    box-sizing: border-box;
-    margin-top: 15px;
-    width: 280px;
-    height: 350px;
-    border: 1px solid #dbdbdb;
-    border-radius: 10px;
-    font-family: "Pretendard";
-    transition: all 0.3s;
-    cursor: pointer;
+export const boardCard = css`
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+  width: 280px;
+  padding-bottom: 15px;
+  border: 1px solid #dbdbdb;
+  border-radius: 10px;
+  font-family: "Pretendard";
+  transition: all 0.3s;
+  cursor: pointer;
 
-    &:hover{
-        transform: translate(0, -5px);
-        border: 1px solid rgba(0, 0, 0, 0.55)
-    }
+  &:hover{
+    transform: translate(0, -5px);
+    border: 1px solid rgba(0, 0, 0, 0.55)
+  }
 `;
-
 export const imageBox = css`
     box-sizing: border-box;
     display: flex;
@@ -47,7 +48,7 @@ export const title = css`
 `;
 
 export const organization = css`
-    margin: 4px 0 20px; 
+    margin: 4px 0 10px; 
     font-size: 16px;
     color: #737373;
 `;
@@ -86,4 +87,28 @@ export const amountBox = css`
         font-weight: 500;
         color: #1c1c1c;
     }
+`;
+
+export const metaBox = css`
+  display: flex;
+  gap: 8px;
+  font-size: 12px;
+  color: #777;
+  margin-bottom: 8px;
+`;
+
+export const category = css`
+  background-color: #e0f7fa;
+  color: #00796b;
+  padding: 2px 6px;
+  border-radius: 4px;
+`;
+
+export const period = css`
+  font-style: italic;
+`;
+
+export const status = (status) => css`
+  font-weight: bold;
+  color: ${status === "진행 중" ? "green" : "red"};
 `;

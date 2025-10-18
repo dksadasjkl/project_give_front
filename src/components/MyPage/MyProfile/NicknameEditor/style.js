@@ -43,6 +43,7 @@ export const profileActionButton = css`
 
 export const nicknameCheckButton = css`
     flex-shrink: 0;
+    height: 38px;
     box-sizing: border-box;
     border: 1px solid #0e004a24;
     border-radius: 5px;
@@ -55,7 +56,7 @@ export const nicknameCheckButton = css`
     cursor: pointer;
 
     &:hover {
-        font-weight: 700;
+        font-weight: 700    ;
         background-color: #f7f7f7cc; 
     }
 `;
