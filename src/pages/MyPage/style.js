@@ -18,7 +18,7 @@ export const layout = css`
 `;
 
 export const sidebar = css`
-  width: 220px;
+  /* width: 220px;
   padding: 20px;
   border: 1px solid #ddd;
   border-radius: 10px;
@@ -27,7 +27,7 @@ export const sidebar = css`
     width: 100%;
     border-right: none;
     border-bottom: 1px solid #ddd;
-  }
+  } */
 `;
 
 export const content = css`

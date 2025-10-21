@@ -16,3 +16,6 @@ export const getMyDonationsRequest = async () => {
   return await instance.get("/mypage/donations");
 };
 
+export const getMyCommentsRequest = async () => {
+  return await instance.get("/mypage/donation-comments");
+};

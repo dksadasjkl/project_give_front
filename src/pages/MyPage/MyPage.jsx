@@ -4,7 +4,6 @@ import React from 'react'
 import MyPageSidebar from '../../components/MyPage/MyPageSidebar/MyPageSidebar'
 import MyDonationList from '../../components/MyPage/MyDonationList/MyDonationList'
 import { Navigate, Route, Routes } from 'react-router-dom';
-import MyPostsList from '../../components/MyPage/MyPostsList/MyPostsList';
 import MyCommentsList from '../../components/MyPage/MyCommentsList/MyCommentsList';
 import MyProfile from "../../components/MyPage/MyProfile/MyProfile";
 
@@ -25,7 +24,6 @@ function MyPage({ principal }) {
                 <Route path="/donations" element={<MyDonationList />} />  
 
                 {/* 게시글/활동 */}
-                <Route path="posts" element={<MyPostsList />} />
                 <Route path="comments" element={<MyCommentsList />} />
             </Routes>
         </div>
