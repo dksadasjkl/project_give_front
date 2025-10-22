@@ -8,6 +8,7 @@ export const commentLayout = css`
 `;
 
 export const commentContainer = css`
+    position: relative; 
     width: 70%;
     margin-top: 10px;
     padding: 24px 0;
@@ -85,4 +86,85 @@ export const commentDate = css`
 
 export const button = css`
     width: 70%;
+`;
+/* ✅ 댓글 수정/삭제/저장 관련 스타일 — 오른쪽 위 정렬 */
+export const commentActions = css`
+  position: absolute;
+  top: 10px;
+  right: 0;
+  display: flex;
+  gap: 6px;
+  z-index: 100;
+
+  & > button {
+    padding: 4px 10px;
+    font-size: 12.5px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color: #f5f5f5;
+      transform: translateY(-1px);
+    }
+  }
+`;
+
+/* ✅ 버튼 개별 스타일 */
+export const saveBtn = css`
+  color: #00ab33;
+  border-color: #00ab33;
+
+  &:hover {
+    background-color: rgba(0, 171, 51, 0.12);
+  }
+`;
+
+export const cancelBtn = css`
+  color: #666;
+  border-color: #ccc;
+
+  &:hover {
+    background-color: #f8f8f8;
+  }
+`;
+
+export const editBtn = css`
+  color: #007bff;
+  border-color: #007bff;
+
+  &:hover {
+    background-color: rgba(0, 123, 255, 0.12);
+  }
+`;
+
+export const deleteBtn = css`
+  color: #ff4d4f;
+  border-color: #ff4d4f;
+
+  &:hover {
+    background-color: rgba(255, 77, 79, 0.12);
+  }
+`;
+
+/* ✅ 댓글 수정 입력창 */
+export const editTextarea = css`
+  width: 100%;
+  min-height: 80px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 15px;
+  font-family: "Pretendard, sans-serif";
+  resize: vertical;
+  margin-top: 8px;
+
+  &:focus {
+    outline: none;
+    border-color: #00ab33;
+    box-shadow: 0 0 0 3px rgba(0, 171, 51, 0.15);
+  }
 `;

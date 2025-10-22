@@ -38,12 +38,14 @@ function MyCommentsList() {
           comments.map(comment => (
             <MyCommentCard
               key={comment.donationProjectCommentId}
+              donationProjectCommentId={comment.donationProjectCommentId} 
               text={comment.donationProjectCommentText}
               projectId={comment.donationProjectId}
               date={comment.createDate}
               nickname={comment.nickname}
               projectTitle={comment.donationProjectTitle}       
               projectImageUrl={comment.donationProjectImageUrl} 
+              onRefresh={() => getMyCommentsRequestQuery.refetch()}
             />
           ))
         ) : (
