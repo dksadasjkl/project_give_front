@@ -10,6 +10,7 @@ import AccountRoute from './routes/AccountRoute/AccountRoute';
 import { useQuery } from '@tanstack/react-query';
 import { getPrincipalRequest } from './apis/api/Account/account';
 import MyPageRoute from './routes/MyPageRoute/MyPageRoute';
+import FundingRoute from './routes/FundingRoute/FundingRoute';
 
 function App() {
 
@@ -36,6 +37,7 @@ function App() {
                 <DonationRoute principal={principalQuery.data?.data?.principal}/>
                 <AccountRoute />
                 <MyPageRoute principal={principalQuery.data?.data?.principal}/>
+                <FundingRoute principal={principalQuery.data?.data?.principal}/>
               </>
               } />
           </Routes>

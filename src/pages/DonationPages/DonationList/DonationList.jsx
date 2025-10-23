@@ -5,12 +5,11 @@
   import { getDonationProjectCountRequest, getDonationProjectsPagingRequest, getDonationProjectsRequest } from '../../../apis/api/Donation/donation';
   import DonationCard from '../../../components/Donation/DonationCard/DonationCard';
   import SortDropdown from '../../../components/Donation/SortDropdown/SortDropdown';
-  import { getDonationCategoriesRequest } from '../../../apis/api/Account/account';
   import { TbInnerShadowBottomRight } from "react-icons/tb";
-  import { PiGlobe, PiLeaf, PiWheelchair, PiBaby, PiDog, PiHeart, PiBuilding , PiUserCircleGear, PiQuestion, PiHandshake } from "react-icons/pi";
   import { useNavigate } from 'react-router-dom';
 import { categoryIcons } from '../../../constants/categories';
 import { sortOptions } from '../../../constants/sortOptions';
+import { getDonationCategoriesRequest } from '../../../apis/api/Categorie/categorie';
 
 
 
