@@ -7,7 +7,7 @@ function FundingPage({ principal }) {
   return (
     <Routes>
         <Route path="/" element={<FundingList />} />
-        <Route path=":fundingProjectId" element={<FundingDetail />} />
+        <Route path=":donationProjectId" element={<FundingDetail principal={principal} />} />
     </Routes>
   )
 }

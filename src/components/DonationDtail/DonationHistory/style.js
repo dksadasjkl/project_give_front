@@ -53,6 +53,7 @@ export const contributorInfo = css`
 
 
 export const emptyMessage = css`
+    margin-top: 20px;
     color: #737373;
 `;
 
