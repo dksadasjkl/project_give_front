@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 
 export const card = css`
+  width: 280px;
   border: 1px solid #dbdbdb;
   border-radius: 10px;
   cursor: pointer;

@@ -6,6 +6,7 @@ import MyDonationList from '../../components/MyPage/MyDonationList/MyDonationLis
 import { Navigate, Route, Routes } from 'react-router-dom';
 import MyCommentsList from '../../components/MyPage/MyCommentsList/MyCommentsList';
 import MyProfile from "../../components/MyPage/MyProfile/MyProfile";
+import MyFundingList from "../../components/MyPage/MyFundingList/MyFundingList";
 
 function MyPage({ principal }) {
   return (
@@ -22,6 +23,9 @@ function MyPage({ principal }) {
 
                 {/* 기부 내역 */}
                 <Route path="/donations" element={<MyDonationList />} />  
+
+                {/* 기부 내역 */}
+                <Route path="/fundings" element={<MyFundingList />} />  
 
                 {/* 게시글/활동 */}
                 <Route path="comments" element={<MyCommentsList />} />

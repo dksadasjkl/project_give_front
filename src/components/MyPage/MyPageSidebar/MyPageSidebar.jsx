@@ -20,6 +20,11 @@ function MyPageSidebar({ principal }) {
           </Link>
         </li>
         <li>
+          <Link to="/mypage/fundings" css={[s.menuLink, location.pathname === '/mypage/fundings' && s.activeLink]}>
+            편딩 내역
+          </Link>
+        </li>
+        <li>
           <Link to="/mypage/comments" css={[s.menuLink, location.pathname === '/mypage/comments' && s.activeLink]}>
             댓글
           </Link>

@@ -7,3 +7,8 @@ export const getFundingProjectsPagingRequest = async (params) => {
 export const getFundingProjectCountRequest = async (params) => {
   return await instance.get('/fundings/count', { params });
 };
+
+export const getMyFundingsRequest = async () => {
+  return await instance.get("/mypage/fundings");
+};
+
