@@ -45,7 +45,7 @@ function DonationCard({
 
         {/* 금액 + 퍼센트 */}
         <div css={s.amountBox}>
-          <div>{percent}%</div>
+          <div>{Math.min(percent, 100)}%</div>
           <div>{amount.toLocaleString()}원</div>
         </div>
       </div>

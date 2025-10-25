@@ -66,7 +66,7 @@ export const progressBar = css`
 `;
 
 export const progressFill = (percent) => css`
-    width: ${percent}%;
+    width: ${Math.min(percent, 100)}%;  // 최대 100%
     height: 100%;
     background: #03a94d;
     border-radius: 4px;

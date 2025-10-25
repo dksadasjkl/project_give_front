@@ -5,22 +5,22 @@ import { useQuery} from '@tanstack/react-query';
 import { useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { getDonationProjectDatatilRequest } from '../../../apis/api/Donation/donationDatail';
-import DonationBanner from "../../../components/DonationDtail/DonationBanner/DonationBanner";
-import DonationTabs from "../../../components/DonationDtail/DonationTabs/DonationTabs";
-import DonationIntroduction from "../../../components/DonationDtail/DonationIntroduction/DonationIntroduction";
-import DonationPlan from "../../../components/DonationDtail/DonationPlan/DonationPlan";
-import DonationHistory from "../../../components/DonationDtail/DonationHistory/DonationHistory";
-import DonationComments from "../../../components/DonationDtail/DonationComments/DonationComments";
 import { getContributionCountRequest, getContributionLoadMoreRequest } from "../../../apis/api/Donation/donationContribution";
 import { getCommentCountRequest, getCommentLoadMoreRequest } from "../../../apis/api/Donation/donationComment";
 import { getProjectRewardsRequest } from '../../../apis/api/Funding/fundingDatil';
+import FundingBanner from '../../../components/FundingDtail/FundingBanner/FundingBanner';
+import FundingTabs from '../../../components/FundingDtail/FundingTabs/FundingTabs';
+import FundingIntroduction from '../../../components/FundingDtail/FundingIntroduction/FundingIntroduction';
+import FundingPlan from '../../../components/FundingDtail/FundingPlan/FundingPlan';
+import FundingComments from '../../../components/FundingDtail/FundingComments/FundingComments';
+import FundingHistory from '../../../components/FundingDtail/FundingHistory/FundingHistory';
 import FundingReward from '../../../components/FundingDtail/FundingReward/FundingReward';
 
 function  FundingDetail({ principal }) {
   const { donationProjectId } = useParams();
 
   // 상세페이지 데이터
-  const [ donationDetails, setDonationDetails ] = useState([]); 
+  const [ fundingDetails, setFundingDetails ] = useState([]); 
   
   // 탭 상태 1: 참여내역(기부내역), 2: 댓글
   const [ tab, setTab ] = useState(1); 
@@ -50,7 +50,7 @@ function  FundingDetail({ principal }) {
       retry: 0,
       refetchOnWindowFocus: false,
       onSuccess: response => {
-        setDonationDetails(response.data)
+        setFundingDetails(response.data)
       },
       onError: (error) => {
         console.log(error);
@@ -162,34 +162,33 @@ function  FundingDetail({ principal }) {
     <div css={s.layout}>
 
         {/* 상단 배너 */}
-        <DonationBanner 
-          imgUrl={donationDetails[0]?.donationProjectImageUrl} 
-          endDate={donationDetails[0]?.donationProjectEndDate} 
-          title={donationDetails[0]?.donationProjectTitle}
-          currentAmount={donationDetails[0]?.donationProjectCurrentAmount}
-          targetAmount={donationDetails[0]?.donationProjectTargetAmount}
+        <FundingBanner
+          imgUrl={fundingDetails[0]?.donationProjectImageUrl}
+          endDate={fundingDetails[0]?.donationProjectEndDate}
+          title={fundingDetails[0]?.donationProjectTitle}
+          currentAmount={fundingDetails[0]?.donationProjectCurrentAmount}
+          targetAmount={fundingDetails[0]?.donationProjectTargetAmount}
         />
 
         {/* 모금소개 및 기부하기 */}
         {/* DonationTabs - 모달은 기부 내역 조회와 함께 진행예정 기본적은 css적용 완료 */}
-        <DonationTabs principal={principal} donationProjectId={donationProjectId}/>
+        <FundingTabs principal={principal} donationProjectId={donationProjectId}/>
 
         {/* 모금 소개 내용 및 사용계획 */}
         <div>
           {/* 모금 소개 내용 */}
-          <DonationIntroduction details={donationDetails} />
-                
-          <div> {(
-              <FundingReward rewards={rewards} />
-            )}
-          </div>
+          <FundingIntroduction details={fundingDetails} />
+
+          {/* 리워드 */}
+          <FundingReward rewards={rewards} />
+
           {/* 사용계획 */}
-          <DonationPlan 
-            startDate={donationDetails[0]?.donationProjectStartDate}
-            endDate={donationDetails[0]?.donationProjectEndDate}
-            amount={donationDetails[0]?.donationProjectTargetAmount}
-            organizationImageUrl={donationDetails[0]?.donationProjectOrganizationImageUrl}
-            organization={donationDetails[0]?.donationProjectOrganization}
+          <FundingPlan 
+            startDate={fundingDetails[0]?.donationProjectStartDate}
+            endDate={fundingDetails[0]?.donationProjectEndDate}
+            amount={fundingDetails[0]?.donationProjectTargetAmount}
+            organizationImageUrl={fundingDetails[0]?.donationProjectOrganizationImageUrl}
+            organization={fundingDetails[0]?.donationProjectOrganization}
           />
         </div>
 
@@ -201,7 +200,7 @@ function  FundingDetail({ principal }) {
             </div>
             <div css={s.tabContent}>
               { tab === 1  && (
-               <DonationHistory 
+               <FundingHistory 
                     contributions={contributions}
                     totalCount={contributionTotalCount}
                     onLoadMore={() => setContributionPage(prev => prev + 1)} 
@@ -209,7 +208,7 @@ function  FundingDetail({ principal }) {
                 />
               )}
               {tab === 2 && (
-                <DonationComments 
+                <FundingComments 
                   comments={comments}
                   totalCount={commentTotalCount}
                   onLoadMore={() => setCommentPage(prev => prev + 1)}
