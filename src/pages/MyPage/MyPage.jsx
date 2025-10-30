@@ -7,6 +7,10 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import MyCommentsList from '../../components/MyPage/MyCommentsList/MyCommentsList';
 import MyProfile from "../../components/MyPage/MyProfile/MyProfile";
 import MyFundingList from "../../components/MyPage/MyFundingList/MyFundingList";
+import StoreCartPage from "../StorePages/StoreCartPage/StoreCartPage";
+import StoreWishlistPage from "../StorePages/StoreWishlistPage/StoreWishlistPage";
+import StoreOrderPage from "../StorePages/StoreOrderPage/StoreOrderPage";
+import StorePointPage from "../StorePages/StorePointPage/StorePointPage";
 
 function MyPage({ principal }) {
   return (
@@ -28,7 +32,13 @@ function MyPage({ principal }) {
                 <Route path="/fundings" element={<MyFundingList />} />  
 
                 {/* 게시글/활동 */}
-                <Route path="comments" element={<MyCommentsList />} />
+                <Route path="/comments" element={<MyCommentsList />} />
+
+                        {/* 🛍️ 스토어 관련 페이지 */}
+                <Route path="/store/cart" element={<StoreCartPage principal={principal} />} />
+                <Route path="/store/wishlist" element={<StoreWishlistPage principal={principal} />} />
+                <Route path="/store/orders" element={<StoreOrderPage principal={principal} />} />
+                <Route path="/store/points" element={<StorePointPage principal={principal} />} />
             </Routes>
         </div>
     </div>

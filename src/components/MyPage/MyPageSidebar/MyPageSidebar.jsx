@@ -29,6 +29,39 @@ function MyPageSidebar({ principal }) {
             댓글
           </Link>
         </li>
+
+        <li>
+           <Link
+            to="/mypage/store/cart"
+            css={[s.menuLink, location.pathname === "/mypage/store/cart" && s.activeLink]}
+          >
+            장바구니
+          </Link>
+        </li>
+        <li>
+           <Link
+            to="/mypage/store/wishlist"
+            css={[s.menuLink, location.pathname === "/mypage/store/wishlist" && s.activeLink]}
+          >
+            찜 목록
+          </Link>
+        </li>
+        <li>
+          <Link
+            to="/mypage/store/orders"
+            css={[s.menuLink, location.pathname === "/mypage/store/orders" && s.activeLink]}
+          >
+            주문 내역
+          </Link>
+        </li>
+        <li>
+          <Link
+            to="/mypage/store/points"
+            css={[s.menuLink, location.pathname === "/mypage/store/points" && s.activeLink]}
+          >
+            포인트 내역
+          </Link>
+        </li>
       </ul>
     </div>
   );
