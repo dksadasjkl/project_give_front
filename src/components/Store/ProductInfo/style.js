@@ -15,19 +15,17 @@ export const container = css`
 `;
 
 export const imageBox = css`
-  flex: 1;
-  max-width: 400px;
-  display: flex;
+  /* display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
 `;
 
 export const image = css`
-  width: 100%;
+  /* width: 100%;
   max-width: 350px;
   border-radius: 12px;
   border: 1px solid #ddd;
-  object-fit: cover;
+  object-fit: cover; */
 `;
 
 export const infoBox = css`
