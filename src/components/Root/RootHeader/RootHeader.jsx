@@ -47,7 +47,7 @@ export const RootHeader = () => {
           <Link css={s.link} to="/funding">
             펀딩
           </Link>
-          <Link css={s.link} to="/">
+          <Link css={s.link} to="/store">
             쇼핑
           </Link>
           <Link css={s.link} to="/">

@@ -30,6 +30,7 @@ export const headerBar = css`
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  margin-right: 15px;
   font-size: 18px;
   
   margin-bottom: 10px;
@@ -39,6 +40,8 @@ export const headerBar = css`
     margin-left: 5px;
   }
 `;
+
+
 
 export const fundingCardGrid = css`
   display: grid;

@@ -11,6 +11,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getPrincipalRequest } from './apis/api/Account/account';
 import MyPageRoute from './routes/MyPageRoute/MyPageRoute';
 import FundingRoute from './routes/FundingRoute/FundingRoute';
+import StoreRoute from './routes/StoreRoute/StoreRoute';
 
 function App() {
 
@@ -38,6 +39,7 @@ function App() {
                 <AccountRoute />
                 <MyPageRoute principal={principalQuery.data?.data?.principal}/>
                 <FundingRoute principal={principalQuery.data?.data?.principal}/>
+                <StoreRoute principal={principalQuery.data?.data?.principal}/>
               </>
               } />
           </Routes>
