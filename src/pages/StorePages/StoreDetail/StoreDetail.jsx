@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { VscChevronDown, VscChevronUp } from "react-icons/vsc";
@@ -8,7 +8,6 @@ import { getStoreProductDetailRequest } from "../../../apis/api/Store/store";
 import { getStoreReviewsWithRatingsRequest } from "../../../apis/api/Store/storeComment";
 import { getStoreQnaByProductRequest } from "../../../apis/api/Store/storeQna";
 import ProductInfo from "../../../components/Store/ProductInfo/ProductInfo";
-import ProductActionBar from "../../../components/Store/ProductActionBar/ProductActionBar";
 import ProductReview from "../../../components/Store/ProductReview/ProductReview";
 import ProductQna from "../../../components/Store/ProductQna/ProductQna";
 
@@ -18,7 +17,7 @@ function StoreDetail({ principal }) {
   const [product, setProduct] = useState(null);
   const [reviews, setReviews] = useState([]);
   const [qnaList, setQnaList] = useState([]);
-  const [isDetailPage, setIsDetailPage] = useState(false); // 상세페이지 토글 상태
+  const [isDetailPage, setIsDetailPage] = useState(false);
 
   // ✅ 상품 상세 조회
   useQuery(
@@ -38,7 +37,7 @@ function StoreDetail({ principal }) {
     async () => await getStoreReviewsWithRatingsRequest(productId),
     {
       refetchOnWindowFocus: false,
-      onSuccess: (res) => setReviews(res.data),
+      onSuccess: (res) => setReviews(res.data || []),
       onError: (err) => console.error("리뷰 조회 오류:", err),
     }
   );
@@ -54,20 +53,31 @@ function StoreDetail({ principal }) {
     }
   );
 
-  if (!product) return <div css={s.loading}>상품 정보를 불러오는 중...</div>;
+    if (!product) return <div css={s.loading}>상품 정보를 불러오는 중...</div>;
 
+  let avgRating = 0;
+  let reviewCount = reviews.length;
+
+  if (reviewCount > 0) {
+    const total = reviews.reduce((sum, r) => sum + (r.averageRating || 0), 0);
+    avgRating = total / reviewCount;
+  }
+  
   return (
     <div css={s.container}>
-      {/* 상단 정보 */}
-      <ProductInfo product={product} />
+      {/* 상단 상품 정보 */}
+      <ProductInfo
+        product={{ ...product, averageRating: avgRating, reviewCount }}
+        principal={principal}
+      />
 
-      {/* 수량 조절 + 장바구니 + 찜 + 결제 */}
-      <ProductActionBar product={product} principal={principal} />
-
-      {/* 상세 이미지 (토글식) */}
+      {/* 상세 이미지 */}
       <div css={s.detailSection}>
         <div css={() => s.detailImageBox(isDetailPage)}>
-          <img src={product.productImageDetailUrl || product.productImageDetailUrl} alt="상세 이미지" />
+          <img
+            src={product.productImageDetailUrl}
+            alt="상세 이미지"
+          />
         </div>
         <button
           css={s.detailToggleBtn}
@@ -85,11 +95,17 @@ function StoreDetail({ principal }) {
         </button>
       </div>
 
-      {/* 리뷰 */}
-      <ProductReview productId={productId} principal={principal} />
+      {/* 리뷰 섹션 (스크롤 타겟) */}
+      <div id="reviewSection">
+        <ProductReview productId={productId} principal={principal} />
+      </div>
 
       {/* QnA */}
-      <ProductQna qnaList={qnaList} productId={productId} principal={principal} />
+      <ProductQna
+        qnaList={qnaList}
+        productId={productId}
+        principal={principal}
+      />
     </div>
   );
 }

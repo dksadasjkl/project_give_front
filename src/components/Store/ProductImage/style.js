@@ -107,8 +107,8 @@ export const zoomPreview = (src, offset, layout, zoomFactor) => {
 
   return css`
     position: absolute;
-    left: calc(100% + 30px);
-    top: 0;
+    left: calc(100% + 10px);
+    top: -50px;
     width: ${previewW}px;
     height: ${previewH}px;
     border-radius: 8px;
