@@ -33,7 +33,7 @@ function ProductActionBar({ product, principal }) {
   const handleQuantityChange = (type) => {
     setQuantity((prev) => {
       const newQuantity = type === "plus" ? prev + 1 : Math.max(1, prev - 1);
-      if (newQuantity > 1) setShowPreview(true); // ✅ 수량 증가 시 미리보기 표시
+      if (newQuantity > 1) setShowPreview(true);
       return newQuantity;
     });
   };
@@ -61,20 +61,23 @@ function ProductActionBar({ product, principal }) {
     navigate(`/store/payment`, { state: { product, quantity } });
   };
 
-  const totalPrice = (product.productPrice * quantity).toLocaleString();
+  // ✅ 배송비 + 총금액 계산
+  const productTotal = product.productPrice * quantity;
+  const shippingFee = 3000;
+  const totalWithShipping = productTotal + shippingFee;
 
   return (
     <div css={s.container}>
       {/* 수량 + 금액 */}
       <div css={s.quantityContainer}>
-          <div css={s.quantityBox}>
-            <button onClick={() => handleQuantityChange("minus")}>−</button>
-            <span>{quantity}</span>
-            <button onClick={() => handleQuantityChange("plus")}>＋</button>
-          </div>
+        <div css={s.quantityBox}>
+          <button onClick={() => handleQuantityChange("minus")}>−</button>
+          <span>{quantity}</span>
+          <button onClick={() => handleQuantityChange("plus")}>＋</button>
+        </div>
       </div>
 
-      {/* ✅ 장바구니 미리보기 (수량 1 이상일 때만 표시) */}
+      {/* ✅ 미리보기 (배송비 + 택배사 표시 포함) */}
       {showPreview && (
         <div css={s.previewBox}>
           <div css={s.previewHeader}>
@@ -87,7 +90,23 @@ function ProductActionBar({ product, principal }) {
           <div css={s.previewItem}>
             <span css={s.previewName}>{product.productName}</span>
             <span css={s.previewCount}>x {quantity}</span>
-            <span css={s.previewPrice}>{totalPrice}원</span>
+            <span css={s.previewPrice}>
+              {productTotal.toLocaleString()}원
+            </span>
+          </div>
+
+          {/* 🚚 배송 정보 표시 */}
+          <div css={s.previewItem}>
+            <div>배송비 </div>
+            <div> 3,000원</div>
+          </div>
+
+          {/* 💰 총 결제금액 */}
+          <div css={s.totalBox}>
+            <p>총 결제금액:</p>
+            <strong css={s.totalPrice}>
+              {totalWithShipping.toLocaleString()}원
+            </strong>
           </div>
         </div>
       )}
@@ -104,7 +123,6 @@ function ProductActionBar({ product, principal }) {
           💳 구매하기
         </button>
       </div>
-
     </div>
   );
 }

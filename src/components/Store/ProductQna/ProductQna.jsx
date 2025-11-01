@@ -58,7 +58,7 @@ function ProductQna({ qnaList = [], productId, principal }) {
 
   return (
     <div css={s.container}>
-      <h3 css={s.title}>❓ 상품 문의</h3>
+      <h3 css={s.title}>Q&A</h3>
 
       {principal ? (
         <div css={s.form}>

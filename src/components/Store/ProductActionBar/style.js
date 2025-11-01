@@ -135,6 +135,7 @@ export const previewTitle = css`
 `;
 
 export const previewItem = css`
+  margin-top: 5px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -180,4 +181,24 @@ export const closeBtn = css`
     color: #000;
     transform: scale(1.1);
   }
+`;
+
+export const shippingInfo = css`
+  margin-top: 8px;
+  font-size: 14px;
+  color: #555;
+  line-height: 1.4;
+`;
+
+export const totalBox = css`
+  margin-top: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const totalPrice = css`
+  font-weight: 600;
+  color: #0078ff;
+  font-size: 16px;
 `;

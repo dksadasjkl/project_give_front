@@ -73,7 +73,7 @@ function ProductReview({ productId, principal }) {
 
   return (
     <div css={s.container}>
-      <h3 css={s.title}>💬 상품 리뷰</h3>
+      <h3 css={s.title}>상품 리뷰</h3>
 
       {/* 작성 영역 */}
       {principal ? (

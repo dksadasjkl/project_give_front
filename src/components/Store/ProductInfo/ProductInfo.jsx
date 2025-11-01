@@ -38,13 +38,11 @@ function ProductInfo({ product, principal }) {
           <ProductImage src={productImageUrl} alt={productName} />
         </div>
 
-        {/* ⭐ 평점 / 리뷰 보기 (이미지 아래) */}
+        {/* ⭐ 평점 / 리뷰 보기 */}
         <div css={s.ratingRow} onClick={handleScrollToReviews}>
           <span css={s.star}>⭐</span>
           <span css={s.score}>{averageRating.toFixed(1)}</span>
-          <span css={s.grayText}>
-            (총 평점 {averageRating.toFixed(1)})
-          </span>
+          <span css={s.grayText}>(총 평점 {averageRating.toFixed(1)})</span>
           <span css={s.reviewLink}>리뷰 {reviewCount}건 보기 &gt;</span>
         </div>
       </div>
@@ -66,6 +64,16 @@ function ProductInfo({ product, principal }) {
             )}
             <span css={s.price}>{productPrice.toLocaleString()}원</span>
           </div>
+        </div>
+
+        {/* 🚚 배송 안내 */}
+        <div css={s.shippingInfo}>
+          <p>
+            <strong>택배사:</strong> CJ대한통운
+          </p>
+          <p>
+            <strong>배송비:</strong> 3,000원
+          </p>
         </div>
 
         {/* 설명 */}

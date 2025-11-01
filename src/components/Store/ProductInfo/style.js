@@ -12,7 +12,7 @@ export const container = css`
 
 export const imageBox = css`
   width: 480px;
-  height: 480px;
+  height: 550px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -158,12 +158,12 @@ export const ratingRow = css`
 `;
 
 export const star = css`
-  color: #ffcc00;
+  color: #ffcc0092;
   font-size: 18px;
 `;
 
 export const score = css`
-  font-weight: 700;
+  font-weight: 700; 
   color: #111;
 `;
 
@@ -180,5 +180,19 @@ export const reviewLink = css`
 
   &:hover {
     text-decoration: underline;
+  }
+`;
+
+export const shippingInfo = css`
+  margin-top: 12px;
+  padding: 10px;
+  background: #f9fafb;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #333;
+  line-height: 1.5;
+
+  p {
+    margin: 0;
   }
 `;

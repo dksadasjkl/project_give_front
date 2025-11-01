@@ -47,12 +47,10 @@ function StorePointPage({ principal }) {
                       ? new Date(p.createDate).toLocaleDateString()
                       : "-"}
                   </td>
-                  <td>{p.description || "주문 결제 적립"}</td>
-                  <td css={p.amount > 0 ? s.plus : s.minus}>
-                    {typeof p.amount === "number"
-                      ? `${p.amount > 0 ? "+" : ""}${p.amount.toLocaleString()} P`
-                      : "0 P"}
-                  </td>
+                    <td>{p.pointReason || "주문 결제 적립"}</td>
+                      <td css={p.pointAmount > 0 ? s.plus : s.minus}>
+                        {`${p.pointAmount > 0 ? "+" : ""}${p.pointAmount.toLocaleString()} P`}
+                    </td>
                 </tr>
               ))}
             </tbody>
