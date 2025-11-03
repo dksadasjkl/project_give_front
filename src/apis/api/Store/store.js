@@ -22,5 +22,6 @@ export const getStoreProductDetailRequest = async (productId) => {
 
 /** ✅ 카테고리 조회 (있다면) */
 export const getStoreCategoriesRequest = async () => {
-  return await instance.get("/store/categories");
+  const response = await instance.get("/store/products/categories");
+  return response.data; 
 };
