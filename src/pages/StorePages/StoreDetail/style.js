@@ -53,3 +53,38 @@ export const detailToggleBtn = css`
     background-color: #f9f9f9;
   }
 `;
+
+export const actionBar = css`
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  gap: 30px;
+  padding: 14px 0;
+`;
+
+export const tabButton = css`
+  font-size: 16px;
+  font-weight: 500;
+  color: #555;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px 16px;
+  border-radius: 6px;
+  transition: 0.2s;
+
+  &:hover {
+    background: #f5f5f5;
+  }
+`;
+
+export const activeTab = css`
+  color: #007bff;
+  font-weight: 700;
+  border-bottom: 2px solid #007bff;
+`;
