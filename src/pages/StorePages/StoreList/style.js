@@ -48,7 +48,7 @@ export const headerBar = css`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
 `;
 
 // ✅ 상품 카드 그리드
