@@ -11,18 +11,18 @@ export const container = css`
 `;
 
 export const imageBox = css`
-  width: 480px;
-  height: 550px;
+  flex: 1;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start; /* ✅ 이미지가 위에서 고정되도록 */
   align-items: center;
-  justify-content: flex-end; 
-  gap: 12px;
   padding-bottom: 12px;
+  position: relative;
 `;
 
 export const imageWrapper = css`
-  flex: 1;
+  width: 100%;
+  height: 500px; /* ✅ 고정된 이미지 영역 */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -144,27 +144,38 @@ export const actionButtons = css`
 
 /* ✅ 평점 줄 */
 export const ratingRow = css`
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
-  margin-top: 8px;
   font-size: 15px;
   cursor: pointer;
   user-select: none;
-
-  &:hover {
-    opacity: 0.85;
-  }
+  background: #fff;
+  padding: 6px 12px;
+  line-height: 1.2;
+  white-space: nowrap; /* ✅ 한 줄 고정 */
+  max-width: 90%; /* ✅ 부모 영역 벗어나지 않게 */
+  overflow: hidden; /* ✅ 혹시라도 넘칠 때 */
+  text-overflow: ellipsis; /* ✅ … 처리 */
 `;
 
+
 export const star = css`
-  color: #ffcc0092;
-  font-size: 18px;
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+  margin-top: -1px; /* ⭐️ 살짝 수직 보정 */
 `;
 
 export const score = css`
-  font-weight: 700; 
+  font-weight: 700;
   color: #111;
+  letter-spacing: -0.3px;
 `;
 
 export const grayText = css`
@@ -173,15 +184,17 @@ export const grayText = css`
 `;
 
 export const reviewLink = css`
-  margin-left: 6px;
+  margin-left: 4px;
   font-size: 14px;
   color: #0078ff;
   font-weight: 600;
+  letter-spacing: -0.2px;
 
   &:hover {
     text-decoration: underline;
   }
 `;
+
 
 export const shippingInfo = css`
   margin-top: 12px;

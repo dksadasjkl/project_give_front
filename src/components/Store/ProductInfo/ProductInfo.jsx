@@ -2,6 +2,7 @@
 import ProductImage from "../ProductImage/ProductImage";
 import * as s from "./style";
 import ProductActionBar from "../ProductActionBar/ProductActionBar";
+import { FaStar } from "react-icons/fa";
 
 function ProductInfo({ product, principal }) {
   const {
@@ -40,7 +41,7 @@ function ProductInfo({ product, principal }) {
 
         {/* ⭐ 평점 / 리뷰 보기 */}
         <div css={s.ratingRow} onClick={handleScrollToReviews}>
-          <span css={s.star}>⭐</span>
+          <FaStar size={14} color="#FFD700" css={s.star} />
           <span css={s.score}>{averageRating.toFixed(1)}</span>
           <span css={s.grayText}>(총 평점 {averageRating.toFixed(1)})</span>
           <span css={s.reviewLink}>리뷰 {reviewCount}건 보기 &gt;</span>
