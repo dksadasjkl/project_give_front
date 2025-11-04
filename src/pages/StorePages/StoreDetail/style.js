@@ -56,8 +56,8 @@ export const detailToggleBtn = css`
 
 export const actionBar = css`
   position: sticky;
-  top: 0;
-  z-index: 20;
+  top: 80px; /* RootHeader 높이만큼 */
+  z-index: 50;
   background: white;
   display: flex;
   justify-content: center;
@@ -65,7 +65,10 @@ export const actionBar = css`
   border-bottom: 1px solid #eee;
   gap: 30px;
   padding: 14px 0;
+  transition: box-shadow 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.03);
 `;
+
 
 export const tabButton = css`
   font-size: 16px;

@@ -24,7 +24,8 @@ function StoreDetail({ principal }) {
   const qnaRef = useRef(null);
 
   // ✅ 상품 상세 조회
-  useQuery(["getStoreProductDetailRequest", productId],
+  useQuery(
+    ["getStoreProductDetailRequest", productId],
     async () => await getStoreProductDetailRequest(productId),
     {
       retry: 0,
@@ -34,7 +35,8 @@ function StoreDetail({ principal }) {
   );
 
   // ✅ 리뷰 조회
-  useQuery(["getStoreReviewsWithRatingsRequest", productId],
+  useQuery(
+    ["getStoreReviewsWithRatingsRequest", productId],
     async () => await getStoreReviewsWithRatingsRequest(productId),
     {
       refetchOnWindowFocus: false,
@@ -43,7 +45,8 @@ function StoreDetail({ principal }) {
   );
 
   // ✅ QnA 조회
-  useQuery(["getStoreQnaByProductRequest", productId],
+  useQuery(
+    ["getStoreQnaByProductRequest", productId],
     async () => await getStoreQnaByProductRequest(productId),
     {
       refetchOnWindowFocus: false,
@@ -56,26 +59,46 @@ function StoreDetail({ principal }) {
       ? reviews.reduce((sum, r) => sum + (r.averageRating || 0), 0) / reviews.length
       : 0;
 
+  // ✅ 탭 클릭 시 스크롤 이동
   const handleScrollTo = (ref) => {
     ref.current.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) setActiveTab(entry.target.id);
-        });
-      },
-      { threshold: 0.4 }
-    );
+// ✅ 현재 섹션 감지 (Intersection Observer)
+useEffect(() => {
+  const sections = [
+    { id: "detail", ref: detailRef },
+    { id: "review", ref: reviewRef },
+    { id: "qna", ref: qnaRef },
+  ];
 
-    if (detailRef.current) observer.observe(detailRef.current);
-    if (reviewRef.current) observer.observe(reviewRef.current);
-    if (qnaRef.current) observer.observe(qnaRef.current);
+  const observer = new IntersectionObserver(
+    (entries) => {
+      // 가장 먼저 화면에 충분히 들어온 섹션을 찾기
+      const visibleEntry = entries.find(
+        (entry) => entry.isIntersecting && entry.intersectionRatio > 0.3
+      );
 
-    return () => observer.disconnect();
-  }, []);
+      if (visibleEntry) {
+        setActiveTab(visibleEntry.target.id);
+      }
+    },
+    {
+      root: null,
+      rootMargin: "-90px 0px -60% 0px", // 👈 헤더 + 탭바 보정값 수정
+      threshold: [0.1, 0.3, 0.6], // 👈 더 세밀한 감지 포인트
+    }
+  );
+
+  sections.forEach(({ ref }) => {
+    if (ref.current) observer.observe(ref.current);
+  });
+
+  return () => observer.disconnect();
+}, []); // ✅ 의존성 없음
+
+
+
 
   if (!product) return <div css={s.loading}>상품 정보를 불러오는 중...</div>;
 
@@ -84,37 +107,41 @@ function StoreDetail({ principal }) {
       {/* ✅ 상세정보 */}
       <div id="detail" ref={detailRef}>
         <ProductInfo
-          product={{ ...product, averageRating: avgRating, reviewCount: reviews.length }}
+          product={{
+            ...product,
+            averageRating: avgRating,
+            reviewCount: reviews.length,
+          }}
           principal={principal}
         />
 
-        {/* ✅ 상단 고정 탭바를 이미지 위로 이동 */}
-        <div css={s.detailSection}>
-          <div css={s.actionBar}>
-            <button
-              css={[s.tabButton, activeTab === "detail" && s.activeTab]}
-              onClick={() => handleScrollTo(detailRef)}
-            >
-              상세정보
-            </button>
-            <button
-              css={[s.tabButton, activeTab === "review" && s.activeTab]}
-              onClick={() => handleScrollTo(reviewRef)}
-            >
-              리뷰 ({reviews.length})
-            </button>
-            <button
-              css={[s.tabButton, activeTab === "qna" && s.activeTab]}
-              onClick={() => handleScrollTo(qnaRef)}
-            >
-              Q&A ({qnaList.length})
-            </button>
-          </div>
+        {/* ✅ 이미지 위에 탭바 (스크롤 시 헤더 아래 고정) */}
+        <div css={s.actionBar}>
+          <button
+            css={[s.tabButton, activeTab === "detail" && s.activeTab]}
+            onClick={() => handleScrollTo(detailRef)}
+          >
+            상세정보
+          </button>
+          <button
+            css={[s.tabButton, activeTab === "review" && s.activeTab]}
+            onClick={() => handleScrollTo(reviewRef)}
+          >
+            리뷰 ({reviews.length})
+          </button>
+          <button
+            css={[s.tabButton, activeTab === "qna" && s.activeTab]}
+            onClick={() => handleScrollTo(qnaRef)}
+          >
+            Q&A ({qnaList.length})
+          </button>
+        </div>
 
+        {/* ✅ 상세 이미지 + 토글 */}
+        <div css={s.detailSection}>
           <div css={() => s.detailImageBox(isDetailPage)}>
             <img src={product.productImageDetailUrl} alt="상세 이미지" />
           </div>
-
           <button
             css={s.detailToggleBtn}
             onClick={() => setIsDetailPage((prev) => !prev)}
@@ -139,7 +166,11 @@ function StoreDetail({ principal }) {
 
       {/* ✅ QnA */}
       <div id="qna" ref={qnaRef}>
-        <ProductQna qnaList={qnaList} productId={productId} principal={principal} />
+        <ProductQna
+          qnaList={qnaList}
+          productId={productId}
+          principal={principal}
+        />
       </div>
     </div>
   );

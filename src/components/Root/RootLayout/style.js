@@ -14,5 +14,4 @@ export const layout = css`
     flex-direction: column;
     background-color: white;
     padding-top: 80px; /* RootHeader 높이만큼 */
-    overflow-x: hidden; /* 가로 스크롤만 막기 */
 `;
