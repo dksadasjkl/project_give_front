@@ -3,7 +3,7 @@ import { css } from "@emotion/react";
 export const layout = css`
   width: 1200px;
   margin: 0 auto;
-  padding: 40px;
+  padding: 40px 0;
   font-family: "Pretendard";
 `;
 
@@ -20,7 +20,7 @@ export const category = (selectedCategory, categoryId) => css`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 80px;
+  width: 90px;
   cursor: pointer;
   padding: 10px;
   border-radius: 12px;

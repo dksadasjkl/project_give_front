@@ -1,16 +1,19 @@
 /** @jsxImportSource @emotion/react */
-import { Link } from "react-router-dom"
-import * as s from "./style"
+import { Link, useLocation } from "react-router-dom";
+import * as s from "./style";
 import { useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import instance from "../../../apis/utills/instance";
-import getServerAddress from "../../../constants/serverAddress";
 import logoHome from "../../../assets/logo_home.png";
+import { TbLogin, TbLogout } from "react-icons/tb";
+import { FiShoppingCart } from "react-icons/fi";
+import getServerAddress from "../../../constants/serverAddress";
 
 export const RootHeader = () => {
-  const [ isLogin, setLogin ] = useState(false);
+  const [isLogin, setLogin] = useState(false);
   const queryClient = useQueryClient();
   const principalQueryState = queryClient.getQueryState(["principalQuery"]);
+  const location = useLocation();
 
   useEffect(() => {
     if (principalQueryState) {
@@ -19,8 +22,6 @@ export const RootHeader = () => {
       setLogin(false);
     }
   }, [principalQueryState?.status]);
-
-  
 
   const handleLogoutClick = () => {
     localStorage.removeItem("AccessToken");
@@ -41,36 +42,80 @@ export const RootHeader = () => {
 
         {/* 중앙 메뉴 */}
         <div css={s.centerMenu}>
-          <Link css={s.link} to="/donation">
+          <Link
+            css={[
+              s.link,
+              location.pathname.startsWith("/donation") && s.activeDonation,
+            ]}
+            to="/donation"
+          >
             기부
           </Link>
-          <Link css={s.link} to="/funding">
+
+          <Link
+            css={[
+              s.link,
+              location.pathname.startsWith("/funding") && s.activeFunding,
+            ]}
+            to="/funding"
+          >
             펀딩
           </Link>
-          <Link css={s.link} to="/store">
-            쇼핑
+
+          <Link
+            css={[
+              s.link,
+              location.pathname.startsWith("/store") && s.activeStore,
+            ]}
+            to="/store"
+          >
+            공감가게
           </Link>
-          <Link css={s.link} to="/">
-            지도
+
+          <Link
+            css={[
+              s.link,
+              location.pathname.startsWith("/map") && s.activeMap,
+            ]}
+            to="/map"
+          >
+            내 주변 기부
           </Link>
-          {/* <div>검색 아이콘</div> */}
         </div>
 
-        {/* 오른쪽 로그인/로그아웃 + MY */}
+        {/* 오른쪽 영역 */}
         <div css={s.rightBox}>
           {!isLogin ? (
-            <a css={s.login} href="/account">
-              로그인
-            </a>
+            <div css={s.accountItems}>
+              {/* 로그인 전 → 로그인 아이콘만 */}
+              <a
+                css={s.login}
+                href={`/account`}
+                title="로그인"
+              >
+                <TbLogin size={22} />
+              </a>
+            </div>
           ) : (
-            <>
-              <Link css={s.login} to="/mypage/account">
+            <div css={s.accountItems}>
+              {/* 로그인 후 → 로그아웃, 장바구니, MY */}
+              <a
+                css={s.login}
+                onClick={handleLogoutClick}
+                href={`/`}
+                title="로그아웃"
+              >
+                <TbLogout size={22} />
+              </a>
+
+              <Link css={s.login} to="/store/cart" title="장바구니">
+                <FiShoppingCart size={22} />
+              </Link>
+
+              <Link css={s.login} to="/mypage/account" title="MY 페이지">
                 MY
               </Link>
-                <a css={s.login} onClick={handleLogoutClick} href="/">
-                  로그아웃
-                </a>
-            </>
+            </div>
           )}
         </div>
       </div>
