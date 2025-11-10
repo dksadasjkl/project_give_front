@@ -20,7 +20,12 @@ function StoreCard({ product, onClick }) {
   );
 
   const commentCount = reviews.length;
-  const averageRating = commentCount > 0 ? (reviews[0].averageRating || 0).toFixed(1) : "0.0";
+const averageRating =
+    commentCount > 0
+      ? (
+          reviews.reduce((sum, r) => sum + (r.averageRating || 0), 0) / commentCount
+        ).toFixed(1)
+      : "0.0";
 
   return (
     <div css={s.card} onClick={onClick}>

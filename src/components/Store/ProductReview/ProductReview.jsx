@@ -15,37 +15,42 @@ function ProductReview({ productId, principal }) {
 
   const [commentText, setCommentText] = useState("");
   const [rating, setRating] = useState(5);
+  const [editingId, setEditingId] = useState(null);
+  const [editText, setEditText] = useState("");
+  const [editRating, setEditRating] = useState(0);
+  const [isSaving, setIsSaving] = useState(false); // 저장 중 표시
 
   // ✅ 리뷰 목록 조회
   const { data: reviews, isLoading } = useQuery(
     ["storeReviews", productId],
     async () => await getStoreReviewsWithRatingsRequest(productId),
-    {
-      refetchOnWindowFocus: false,
-    }
+    { refetchOnWindowFocus: false }
   );
 
   // ✅ 리뷰 등록
-  const createCommentMutation = useMutation(
-    (data) => postStoreCommentRequest(data),
-    {
-      onSuccess: () => {
-        alert("리뷰가 등록되었습니다!");
-        setCommentText("");
-        queryClient.invalidateQueries(["storeReviews", productId]);
-      },
-      onError: (err) => console.error("리뷰 등록 오류:", err),
-    }
-  );
+  const createCommentMutation = useMutation(postStoreCommentRequest, {
+    onSuccess: () => {
+      alert("리뷰가 등록되었습니다!");
+      setCommentText("");
+      queryClient.invalidateQueries(["storeReviews", productId]);
+    },
+    onError: (err) => {
+      console.error(err);
+      alert(err?.response?.data?.message || "리뷰 등록 중 오류가 발생했습니다.");
+    },
+  });
 
-  // ✅ 별점 등록
+  // ✅ 별점 등록 및 수정
   const ratingMutation = useMutation(
-    ({ commentId, rating }) =>
-      postStoreReviewRatingRequest(commentId, rating),
+    ({ commentId, rating }) => postStoreReviewRatingRequest(commentId, rating),
     {
-      onSuccess: () => {
-        alert("별점이 등록되었습니다!");
-        queryClient.invalidateQueries(["storeReviews", productId]);
+      onError: (error) => {
+        const msg = error?.response?.data?.message;
+        if (msg === "이미 별점을 등록한 사용자입니다.") {
+          alert("이미 별점을 등록한 사용자입니다.");
+        } else {
+          alert(msg || "별점 등록 중 오류가 발생했습니다.");
+        }
       },
     }
   );
@@ -54,20 +59,50 @@ function ProductReview({ productId, principal }) {
   const updateCommentMutation = useMutation(
     ({ commentId, text }) => putStoreCommentRequest(commentId, { commentText: text }),
     {
-      onSuccess: () => queryClient.invalidateQueries(["storeReviews", productId]),
+      onError: (err) => {
+        console.error(err);
+        alert(err?.response?.data?.message || "리뷰 수정 중 오류가 발생했습니다.");
+      },
     }
   );
 
   // ✅ 리뷰 삭제
-  const deleteCommentMutation = useMutation(
-    (commentId) => deleteStoreCommentRequest(commentId),
-    {
-      onSuccess: () => {
-        alert("리뷰가 삭제되었습니다.");
-        queryClient.invalidateQueries(["storeReviews", productId]);
-      },
+  const deleteCommentMutation = useMutation(deleteStoreCommentRequest, {
+    onSuccess: () => {
+      alert("리뷰가 삭제되었습니다.");
+      queryClient.invalidateQueries(["storeReviews", productId]);
+    },
+    onError: (err) => {
+      console.error(err);
+      alert(err?.response?.data?.message || "리뷰 삭제 중 오류가 발생했습니다.");
+    },
+  });
+
+  // ✅ 저장 로직 (댓글 + 별점 병렬 저장)
+  const handleSave = async (commentId) => {
+    if (!editText.trim()) {
+      alert("리뷰 내용을 입력해주세요.");
+      return;
     }
-  );
+
+    setIsSaving(true);
+    try {
+      await Promise.all([
+        updateCommentMutation.mutateAsync({ commentId, text: editText }),
+        ratingMutation.mutateAsync({ commentId, rating: editRating }),
+      ]);
+
+      alert("리뷰와 별점이 수정되었습니다!");
+      setEditingId(null);
+      queryClient.invalidateQueries(["storeReviews", productId]);
+    } catch (err) {
+      const msg = err?.response?.data?.message || "리뷰/별점 수정 중 오류가 발생했습니다.";
+      alert(msg);
+      console.error(err);
+    } finally {
+      setIsSaving(false);
+    }
+  };
 
   if (isLoading) return <p css={s.loading}>리뷰 불러오는 중...</p>;
 
@@ -97,12 +132,8 @@ function ProductReview({ productId, principal }) {
           </div>
           <button
             css={s.submitBtn}
-            onClick={() =>
-              createCommentMutation.mutate({
-                productId,
-                commentText,
-              })
-            }
+            onClick={() => createCommentMutation.mutate({ productId, commentText })}
+            disabled={!commentText.trim()}
           >
             등록
           </button>
@@ -118,59 +149,70 @@ function ProductReview({ productId, principal }) {
             <div key={r.commentId} css={s.reviewCard}>
               <div css={s.reviewHeader}>
                 <p css={s.user}>👤 사용자 #{r.userId}</p>
-                <p css={s.date}>
-                  {new Date(r.createDate).toLocaleDateString()}
-                </p>
+                <p css={s.date}>{new Date(r.createDate).toLocaleDateString()}</p>
               </div>
-              <div css={s.stars}>
-                {"★".repeat(Math.round(r.averageRating || 0))}
-                {"☆".repeat(5 - Math.round(r.averageRating || 0))}
-              </div>
-              <p css={s.text}>{r.commentText}</p>
 
-              {principal?.userId === r.userId && (
-                <div css={s.actions}>
-                  <button
-                    css={s.actionBtn}
-                    onClick={() =>
-                      updateCommentMutation.mutate({
-                        commentId: r.commentId,
-                        text: prompt("수정할 내용을 입력하세요", r.commentText),
-                      })
-                    }
-                  >
-                    수정
-                  </button>
-                  <button
-                    css={s.actionBtn}
-                    onClick={() =>
-                      deleteCommentMutation.mutate(r.commentId)
-                    }
-                  >
-                    삭제
-                  </button>
-                </div>
-              )}
-
-              {/* 별점 등록 */}
-              {principal && (
-                <div css={s.rateBox}>
-                  <span>별점 주기:</span>
-                  {[1, 2, 3, 4, 5].map((num) => (
-                    <span
-                      key={num}
-                      css={s.starSmall}
-                      onClick={() =>
-                        ratingMutation.mutate({
-                          commentId: r.commentId,
-                          rating: num,
-                        })
-                      }
+              {/* ⭐ 수정 모드 */}
+              {editingId === r.commentId ? (
+                <div css={s.editForm}>
+                  <textarea
+                    css={s.textarea}
+                    value={editText}
+                    onChange={(e) => setEditText(e.target.value)}
+                  />
+                  <div css={s.ratingBox}>
+                    {[1, 2, 3, 4, 5].map((num) => (
+                      <span
+                        key={num}
+                        css={num <= editRating ? s.starActive : s.star}
+                        onClick={() => setEditRating(num)}
+                      >
+                        ★
+                      </span>
+                    ))}
+                  </div>
+                  <div css={s.actions}>
+                    <button
+                      css={s.submitBtn}
+                      disabled={isSaving}
+                      onClick={() => handleSave(r.commentId)}
                     >
-                      ★
-                    </span>
-                  ))}
+                      {isSaving ? "저장 중..." : "저장"}
+                    </button>
+                    <button css={s.actionBtn} onClick={() => setEditingId(null)}>
+                      취소
+                    </button>
+                  </div>
                 </div>
+              ) : (
+                <>
+                  <div css={s.stars}>
+                    {"★".repeat(Math.round(r.averageRating || 0))}
+                    {"☆".repeat(5 - Math.round(r.averageRating || 0))}
+                  </div>
+                  <p css={s.text}>{r.commentText}</p>
+
+                  {principal?.userId === r.userId && (
+                    <div css={s.actions}>
+                      <button
+                        css={s.actionBtn}
+                        onClick={() => {
+                          setEditingId(r.commentId);
+                          setEditText(r.commentText);
+                          setEditRating(Math.round(r.averageRating || 0));
+                        }}
+                      >
+                        수정
+                      </button>
+                      <button
+                        css={s.actionBtn}
+                        onClick={() => deleteCommentMutation.mutate(r.commentId)}
+                      >
+                        삭제
+                      </button>
+                    </div>
+                  )}
+                </>
               )}
             </div>
           ))

@@ -29,15 +29,7 @@ function MyPageSidebar({ principal }) {
             댓글
           </Link>
         </li>
-
-        <li>
-           <Link
-            to="/mypage/store/cart"
-            css={[s.menuLink, location.pathname === "/mypage/store/cart" && s.activeLink]}
-          >
-            장바구니
-          </Link>
-        </li>
+        
         <li>
            <Link
             to="/mypage/store/wishlist"
