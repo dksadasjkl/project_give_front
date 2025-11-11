@@ -29,3 +29,11 @@ export const getStoreCommentCountRequest = async (productId) => {
 export const getStoreReviewsWithRatingsRequest = async (productId) => {
   return await instance.get(`/store/reviews/${productId}`);
 };
+
+/** 페이지네이션 리뷰 조회 */
+export const getStoreReviewsPageRequest = async (productId, page = 1, size = 5, sort = "latest") => {
+  const response = await instance.get(`/store/reviews/${productId}`, {
+    params: { page, size, sort },
+  });
+  return response.data;
+};

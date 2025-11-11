@@ -9,3 +9,5 @@ export const postStoreReviewRatingRequest = async (commentId, rating) => {
 export const getStoreAverageRatingRequest = async (commentId) => {
   return await instance.get(`/store/review-rating/${commentId}/average`);
 };
+
+

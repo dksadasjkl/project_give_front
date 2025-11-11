@@ -14,8 +14,16 @@ import ProductQna from "../../../components/Store/ProductQna/ProductQna";
 function StoreDetail({ principal }) {
   const { productId } = useParams();
   const [product, setProduct] = useState(null);
+
+  // ✅ 리뷰 관련 상태
   const [reviews, setReviews] = useState([]);
+  const [avgRating, setAvgRating] = useState(0);
+  const [distribution, setDistribution] = useState([]);
+  const [totalCount, setTotalCount] = useState(0);
+
+  // ✅ QnA 관련 상태
   const [qnaList, setQnaList] = useState([]);
+
   const [activeTab, setActiveTab] = useState("detail");
   const [isDetailPage, setIsDetailPage] = useState(false);
 
@@ -24,8 +32,7 @@ function StoreDetail({ principal }) {
   const qnaRef = useRef(null);
 
   // ✅ 상품 상세 조회
-  useQuery(
-    ["getStoreProductDetailRequest", productId],
+  useQuery(["getStoreProductDetailRequest", productId],
     async () => await getStoreProductDetailRequest(productId),
     {
       retry: 0,
@@ -34,19 +41,23 @@ function StoreDetail({ principal }) {
     }
   );
 
-  // ✅ 리뷰 조회
-  useQuery(
-    ["getStoreReviewsWithRatingsRequest", productId],
+  // ✅ 리뷰 조회 (평균 / 분포 / 총 리뷰 포함)
+  useQuery(["getStoreReviewsWithRatingsRequest", productId],
     async () => await getStoreReviewsWithRatingsRequest(productId),
     {
       refetchOnWindowFocus: false,
-      onSuccess: (res) => setReviews(res.data || []),
+      onSuccess: (res) => {
+        const data = res.data;
+        setReviews(data.reviews || []);
+        setAvgRating(data.averageRating || 0);
+        setDistribution(data.distribution || []);
+        setTotalCount(data.totalCount || 0);
+      },
     }
   );
 
   // ✅ QnA 조회
-  useQuery(
-    ["getStoreQnaByProductRequest", productId],
+  useQuery(["getStoreQnaByProductRequest", productId],
     async () => await getStoreQnaByProductRequest(productId),
     {
       refetchOnWindowFocus: false,
@@ -54,53 +65,32 @@ function StoreDetail({ principal }) {
     }
   );
 
-  const avgRating =
-    reviews.length > 0
-      ? reviews.reduce((sum, r) => sum + (r.averageRating || 0), 0) / reviews.length
-      : 0;
+  // ✅ 섹션 감지 (스크롤 탭)
+  useEffect(() => {
+    const sections = [
+      { id: "detail", ref: detailRef },
+      { id: "review", ref: reviewRef },
+      { id: "qna", ref: qnaRef },
+    ];
 
-  // ✅ 탭 클릭 시 스크롤 이동
-  const handleScrollTo = (ref) => {
-    ref.current.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.find(
+          (entry) => entry.isIntersecting && entry.intersectionRatio > 0.3
+        );
+        if (visible) setActiveTab(visible.target.id);
+      },
+      { root: null, rootMargin: "-90px 0px -60% 0px", threshold: [0.1, 0.3, 0.6] }
+    );
 
-// ✅ 현재 섹션 감지 (Intersection Observer)
-useEffect(() => {
-  const sections = [
-    { id: "detail", ref: detailRef },
-    { id: "review", ref: reviewRef },
-    { id: "qna", ref: qnaRef },
-  ];
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      // 가장 먼저 화면에 충분히 들어온 섹션을 찾기
-      const visibleEntry = entries.find(
-        (entry) => entry.isIntersecting && entry.intersectionRatio > 0.3
-      );
-
-      if (visibleEntry) {
-        setActiveTab(visibleEntry.target.id);
-      }
-    },
-    {
-      root: null,
-      rootMargin: "-90px 0px -60% 0px", // 👈 헤더 + 탭바 보정값 수정
-      threshold: [0.1, 0.3, 0.6], // 👈 더 세밀한 감지 포인트
-    }
-  );
-
-  sections.forEach(({ ref }) => {
-    if (ref.current) observer.observe(ref.current);
-  });
-
-  return () => observer.disconnect();
-}, []); // ✅ 의존성 없음
-
-
-
+    sections.forEach(({ ref }) => ref.current && observer.observe(ref.current));
+    return () => observer.disconnect();
+  }, []);
 
   if (!product) return <div css={s.loading}>상품 정보를 불러오는 중...</div>;
+
+  const handleScrollTo = (ref) =>
+    ref.current.scrollIntoView({ behavior: "smooth", block: "start" });
 
   return (
     <div css={s.container}>
@@ -110,67 +100,45 @@ useEffect(() => {
           product={{
             ...product,
             averageRating: avgRating,
-            reviewCount: reviews.length,
+            reviewCount: totalCount,
           }}
           principal={principal}
         />
 
-        {/* ✅ 이미지 위에 탭바 (스크롤 시 헤더 아래 고정) */}
+        {/* ✅ 탭바 */}
         <div css={s.actionBar}>
-          <button
-            css={[s.tabButton, activeTab === "detail" && s.activeTab]}
-            onClick={() => handleScrollTo(detailRef)}
-          >
-            상세정보
-          </button>
-          <button
-            css={[s.tabButton, activeTab === "review" && s.activeTab]}
-            onClick={() => handleScrollTo(reviewRef)}
-          >
-            리뷰 ({reviews.length})
-          </button>
-          <button
-            css={[s.tabButton, activeTab === "qna" && s.activeTab]}
-            onClick={() => handleScrollTo(qnaRef)}
-          >
-            Q&A ({qnaList.length})
-          </button>
+          <button css={[s.tabButton, activeTab === "detail" && s.activeTab]} onClick={() => handleScrollTo(detailRef)}>상세정보</button>
+          <button css={[s.tabButton, activeTab === "review" && s.activeTab]} onClick={() => handleScrollTo(reviewRef)}>리뷰 ({totalCount})</button>
+          <button css={[s.tabButton, activeTab === "qna" && s.activeTab]} onClick={() => handleScrollTo(qnaRef)}>Q&A ({qnaList.length})</button>
         </div>
 
-        {/* ✅ 상세 이미지 + 토글 */}
+        {/* ✅ 상세 이미지 토글 */}
         <div css={s.detailSection}>
           <div css={() => s.detailImageBox(isDetailPage)}>
             <img src={product.productImageDetailUrl} alt="상세 이미지" />
           </div>
-          <button
-            css={s.detailToggleBtn}
-            onClick={() => setIsDetailPage((prev) => !prev)}
-          >
-            {isDetailPage ? (
-              <>
-                상세페이지 닫기 <VscChevronUp />
-              </>
-            ) : (
-              <>
-                상세페이지 보기 <VscChevronDown />
-              </>
-            )}
+          <button css={s.detailToggleBtn} onClick={() => setIsDetailPage(!isDetailPage)}>
+            {isDetailPage ? <>상세페이지 닫기 <VscChevronUp /></> : <>상세페이지 보기 <VscChevronDown /></>}
           </button>
         </div>
       </div>
 
       {/* ✅ 리뷰 */}
       <div id="review" ref={reviewRef}>
-        <ProductReview productId={productId} principal={principal} />
+        <ProductReview
+          productId={productId}
+          product={product}
+          principal={principal}
+          reviews={reviews}
+          averageRating={avgRating}
+          distribution={distribution}
+          totalCount={totalCount}
+        />
       </div>
 
-      {/* ✅ QnA */}
+      {/* ✅ Q&A */}
       <div id="qna" ref={qnaRef}>
-        <ProductQna
-          qnaList={qnaList}
-          productId={productId}
-          principal={principal}
-        />
+        <ProductQna qnaList={qnaList} productId={productId} principal={principal} />
       </div>
     </div>
   );
