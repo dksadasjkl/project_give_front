@@ -6,7 +6,7 @@ function StoreRoute({ principal }) {
   return (
     <Routes>
       <Route path="/store/*" element={<StorePage principal={principal} />} />
-    </Routes>
+    </Routes> 
   )
 }
 

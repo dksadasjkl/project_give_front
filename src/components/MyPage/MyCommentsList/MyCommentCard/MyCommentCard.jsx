@@ -18,6 +18,8 @@ function MyCommentCard({
   const [isEditing, setIsEditing] = useState(false);
   const [editText, setEditText] = useState(text);
 
+
+
   const formattedDate = new Date(date).toLocaleString('ko-KR', {
     year: 'numeric',
     month: '2-digit',

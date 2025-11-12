@@ -12,7 +12,7 @@ export const title = css`
   font-size: 22px;
   font-weight: 700;
   color: #222;
-  margin-bottom: 8px;
+  margin-bottom: 20px;
   padding-left: 10px;
   border-left: 4px solid #007bff;
 `;
