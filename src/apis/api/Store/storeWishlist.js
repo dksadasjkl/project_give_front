@@ -11,6 +11,6 @@ export const deleteStoreWishlistRequest = async (productId) => {
 };
 
 /** 🧩 내 찜 목록 조회 */
-export const getMyStoreWishlistRequest = async () => {
-  return await instance.get("/store/wishlist");
+export const getMyStoreWishlistRequest = async (page, size) => {
+  return await instance.get(`/store/wishlist?page=${page}&size=${size}`);
 };
