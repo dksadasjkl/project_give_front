@@ -118,3 +118,17 @@ export const loginNotice = css`
   padding: 40px;
   font-size: 18px;
 `;
+
+export const confirmBtn = css`
+  background: #03a94d;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  margin-right: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  &:hover {
+    background: #029b45;
+  }
+`;

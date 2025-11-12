@@ -25,3 +25,8 @@ export const putStoreOrderStatusRequest = async (orderId, status) => {
 export const deleteStoreOrderRequest = async (orderId) => {
   return await instance.delete(`/store/orders/${orderId}`);
 };
+
+// 구매 확정
+export const putStoreOrderConfirmRequest = async (orderId) => {
+  return await instance.put(`/store/orders/${orderId}/confirm`);
+};

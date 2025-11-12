@@ -6,6 +6,7 @@ import {
   postStoreCommentRequest,
   deleteStoreCommentRequest,
   getStoreReviewsPageRequest,
+  getStoreReviewEligibilityRequest, // ✅ 추가
 } from "../../../apis/api/Store/storeComment";
 import { postStoreReviewRatingRequest } from "../../../apis/api/Store/storeReviewRating";
 import { postStoreReviewReportRequest } from "../../../apis/api/Store/storeReport";
@@ -31,6 +32,19 @@ function ProductReview({
   const [reportReason, setReportReason] = useState("");
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
 
+  // ✅ 구매자 여부 확인 (배달 완료된 사람)
+  const { data: eligibilityData } = useQuery(
+    ["getStoreReviewEligibilityRequest", productId],
+    () => getStoreReviewEligibilityRequest(productId),
+    {
+      enabled: !!principal,
+      staleTime: 300000, // ✅ 5분 동안 캐시 유지
+      refetchOnWindowFocus: false, // ✅ 탭 포커스시 재요청 방지
+    }
+  );
+
+  const isEligible = eligibilityData?.eligible ?? false;
+
   // ✅ 리뷰 데이터 불러오기 (페이지네이션)
   const { data, isLoading } = useQuery(
     ["getStoreReviewsPageRequest", productId, page],
@@ -42,7 +56,7 @@ function ProductReview({
   const totalCount = data?.totalCount || 0;
   const totalPages = Math.ceil(totalCount / size);
 
-  // ✅ 페이지 그룹 (1~10, 11~20)
+  // ✅ 페이지 그룹 계산
   const startPage = Math.floor((page - 1) / pageBlock) * pageBlock + 1;
   const endPage = Math.min(startPage + pageBlock - 1, totalPages);
 
@@ -115,7 +129,6 @@ function ProductReview({
     setIsReportModalOpen(true);
   };
 
-  // ✅ 신고 제출
   const handleSubmitReport = () => {
     if (!reportReason.trim()) {
       alert("신고 사유를 입력해주세요.");
@@ -128,29 +141,62 @@ function ProductReview({
     <div css={s.container}>
       <h2 css={s.title}>상품 리뷰</h2>
 
-      {principal ? (
-        <div css={s.form}>
-          <textarea
-            css={s.textarea}
-            value={commentText}
-            onChange={(e) => setCommentText(e.target.value)}
-            placeholder="리뷰를 작성해주세요."
-          />
-          <div css={s.ratingBox}>
-            {[1, 2, 3, 4, 5].map((num) => (
-              <span
-                key={num}
-                css={num <= rating ? s.starActive : s.star}
-                onClick={() => setRating(num)}
-              >
-                ★
-              </span>
-            ))}
+      {/* ✅ 리뷰 통계 그래프 */}
+      <div css={s.statsBox}>
+        <div css={s.statsLeft}>
+          <div css={s.avgNum}>{averageRating.toFixed(1)}</div>
+          <div css={s.stars}>
+            {"★".repeat(Math.round(averageRating))}
+            {"☆".repeat(5 - Math.round(averageRating))}
           </div>
-          <button css={s.submitBtn} onClick={handleCreateReview}>
-            등록
-          </button>
+          <div css={s.total}>({totalCount}건)</div>
         </div>
+        <div css={s.statsRight}>
+          {[5, 4, 3, 2, 1].map((star) => {
+            const item = distribution.find((d) => d.rating === star);
+            const count = item ? item.count : 0;
+            const percent = totalCount ? (count / totalCount) * 100 : 0;
+            return (
+              <div key={star} css={s.barRow}>
+                <span css={s.barLabel}>{star}점</span>
+                <div css={s.barTrack}>
+                  <div css={s.barFill(percent)} />
+                </div>
+                <span css={s.barCount}>{count}</span>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* ✅ 리뷰 작성 */}
+      {principal ? (
+        isEligible ? (
+          <div css={s.form}>
+            <textarea
+              css={s.textarea}
+              value={commentText}
+              onChange={(e) => setCommentText(e.target.value)}
+              placeholder="리뷰를 작성해주세요."
+            />
+            <div css={s.ratingBox}>
+              {[1, 2, 3, 4, 5].map((num) => (
+                <span
+                  key={num}
+                  css={num <= rating ? s.starActive : s.star}
+                  onClick={() => setRating(num)}
+                >
+                  ★
+                </span>
+              ))}
+            </div>
+            <button css={s.submitBtn} onClick={handleCreateReview}>
+              등록
+            </button>
+          </div>
+        ) : (
+          <p css={s.loginNotice}>상품을 구매한 고객만 리뷰를 작성할 수 있습니다.</p>
+        )
       ) : (
         <p css={s.loginNotice}>로그인 후 리뷰를 작성할 수 있습니다.</p>
       )}
@@ -257,7 +303,10 @@ function ProductReview({
               onChange={(e) => setReportReason(e.target.value)}
             />
             <div css={s.modalActions}>
-              <button css={s.modalCancel} onClick={() => setIsReportModalOpen(false)}>
+              <button
+                css={s.modalCancel}
+                onClick={() => setIsReportModalOpen(false)}
+              >
                 취소
               </button>
               <button css={s.modalSubmit} onClick={handleSubmitReport}>

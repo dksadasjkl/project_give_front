@@ -37,3 +37,9 @@ export const getStoreReviewsPageRequest = async (productId, page = 1, size = 5, 
   });
   return response.data;
 };
+
+/** 💬 리뷰 작성 가능 여부 (구매자 확인) */
+export const getStoreReviewEligibilityRequest = async (productId) => {
+  const response = await instance.get(`/store/reviews/${productId}/eligibility`);
+  return response.data; // { eligible: true or false }
+};

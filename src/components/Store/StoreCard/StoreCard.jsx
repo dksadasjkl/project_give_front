@@ -8,24 +8,19 @@ import { getStoreReviewsWithRatingsRequest } from "../../../apis/api/Store/store
 function StoreCard({ product, onClick }) {
   const { productId, productImageUrl, productName, productPrice } = product;
 
-  // ✅ 댓글 + 평균 평점 조회
-  const { data: reviews = [] } = useQuery(
+  // ✅ 리뷰 데이터 조회 (평균 + 개수 포함)
+  const { data } = useQuery(
     ["getStoreReviewsWithRatingsRequest", productId],
-    async () => await getStoreReviewsWithRatingsRequest(productId),
+    () => getStoreReviewsWithRatingsRequest(productId),
     {
       enabled: !!productId,
       refetchOnWindowFocus: false,
-      select: (res) => res?.data || [],
+      select: (res) => res?.data,
     }
   );
 
-  const commentCount = reviews.length;
-const averageRating =
-    commentCount > 0
-      ? (
-          reviews.reduce((sum, r) => sum + (r.averageRating || 0), 0) / commentCount
-        ).toFixed(1)
-      : "0.0";
+  const commentCount = data?.totalCount || 0;
+  const averageRating = data?.averageRating?.toFixed(1) || "0.0";
 
   return (
     <div css={s.card} onClick={onClick}>
