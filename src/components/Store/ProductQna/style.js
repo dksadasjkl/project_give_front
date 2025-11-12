@@ -3,7 +3,7 @@ import { css } from "@emotion/react";
 /* 📦 전체 컨테이너 */
 export const container = css`
   margin-top: 60px;
-  padding: 28px;
+  padding: 28px 28px 20px;
   background: #ffffff;
   border-radius: 16px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
@@ -209,4 +209,36 @@ export const loginNotice = css`
   border-radius: 12px;
   margin-bottom: 25px;
   font-size: 15px;
+`;
+
+/* ✅ 페이지네이션 영역 */
+export const pagination = css`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  padding-top: 10px;
+`;
+
+export const pageBtn = css`
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  background: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+
+  &:hover {
+    background: #007bff;
+    color: #fff;
+  }
+`;
+
+export const pageBtnActive = css`
+  background: #007bff;
+  color: white;
+  border: 1px solid #007bff;
+  font-weight: 600;
 `;

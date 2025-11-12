@@ -1,41 +1,58 @@
 /** @jsxImportSource @emotion/react */
 import { useState } from "react";
 import * as s from "./style";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   postStoreQnaRequest,
-  deleteStoreQnaRequest,
+  getStoreQnaPageRequest 
 } from "../../../apis/api/Store/storeQna";
 
-function ProductQna({ qnaList = [], productId, principal }) {
+function ProductQna({ productId, principal }) {
   const queryClient = useQueryClient();
   const [questionTitle, setQuestionTitle] = useState("");
   const [questionContent, setQuestionContent] = useState("");
   const [isSecret, setIsSecret] = useState(false);
-  const [openId, setOpenId] = useState(null); // ✅ 클릭 시 열릴 QnA ID
+  const [openId, setOpenId] = useState(null);
+
+  // ✅ 페이지네이션
+  const [page, setPage] = useState(1);
+  const size = 10;
+  const pageBlock = 5;
+
+  // ✅ QnA 데이터 불러오기
+  const { data, isLoading } = useQuery(
+    ["getStoreQnaPageRequest", productId, page],
+    () => getStoreQnaPageRequest(productId, page, size),
+    {
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
+      enabled: !!productId, // productId 있을 때만 실행
+    }
+  );
+
+  const qnaList = data?.qnaList || [];
+  const totalCount = data?.totalCount || 0;
+  const totalPages = Math.ceil(totalCount / size);
+
+  const startPage = Math.floor((page - 1) / pageBlock) * pageBlock + 1;
+  const endPage = Math.min(startPage + pageBlock - 1, totalPages);
+
+  const handlePageChange = (num) => setPage(num);
+  const handlePrevBlock = () => setPage(startPage - 1);
+  const handleNextBlock = () => setPage(endPage + 1);
 
   // ✅ 문의 등록
   const postQnaMutation = useMutation(postStoreQnaRequest, {
     onSuccess: () => {
       alert("문의가 등록되었습니다 📝");
-      queryClient.invalidateQueries(["getStoreQnaByProductRequest", productId]);
+      queryClient.invalidateQueries(["getStoreQnaPageRequest", productId]);
       setQuestionTitle("");
       setQuestionContent("");
       setIsSecret(false);
     },
-    onError: (err) => console.error(err),
   });
 
-  // ✅ 문의 삭제
-  const deleteQnaMutation = useMutation(deleteStoreQnaRequest, {
-    onSuccess: () => {
-      alert("문의가 삭제되었습니다 🗑️");
-      queryClient.invalidateQueries(["getStoreQnaByProductRequest", productId]);
-    },
-    onError: (err) => console.error(err),
-  });
 
-  // ✅ 등록 버튼
   const handleSubmit = () => {
     if (!questionTitle.trim() || !questionContent.trim()) {
       alert("제목과 내용을 모두 입력해주세요!");
@@ -54,7 +71,6 @@ function ProductQna({ qnaList = [], productId, principal }) {
     setOpenId(openId === qnaId ? null : qnaId);
   };
 
-  // ✅ 아이디 마스킹
   const maskUsername = (username) => {
     if (!username) return "";
     const len = username.length;
@@ -113,7 +129,9 @@ function ProductQna({ qnaList = [], productId, principal }) {
           <span css={s.colDate}>작성일</span>
         </div>
 
-        {qnaList.length === 0 ? (
+        {isLoading ? (
+          <p css={s.noQna}>불러오는 중...</p>
+        ) : qnaList.length === 0 ? (
           <p css={s.noQna}>등록된 문의가 없습니다.</p>
         ) : (
           qnaList.map((qna) => {
@@ -150,15 +168,14 @@ function ProductQna({ qnaList = [], productId, principal }) {
                   <span css={s.colDate}>{formattedDate}</span>
                 </div>
 
-                {/* ✅ 클릭 시 내용 & 답변 토글 */}
                 {openId === qna.qnaId && (
                   <>
                     <div css={s.detailRow}>
                       <span css={s.colStatus}></span>
                       <span css={s.detailContent(answered)}>
-                          {isSecretPost && !canView
-                            ? "비공개 문의내역은 작성자 본인만 확인하실 수 있습니다."
-                            : qna.questionContent}
+                        {isSecretPost && !canView
+                          ? "비공개 문의내역은 작성자 본인만 확인하실 수 있습니다."
+                          : qna.questionContent}
                       </span>
                       <span css={s.colWriter}></span>
                       <span css={s.colDate}></span>
@@ -184,6 +201,34 @@ function ProductQna({ qnaList = [], productId, principal }) {
           })
         )}
       </div>
+
+      {/* ✅ 페이지네이션 */}
+      {totalPages  >= 1 && (
+        <div css={s.pagination}>
+          {startPage > 1 && (
+            <button css={s.pageBtn} onClick={handlePrevBlock}>
+              &lt; 이전
+            </button>
+          )}
+          {Array.from(
+            { length: endPage - startPage + 1 },
+            (_, i) => startPage + i
+          ).map((num) => (
+            <button
+              key={num}
+              css={[s.pageBtn, page === num && s.pageBtnActive]}
+              onClick={() => handlePageChange(num)}
+            >
+              {num}
+            </button>
+          ))}
+          {endPage < totalPages && (
+            <button css={s.pageBtn} onClick={handleNextBlock}>
+              다음 &gt;
+            </button>
+          )}
+        </div>
+      )}
     </div>
   );
 }

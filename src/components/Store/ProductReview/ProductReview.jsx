@@ -27,25 +27,25 @@ function ProductReview({
   const [rating, setRating] = useState(0);
   const [sortOption, setSortOption] = useState("latest");
 
-  // ✅ 신고 관련 상태
+  // 신고 관련 상태
   const [reportTarget, setReportTarget] = useState(null);
   const [reportReason, setReportReason] = useState("");
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
 
-  // ✅ 구매자 여부 확인 (배달 완료된 사람)
+  // 구매자 여부 확인 (배달 완료된 사람)
   const { data: eligibilityData } = useQuery(
     ["getStoreReviewEligibilityRequest", productId],
     () => getStoreReviewEligibilityRequest(productId),
     {
       enabled: !!principal,
-      staleTime: 300000, // ✅ 5분 동안 캐시 유지
-      refetchOnWindowFocus: false, // ✅ 탭 포커스시 재요청 방지
+      staleTime: 300000, //  5분 동안 캐시 유지
+      refetchOnWindowFocus: false, //  탭 포커스시 재요청 방지
     }
   );
 
   const isEligible = eligibilityData?.eligible ?? false;
 
-  // ✅ 리뷰 데이터 불러오기 (페이지네이션)
+  // 리뷰 데이터 불러오기 (페이지네이션)
   const { data, isLoading } = useQuery(
     ["getStoreReviewsPageRequest", productId, page],
     () => getStoreReviewsPageRequest(productId, page, size, sortOption),
@@ -56,7 +56,7 @@ function ProductReview({
   const totalCount = data?.totalCount || 0;
   const totalPages = Math.ceil(totalCount / size);
 
-  // ✅ 페이지 그룹 계산
+  // 페이지 그룹 계산
   const startPage = Math.floor((page - 1) / pageBlock) * pageBlock + 1;
   const endPage = Math.min(startPage + pageBlock - 1, totalPages);
 
@@ -64,7 +64,7 @@ function ProductReview({
   const handlePrevBlock = () => setPage(startPage - 1);
   const handleNextBlock = () => setPage(endPage + 1);
 
-  // ✅ 리뷰 등록
+  // 리뷰 등록
   const createCommentMutation = useMutation(postStoreCommentRequest, {
     onSuccess: async (res) => {
       const newCommentId = res.data.commentId;
@@ -82,7 +82,7 @@ function ProductReview({
     },
   });
 
-  // ✅ 리뷰 신고
+  // 리뷰 신고
   const reportMutation = useMutation(
     ({ commentId, reason }) => postStoreReviewReportRequest(commentId, reason),
     {
@@ -94,7 +94,7 @@ function ProductReview({
     }
   );
 
-  // ✅ 유저명 마스킹
+  // 유저명 마스킹
   const maskUsername = (username) => {
     const len = username?.length || 0;
     if (len <= 4) return username.slice(0, 2) + "**";
@@ -123,7 +123,7 @@ function ProductReview({
     createCommentMutation.mutate({ productId, commentText });
   };
 
-  // ✅ 신고 모달 열기
+  // 신고 모달 열기
   const openReportModal = (commentId) => {
     setReportTarget(commentId);
     setIsReportModalOpen(true);
@@ -141,7 +141,7 @@ function ProductReview({
     <div css={s.container}>
       <h2 css={s.title}>상품 리뷰</h2>
 
-      {/* ✅ 리뷰 통계 그래프 */}
+      {/*  리뷰 통계 그래프 */}
       <div css={s.statsBox}>
         <div css={s.statsLeft}>
           <div css={s.avgNum}>{averageRating.toFixed(1)}</div>
@@ -169,7 +169,7 @@ function ProductReview({
         </div>
       </div>
 
-      {/* ✅ 리뷰 작성 */}
+      {/*  리뷰 작성 */}
       {principal ? (
         isEligible ? (
           <div css={s.form}>
@@ -201,7 +201,7 @@ function ProductReview({
         <p css={s.loginNotice}>로그인 후 리뷰를 작성할 수 있습니다.</p>
       )}
 
-      {/* ✅ 정렬 및 총 리뷰 */}
+      {/*  정렬 및 총 리뷰 */}
       <div css={s.reviewHeader}>
         <div css={s.reviewCount}>
           리뷰 <strong>{totalCount}</strong>건
@@ -261,8 +261,8 @@ function ProductReview({
             )}
           </div>
 
-          {/* ✅ 페이지네이션 */}
-          {totalPages > 1 && (
+          {/* 페이지네이션 */}
+          {totalPages >= 1 && (
             <div css={s.pagination}>
               {startPage > 1 && (
                 <button css={s.pageBtn} onClick={handlePrevBlock}>
