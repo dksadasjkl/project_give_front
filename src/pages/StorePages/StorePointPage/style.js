@@ -2,15 +2,21 @@
 import { css } from "@emotion/react";
 
 export const container = css`
-  max-width: 800px;
-  margin: 40px auto;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
   font-family: "Pretendard";
 `;
 
 export const title = css`
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-size: 24px;
-  font-weight: 600;
-  margin-bottom: 20px;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 28px;
+  font-family: "Pretendard", "NanumSquareWebFont", sans-serif;
 `;
 
 export const loading = css`

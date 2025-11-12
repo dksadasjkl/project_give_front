@@ -11,7 +11,7 @@ export const userDetails = css`
     flex-direction: column;
     box-sizing: border-box;
     height: 100%;
-    padding: 0px 80px 80px 40px;
+    padding: 20px;
     color: #202020;
     font-size: 18px;
     font-family: "NanumSquareWebFont, dotum, Sans-serif";

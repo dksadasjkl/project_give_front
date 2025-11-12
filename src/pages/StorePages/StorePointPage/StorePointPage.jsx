@@ -25,7 +25,7 @@ function StorePointPage({ principal }) {
 
   return (
     <div css={s.container}>
-      <h2 css={s.title}>💰 내 포인트 내역</h2>
+      <div css={s.title}>포인트 내역</div>
 
       {points.length === 0 ? (
         <p css={s.empty}>포인트 내역이 없습니다.</p>

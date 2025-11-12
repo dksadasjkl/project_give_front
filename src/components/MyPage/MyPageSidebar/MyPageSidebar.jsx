@@ -15,6 +15,11 @@ function MyPageSidebar({ principal }) {
           </Link>
         </li>
         <li>
+          <Link to="/mypage/comments" css={[s.menuLink, location.pathname === '/mypage/comments' && s.activeLink]}>
+            댓글 내역
+          </Link>
+        </li>
+        <li>
           <Link to="/mypage/donations" css={[s.menuLink, location.pathname === '/mypage/donations' && s.activeLink]}>
             기부 내역
           </Link>
@@ -24,12 +29,6 @@ function MyPageSidebar({ principal }) {
             편딩 내역
           </Link>
         </li>
-        <li>
-          <Link to="/mypage/comments" css={[s.menuLink, location.pathname === '/mypage/comments' && s.activeLink]}>
-            댓글
-          </Link>
-        </li>
-        
         <li>
            <Link
             to="/mypage/store/wishlist"
