@@ -12,6 +12,7 @@ import { getPrincipalRequest } from './apis/api/Account/account';
 import MyPageRoute from './routes/MyPageRoute/MyPageRoute';
 import FundingRoute from './routes/FundingRoute/FundingRoute';
 import StoreRoute from './routes/StoreRoute/StoreRoute';
+import MainRoute from './routes/MainRoute/MainRoute';
 
 function App() {
 
@@ -33,6 +34,12 @@ function App() {
       <RootContainer>
         <PageContainer>
           <Routes>
+
+            {/* 메인 페이지 */}
+            <Route path="/" element={
+              <MainRoute principal={principalQuery.data?.data?.principal} />
+            } />
+
             <Route path="/*" element={
               <>
                 <DonationRoute principal={principalQuery.data?.data?.principal}/>
