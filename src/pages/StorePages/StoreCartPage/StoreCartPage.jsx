@@ -14,7 +14,7 @@ function StoreCartPage({ principal }) {
   const queryClient = useQueryClient();
   const [cartList, setCartList] = useState([]);
 
-  // ✅ 장바구니 조회
+  //  장바구니 조회
   useQuery(["getMyStoreCartRequest"], getMyStoreCartRequest, {
     refetchOnWindowFocus: false,
     enabled: !!principal,
@@ -22,7 +22,7 @@ function StoreCartPage({ principal }) {
     onError: (err) => console.error("장바구니 조회 오류:", err),
   });
 
-  // ✅ 수량 변경
+  //  수량 변경
   const updateQuantityMutation = useMutation(
     ({ cartId, quantity }) => putStoreCartQuantityRequest(cartId, quantity),
     {
@@ -31,7 +31,7 @@ function StoreCartPage({ principal }) {
     }
   );
 
-  // ✅ 상품 삭제
+  //  상품 삭제
   const deleteCartMutation = useMutation(deleteStoreCartItemRequest, {
     onSuccess: () => {
       alert("상품이 장바구니에서 삭제되었습니다 🗑️");

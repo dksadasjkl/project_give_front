@@ -1,131 +1,194 @@
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import { useLocation, useNavigate } from "react-router-dom";
-import { postStorePaymentRequest } from "../../../apis/api/Store/storePayment";
+import { useQuery } from "@tanstack/react-query";
+import { getMyStoreCartRequest } from "../../../apis/api/Store/storeCart";
 import { postStoreOrderRequest } from "../../../apis/api/Store/storeOrder";
+import { postStorePaymentRequest } from "../../../apis/api/Store/storePayment";
 import { postStoreShippingRequest } from "../../../apis/api/Store/storeShipping";
 import { portOnePayRequest } from "../../../apis/api/Order/portOne";
 import { useState } from "react";
 import DaumPostcode from "react-daum-postcode";
-import { useInput } from "../../../hooks/useInput";
 
 function StorePaymentPage({ principal }) {
   const navigate = useNavigate();
   const location = useLocation();
-  const { product, quantity } = location.state || {};
+
+  // 일반 결제용 데이터
+  const product = location.state?.product || null;
+  const quantity = location.state?.quantity || null;
+
+  // 장바구니 결제 여부
+  const fromCart = location.state?.fromCart || false;
 
   const [isPaying, setIsPaying] = useState(false);
   const [isPostcodeOpen, setIsPostcodeOpen] = useState(false);
 
-  // ✅ 기본값: principal에서 수령인 정보 불러오기
+  // 배송 정보 기본값
   const [recipientName, setRecipientName] = useState(
     principal?.name || principal?.nickname || ""
   );
-  const [recipientPhone, setRecipientPhone] = useState(
-    principal?.phone || ""
-  );
+  const [recipientPhone, setRecipientPhone] = useState(principal?.phone || "");
   const [zipcode, setZipcode] = useState("");
   const [address, setAddress] = useState("");
-  const [detailAddress, onChangeDetailAddress] = useInput("address");
+  const [detailAddress, setDetailAddress] = useState("");
 
-  // ✅ 랜덤 운송장번호 생성
-  const generateTrackingNumber = () => {
-    const randomDigits = Math.floor(1000000000 + Math.random() * 9000000000);
-    return `C${randomDigits}`;
-  };
+  // 장바구니 데이터 조회 (fromCart일 때만)
+  const { data: cartResponse } = useQuery(
+    ["getMyStoreCartRequest"],
+    getMyStoreCartRequest,
+    { enabled: fromCart }
+  );
 
-  // ✅ 다음 주소 API 완료 이벤트
+  const cartList = cartResponse?.data || [];
+
+  // 상품 총액 계산
+  let productsTotal = 0;
+
+  if (fromCart) {
+    productsTotal = cartList.reduce(
+      (sum, item) => sum + item.productPrice * item.quantity,
+      0
+    );
+  } else if (product && quantity) {
+    productsTotal = product.productPrice * quantity;
+  }
+
+  const totalAmount = productsTotal + 3000;
+
   const handleComplete = (data) => {
     setZipcode(data.zonecode);
     setAddress(data.address);
     setIsPostcodeOpen(false);
   };
 
-  // ✅ 결제 실행
-  const handleKakaoPay = async () => {
-    if (!principal) return alert("로그인 후 이용해주세요!");
-    if (!product) return alert("상품 정보가 없습니다.");
-    if (!recipientName || !recipientPhone || !zipcode || !address)
-      return alert("배송 정보를 모두 입력해주세요!");
+  const generateTrackingNumber = () => {
+    const random = Math.floor(1000000000 + Math.random() * 9000000000);
+    return `C${random}`;
+  };
 
-    setIsPaying(true);
+ const handleKakaoPay = async () => {
+  if (!recipientName || !recipientPhone || !zipcode || !address) {
+    alert("배송 정보를 모두 입력해 주세요.");
+    return;
+  }
 
-    try {
-      // 1️⃣ 포트원 결제 요청
-      const payResult = await portOnePayRequest({
-        orderName: `${product.productName}`,
-        totalAmount: product.productPrice * quantity + 3000,
-      });
+  setIsPaying(true);
 
-      if (payResult.code) {
-        alert("❌ 결제가 취소되었습니다.");
-        setIsPaying(false);
-        return;
-      }
+  try {
+    const payResult = await portOnePayRequest({
+      orderName: fromCart ? "장바구니 결제" : product.productName,
+      totalAmount
+    });
 
-      // 2️⃣ 주문 생성
+    if (payResult.code) {
+      alert("결제가 취소되었습니다.");
+      setIsPaying(false);
+      return;
+    }
+
+    let orderIds = [];
+
+    // 일반 결제
+    if (!fromCart) {
       const orderResponse = await postStoreOrderRequest({
         productId: product.productId,
         quantity,
-        totalAmount: product.productPrice * quantity + 3000,
-      });
-      const orderId = orderResponse.data?.orderId;
-
-      // 3️⃣ 결제 내역 저장
-      await postStorePaymentRequest({
-        orderId,
-        paymentMethod: "KAKAO_PAY",
-        paymentStatus: "SUCCESS",
-        amount: product.productPrice * quantity + 3000,
-        transactionId: payResult.paymentId,
+        totalAmount
       });
 
-      // 4️⃣ 배송 정보 저장
-      await postStoreShippingRequest({
-        orderId,
-        recipientName,
-        recipientPhone,
-        address: `${address} ${detailAddress}`,
-        zipcode,
-        shippingCarrier: "CJ대한통운",
-        trackingNumber: generateTrackingNumber(),
-      });
-
-      alert("🎉 결제가 완료되었습니다! 포인트가 적립되었습니다.");
-      navigate("/store/orders");
-    } catch (error) {
-      console.error(error);
-      alert("❌ 결제 중 오류가 발생했습니다.");
-    } finally {
-      setIsPaying(false);
+      orderIds = orderResponse.data.orderIds;  // 배열 형태로 통일
     }
-  };
 
-  const totalAmount = product ? product.productPrice * quantity + 3000 : 0;
+    // 장바구니 결제
+    if (fromCart) {
+      const orderResponse = await postStoreOrderRequest({
+        items: cartList.map(item => ({
+          productId: item.productId,
+          quantity: item.quantity
+        })),
+        totalAmount
+      });
 
-  if (!product)
-    return <div css={s.loading}>결제할 상품 정보를 불러오는 중...</div>;
+      orderIds = orderResponse.data.orderIds;    // 여러 개
+    }
+
+    // 모든 주문에 결제 정보 저장
+    await Promise.all(
+      orderIds.map(id =>
+        postStorePaymentRequest({
+          orderId: id,
+          paymentMethod: "KAKAO_PAY",
+          paymentStatus: "SUCCESS",
+          amount: totalAmount,
+          transactionId: payResult.paymentId
+        })
+      )
+    );
+
+    // 모든 주문에 배송 정보 저장
+    await Promise.all(
+      orderIds.map(id =>
+        postStoreShippingRequest({
+          orderId: id,
+          recipientName,
+          recipientPhone,
+          address: `${address} ${detailAddress}`,
+          zipcode,
+          shippingCarrier: "CJ대한통운",
+          trackingNumber: generateTrackingNumber()
+        })
+      )
+    );
+
+    alert("결제가 완료되었습니다.");
+    navigate("/store/orders");
+
+  } catch (error) {
+    console.error(error);
+    alert("결제 중 오류가 발생했습니다.");
+  } finally {
+    setIsPaying(false);
+  }
+};
+
+  // 일반 결제인데 데이터를 못받은 경우
+  if (!fromCart && !product) {
+    return <div css={s.loading}>결제할 상품 정보를 불러오는 중입니다...</div>;
+  }
+
+  // 장바구니 결제인데 데이터 없는 경우
+  if (fromCart && cartList.length === 0) {
+    return <div css={s.loading}>장바구니 정보를 불러오는 중입니다...</div>;
+  }
 
   return (
     <div css={s.container}>
-      <h2 css={s.title}>💳 카카오페이 결제</h2>
+      <h2 css={s.title}>카카오페이 결제</h2>
 
-      {/* 상품 요약 */}
       <div css={s.productBox}>
-        <img src={product.productImageUrl} alt={product.productName} />
-        <div css={s.productInfo}>
-          <h3>{product.productName}</h3>
-          <p>{product.productDescription}</p>
-          <p>수량: {quantity}개</p>
-          <p>상품 금액: {(product.productPrice * quantity).toLocaleString()}원</p>
-          <p>배송비: +3,000원</p>
-          <p css={s.price}>
-            총 결제 금액: <strong>{totalAmount.toLocaleString()}원</strong>
-          </p>
+        <div>
+          {fromCart ? (
+            <>
+              <p>상품 종류: {cartList.length}종</p>
+              <p>상품 총액: {productsTotal.toLocaleString()}원</p>
+            </>
+          ) : (
+            <>
+              <p>상품명: {product.productName}</p>
+              <p>수량: {quantity}개</p>
+              <p>
+                상품 금액: {(product.productPrice * quantity).toLocaleString()}
+                원
+              </p>
+            </>
+          )}
+
+          <p>배송비: 3,000원</p>
+          <p css={s.price}>최종 결제 금액: {totalAmount.toLocaleString()}원</p>
         </div>
       </div>
 
-      {/* 배송 정보 */}
       <div css={s.shippingBox}>
         <h4>배송 정보</h4>
 
@@ -139,7 +202,7 @@ function StorePaymentPage({ principal }) {
 
         <input
           type="text"
-          placeholder="연락처 (010-0000-0000)"
+          placeholder="연락처"
           value={recipientPhone}
           onChange={(e) => setRecipientPhone(e.target.value)}
           css={s.input}
@@ -158,7 +221,6 @@ function StorePaymentPage({ principal }) {
           </button>
         </div>
 
-        {/* ✅ 다음 주소 API 모달 */}
         {isPostcodeOpen && (
           <div css={s.postcodeOverlay}>
             <div css={s.postcodePopup}>
@@ -170,7 +232,7 @@ function StorePaymentPage({ principal }) {
                 css={s.closePostcodeBtn}
                 onClick={() => setIsPostcodeOpen(false)}
               >
-                닫기 ✕
+                닫기
               </button>
             </div>
           </div>
@@ -178,26 +240,24 @@ function StorePaymentPage({ principal }) {
 
         <input
           type="text"
-          placeholder="기본주소"
+          placeholder="기본 주소"
           value={address}
           readOnly
           css={s.input}
         />
+
         <input
           type="text"
-          placeholder="상세주소"
+          placeholder="상세 주소"
           value={detailAddress}
-          onChange={onChangeDetailAddress}
+          onChange={(e) => setDetailAddress(e.target.value)}
           css={s.input}
         />
       </div>
 
-      {/* 결제 수단 */}
       <div css={s.paymentBox}>
         <h4>결제 수단</h4>
-        <div css={s.methodBox}>
-          <div css={s.kakaoMethod}>🟡 카카오페이</div>
-        </div>
+
         <button css={s.payBtn} onClick={handleKakaoPay} disabled={isPaying}>
           {isPaying ? "결제 처리 중..." : "카카오페이로 결제하기"}
         </button>
