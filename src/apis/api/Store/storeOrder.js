@@ -7,8 +7,10 @@ export const postStoreOrderRequest = async (data) => {
 };
 
 /** 🧾 내 주문 목록 조회 */
-export const getMyStoreOrdersRequest = async () => {
-  return await instance.get("/store/orders/my");
+export const getMyStoreOrdersRequest = async (page, size) => {
+  return await instance.get(`/store/orders`, {
+    params: { page, size },
+  });
 };
 
 /** 🧾 주문 상세 조회 */
