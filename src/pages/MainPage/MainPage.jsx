@@ -1,32 +1,42 @@
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import { useQuery } from "@tanstack/react-query";
-import { getMainTopRequest } from "../../apis/api/Main/main";
+import { getMainRecommendRequest } from "../../apis/api/Main/main";
 
 import MainBannerCarousel from "./components/MainBannerCarousel";
 import MainSection from "./components/MainSection";
-import RecommendationDonation from "./components/RecommendationDonation";
-import RecommendationStore from "./components/RecommendationStore";
+import RecommendationDonationList from "./components/RecommendationDonationList";
+import RecommendationStoreList from "./components/RecommendationStoreList";
 
 function MainPage() {
-  const { data: topData } = useQuery(["mainTop"], getMainTopRequest);
 
-  const donation = topData?.data?.bannerDonation;
-  const product = topData?.data?.bannerProduct;
+  const { data } = useQuery(
+    ["mainRecommend"],
+    getMainRecommendRequest
+  );
+
+  const donationList = data?.data?.donations || [];
+  const productList = data?.data?.products || [];
 
   return (
     <div css={s.container}>
-      
-      <MainBannerCarousel donation={donation} product={product} />
 
+      {/* 배너는 첫 번째만 사용 */}
+      <MainBannerCarousel
+        donation={donationList[0]}
+        product={productList[0]}
+      />
+
+      {/* 추천 기부 TOP3 */}
       <MainSection title="추천 기부 프로젝트">
-        <RecommendationDonation donation={donation} />
+        <RecommendationDonationList donations={donationList} />
       </MainSection>
 
+      {/* 추천 쇼핑 TOP3 */}
       <MainSection title="인기 쇼핑 상품">
-        <RecommendationStore product={product} />
-      </MainSection>
-
+        <RecommendationStoreList products={productList} />
+      </MainSection>  
+      
     </div>
   );
 }

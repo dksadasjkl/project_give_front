@@ -3,10 +3,10 @@ import * as s from "./MainSection.style";
 
 function MainSection({ title, children }) {
   return (
-    <section css={s.sectionWrapper}>
+    <div css={s.sectionWrapper}>
       <h3 css={s.sectionTitle}>{title}</h3>
-      {children}
-    </section>
+      <div css={s.gridWrapper}>{children}</div>
+    </div>
   );
 }
 

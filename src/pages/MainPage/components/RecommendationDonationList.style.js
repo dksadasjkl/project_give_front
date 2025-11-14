@@ -1,0 +1,56 @@
+import { css } from "@emotion/react";
+
+export const card = css`
+  width: 100%;
+  height: 320px; /* 이미지 크게 → 카드도 약간 높게 */
+  border: 1px solid #eee;
+  border-radius: 12px;
+  background: #fff;
+  cursor: pointer;
+  overflow: hidden;
+  transition: 0.25s;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+  }
+`;
+
+export const imageBox = css`
+  width: 100%;
+  height: 220px; /* 🔥 크게 키움 */
+  background: #f3f3f3;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+  }
+`;
+
+export const infoBox = css`
+  padding: 12px;
+  height: 100px; /* 🔥 더 작고 컴팩트한 영역 */
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* 텍스트 중앙 정렬 */
+
+  h4 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  p {
+    margin: 8px 0 0;
+    font-size: 13px;
+    color: #777;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+`;
