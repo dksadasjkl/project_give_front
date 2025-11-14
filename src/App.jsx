@@ -13,6 +13,7 @@ import MyPageRoute from './routes/MyPageRoute/MyPageRoute';
 import FundingRoute from './routes/FundingRoute/FundingRoute';
 import StoreRoute from './routes/StoreRoute/StoreRoute';
 import MainRoute from './routes/MainRoute/MainRoute';
+import DonationNearbyMap from './pages/DonationNearby/DonationNearbyMap';
 
 function App() {
 
@@ -39,6 +40,9 @@ function App() {
             <Route path="/" element={
               <MainRoute principal={principalQuery.data?.data?.principal} />
             } />
+
+            {/* 🔥 내 주변 기부 지도 */}
+            <Route path="/map" element={<DonationNearbyMap principal={principalQuery.data?.data?.principal} />} />
 
             <Route path="/*" element={
               <>
