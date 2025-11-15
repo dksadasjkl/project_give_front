@@ -14,6 +14,10 @@ import FundingRoute from './routes/FundingRoute/FundingRoute';
 import StoreRoute from './routes/StoreRoute/StoreRoute';
 import MainRoute from './routes/MainRoute/MainRoute';
 import DonationNearbyMap from './pages/DonationNearby/DonationNearbyMap';
+import AdminDonationListPage from './admin/pages/Donation/AdminDonationListPage';
+import AdminLayout from './admin/layout/AdminLayout/AdminLayout';
+import AdminDashboardPage from './admin/pages/Dashboard/AdminDashboardPage';
+import AdminDonationDetailPage from './admin/pages/Donation/AdminDonationDetailPage';
 
 function App() {
 
@@ -34,7 +38,14 @@ function App() {
       <RootHeader />  
       <RootContainer>
         <PageContainer>
-          <Routes>
+          <Routes>  
+
+            <Route path="/admin" element={<AdminLayout />}>
+              <Route index element={<AdminDashboardPage />} />
+              <Route path="donation" element={<AdminDonationListPage />} />
+              <Route path="donation/:projectId" element={<AdminDonationDetailPage />} />
+            </Route>
+
 
             {/* 메인 페이지 */}
             <Route path="/" element={

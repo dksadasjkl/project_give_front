@@ -1,0 +1,27 @@
+import instance from "../../apis/utills/instance";
+
+/** ✅ 기부 프로젝트 목록 가져오기 */
+export const getAdminDonationListRequest = async (page = 1, size = 10) => {
+  return await instance.get(`/admin/donation?page=${page}&size=${size}`);
+};
+
+/** ✅ 기부 프로젝트 상세조회 */
+export const getAdminDonationDetailRequest = async (id) => {
+  return await instance.get(`/admin/donation/projects/${id}`);
+};
+
+/** ✅ 기부 프로젝트 생성 */
+export const postAdminDonationCreateRequest = async (data) => {
+  return await instance.post(`/admin/donation`, data);
+};
+
+/** ✅ 기부 프로젝트 수정 */
+export const putAdminDonationUpdateRequest = async (donationProjectId, data) => {
+  return await instance.put(`/admin/donation/${donationProjectId}`, data);
+};
+
+/** ✅ 기부 프로젝트 삭제 */
+export const deleteAdminDonationDeleteRequest = async (donationProjectId) => {
+  return await instance.delete(`/admin/donation/${donationProjectId}`);
+};
+
