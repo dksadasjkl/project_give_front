@@ -15,13 +15,12 @@ export const postAdminDonationCreateRequest = async (data) => {
   return await instance.post(`/admin/donation`, data);
 };
 
-/** ✅ 기부 프로젝트 수정 */
+/** ✅ 기부 프로젝트 수정 (⚠️ 수정됨) */
 export const putAdminDonationUpdateRequest = async (donationProjectId, data) => {
-  return await instance.put(`/admin/donation/${donationProjectId}`, data);
+  return await instance.put(`/admin/donation/projects/${donationProjectId}`, data);
 };
 
-/** ✅ 기부 프로젝트 삭제 */
+/** ✅ 기부 프로젝트 삭제 (⚠️ 수정됨) */
 export const deleteAdminDonationDeleteRequest = async (donationProjectId) => {
-  return await instance.delete(`/admin/donation/${donationProjectId}`);
+  return await instance.delete(`/admin/donation/projects/${donationProjectId}`);
 };
-

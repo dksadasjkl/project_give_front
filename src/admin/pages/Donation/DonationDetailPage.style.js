@@ -27,11 +27,16 @@ export const infoBox = css`
   display: flex;
   flex-direction: column;
   font-size: 16px;
+
+  p {
+    margin: 6px 0;
+  }
 `;
 
 export const projectTitle = css`
   font-size: 22px;
   font-weight: 700;
+  margin-bottom: 10px;
 `;
 
 export const section = css`
@@ -44,4 +49,20 @@ export const description = css`
   padding: 16px;
   border-radius: 8px;
   border: 1px solid #eee;
+`;
+
+export const editBtn = css`
+  margin-top: 20px;
+  padding: 10px 16px;
+  background: #333;
+  color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  border: none;
+  font-size: 15px;
+  font-weight: 600;
+
+  &:hover {
+    background: #555;
+  }
 `;

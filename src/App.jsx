@@ -18,6 +18,7 @@ import AdminDonationListPage from './admin/pages/Donation/AdminDonationListPage'
 import AdminLayout from './admin/layout/AdminLayout/AdminLayout';
 import AdminDashboardPage from './admin/pages/Dashboard/AdminDashboardPage';
 import AdminDonationDetailPage from './admin/pages/Donation/AdminDonationDetailPage';
+import AdminDonationEditPage from './admin/pages/Donation/AdminDonationEditPage';
 
 function App() {
 
@@ -40,11 +41,12 @@ function App() {
         <PageContainer>
           <Routes>  
 
-            <Route path="/admin" element={<AdminLayout />}>
-              <Route index element={<AdminDashboardPage />} />
-              <Route path="donation" element={<AdminDonationListPage />} />
-              <Route path="donation/:projectId" element={<AdminDonationDetailPage />} />
-            </Route>
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route index element={<AdminDashboardPage />} />
+            <Route path="donation" element={<AdminDonationListPage />} />
+            <Route path="donation/:projectId" element={<AdminDonationDetailPage />} />
+            <Route path="donation/:projectId/edit" element={<AdminDonationEditPage />} />
+          </Route>
 
 
             {/* 메인 페이지 */}
