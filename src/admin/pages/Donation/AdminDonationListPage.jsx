@@ -3,13 +3,17 @@ import { useQuery } from "@tanstack/react-query";
 import * as s from "./DonationListPage.style";
 import { getAdminDonationListRequest } from "../../apis/adminDonationApi";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const AdminDonationListPage = () => {
   const navigate = useNavigate();
 
+  const [page, setPage] = useState(1);       // 현재 페이지
+  const size = 10;                           // 한 페이지당 10개 출력 (원하면 변경 가능)
+
   const { data, isLoading, error } = useQuery(
-    ["adminDonationList"],
-    () => getAdminDonationListRequest(1, 20),
+    ["adminDonationList", page],             // 페이지 변경되면 자동 refetch
+    () => getAdminDonationListRequest(page, size),
     { refetchOnWindowFocus: false }
   );
 
@@ -17,6 +21,8 @@ const AdminDonationListPage = () => {
   if (error) return <p>에러 발생</p>;
 
   const items = data?.data?.items || [];
+  const total = data?.data?.total || 0;
+  const totalPages = Math.ceil(total / size);
 
   return (
     <div>
@@ -66,6 +72,27 @@ const AdminDonationListPage = () => {
           ))}
         </tbody>
       </table>
+
+      {/* 페이지네이션 */}
+      <div css={s.pagination}>
+        <button
+          disabled={page === 1}
+          onClick={() => setPage((prev) => prev - 1)}
+        >
+          이전
+        </button>
+
+        <span>
+          {page} / {totalPages}
+        </span>
+
+        <button
+          disabled={page === totalPages}
+          onClick={() => setPage((prev) => prev + 1)}
+        >
+          다음
+        </button>
+      </div>
     </div>
   );
 };

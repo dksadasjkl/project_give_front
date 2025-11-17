@@ -52,7 +52,7 @@ export const description = css`
 `;
 
 export const editBtn = css`
-  margin-top: 20px;
+  margin: 20px 5px 0;
   padding: 10px 16px;
   background: #333;
   color: #fff;
@@ -64,5 +64,21 @@ export const editBtn = css`
 
   &:hover {
     background: #555;
+  }
+`;
+
+export const detailManageBtn = css`
+  margin-top: 16px;
+  background: #4f46e5;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  transition: 0.15s ease;
+
+  &:hover {
+    background: #4338ca;
   }
 `;

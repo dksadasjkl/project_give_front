@@ -19,6 +19,7 @@ import AdminLayout from './admin/layout/AdminLayout/AdminLayout';
 import AdminDashboardPage from './admin/pages/Dashboard/AdminDashboardPage';
 import AdminDonationDetailPage from './admin/pages/Donation/AdminDonationDetailPage';
 import AdminDonationEditPage from './admin/pages/Donation/AdminDonationEditPage';
+import AdminDonationDetailManagePage from './admin/pages/Donation/AdminDonationDetailManagePage';
 
 function App() {
 
@@ -43,11 +44,15 @@ function App() {
 
           <Route path="/admin" element={<AdminLayout />}>
             <Route index element={<AdminDashboardPage />} />
+
+            {/* 기부 프로젝트 */}
             <Route path="donation" element={<AdminDonationListPage />} />
             <Route path="donation/:projectId" element={<AdminDonationDetailPage />} />
             <Route path="donation/:projectId/edit" element={<AdminDonationEditPage />} />
-          </Route>
 
+            {/* 상세 콘텐츠 관리 (신규 추가) */}
+            <Route path="donation/:projectId/details" element={<AdminDonationDetailManagePage />} />
+          </Route>
 
             {/* 메인 페이지 */}
             <Route path="/" element={

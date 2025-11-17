@@ -94,6 +94,12 @@ const AdminDonationDetailPage = () => {
       >
         수정하기
       </button>
+      <button
+        css={s.detailManageBtn}
+        onClick={() => navigate(`/admin/donation/${projectId}/details`)}
+      >
+        상세 콘텐츠 관리
+      </button>
     </div>
   );
 };

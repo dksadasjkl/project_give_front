@@ -13,6 +13,14 @@ const AdminSidebar = () => {
     { name: "주문 / 배송 관리", path: "/admin/order" },
   ];
 
+  const isActive = (menuPath) => {
+    if (menuPath === "/admin") {
+      return location.pathname === "/admin";
+    }
+
+    return location.pathname.startsWith(menuPath);
+  };
+
   return (
     <aside css={s.sidebar}>
       <h1 css={s.logo}>GIVE ADMIN</h1>
@@ -21,10 +29,7 @@ const AdminSidebar = () => {
         {menus.map((menu, idx) => (
           <li key={idx}>
             <Link
-              css={[
-                s.menuItem,
-                location.pathname.startsWith(menu.path) && s.activeMenu,
-              ]}
+              css={[s.menuItem, isActive(menu.path) && s.activeMenu]}
               to={menu.path}
             >
               {menu.name}

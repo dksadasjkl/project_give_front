@@ -31,3 +31,33 @@ export const row = css`
     background: #fafafa;
   }
 `;
+
+export const pagination = css`
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+
+  button {
+    padding: 6px 12px;
+    border: 1px solid #ddd;
+    background: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    &:hover:not(:disabled) {
+      background: #f7f7f7;
+    }
+  }
+
+  span {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+  }
+`;
