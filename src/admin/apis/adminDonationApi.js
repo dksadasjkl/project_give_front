@@ -12,7 +12,7 @@ export const getAdminDonationDetailRequest = async (id) => {
 
 /** ✅ 기부 프로젝트 생성 */
 export const postAdminDonationCreateRequest = async (data) => {
-  return await instance.post(`/admin/donation`, data);
+  return await instance.post(`/admin/donation/projects`, data);
 };
 
 /** ✅ 기부 프로젝트 수정 ( 수정됨) */

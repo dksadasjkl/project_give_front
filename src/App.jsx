@@ -20,6 +20,7 @@ import AdminDashboardPage from './admin/pages/Dashboard/AdminDashboardPage';
 import AdminDonationDetailPage from './admin/pages/Donation/AdminDonationDetailPage';
 import AdminDonationEditPage from './admin/pages/Donation/AdminDonationEditPage';
 import AdminDonationDetailManagePage from './admin/pages/Donation/AdminDonationDetailManagePage';
+import AdminDonationCreatePage from './admin/pages/Donation/AdminDonationCreatePage';
 
 function App() {
 
@@ -47,10 +48,9 @@ function App() {
 
             {/* 기부 프로젝트 */}
             <Route path="donation" element={<AdminDonationListPage />} />
+            <Route path="donation/create" element={<AdminDonationCreatePage />} />   {/* 🔥 신규 */}
             <Route path="donation/:projectId" element={<AdminDonationDetailPage />} />
             <Route path="donation/:projectId/edit" element={<AdminDonationEditPage />} />
-
-            {/* 상세 콘텐츠 관리 (신규 추가) */}
             <Route path="donation/:projectId/details" element={<AdminDonationDetailManagePage />} />
           </Route>
 
