@@ -1,15 +1,16 @@
 /** @jsxImportSource @emotion/react */
-import * as s from "./AdminDonationCreatePage.style";
+import * as s from "./AdminFundingCreatePage.style";
 import { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { getAdminDonationCategoriesRequest, postAdminDonationCreateRequest } from "../../apis/adminDonationApi";
 
 import { v4 as uuid } from "uuid";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { storage } from "../../../apis/firebase/firebaseConfig";
 
-function AdminDonationCreatePage() {
+import { getAdminFundingCategoriesRequest, postAdminFundingCreateRequest } from "../../apis/adminFundingApi";
+
+function AdminFundingCreatePage() {
   const [categories, setCategories] = useState([]);
 
   const [form, setForm] = useState({
@@ -27,16 +28,17 @@ function AdminDonationCreatePage() {
     { subtitle: "", content: "", imageUrl: "" }
   ]);
 
+  /** 카테고리 로딩 (FUNDING 전용) */
   useEffect(() => {
-    getAdminDonationCategoriesRequest().then((res) =>
+    getAdminFundingCategoriesRequest().then((res) =>
       setCategories(res.data || [])
     );
   }, []);
 
-  /** Firebase 업로드 */
+  /** Firebase 이미지 업로드 */
   const uploadToFirebase = async (file) => {
     return new Promise((resolve, reject) => {
-      const storageRef = ref(storage, `donation/${uuid()}_${file.name}`);
+      const storageRef = ref(storage, `funding/${uuid()}_${file.name}`);
       const task = uploadBytesResumable(storageRef, file);
 
       task.on(
@@ -74,6 +76,7 @@ function AdminDonationCreatePage() {
     return onlyNum.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
 
+  /** 제출 */
   const handleSubmit = async () => {
     const mappedDetails = details.map((d, idx) => ({
       donationProjectDetailSubtitle: d.subtitle,
@@ -91,20 +94,19 @@ function AdminDonationCreatePage() {
       donationProjectTargetAmount: Number(form.targetAmount.replace(/,/g, "")),
       donationProjectStartDate: form.startDate.toISOString().slice(0, 10),
       donationProjectEndDate: form.endDate.toISOString().slice(0, 10),
-      donationProjectType: "DONATION",     // 🔥 기부 고정
+      donationProjectType: "FUNDING",
       details: mappedDetails,
-      rewards: []                          // 🔥 펀딩 아님 — 빈 배열
+      rewards: [], // ✔ 리워드는 Create에서 제거
     };
 
-    await postAdminDonationCreateRequest(payload);
-    alert("기부 프로젝트가 등록되었습니다!");
-    window.location.href = "/admin/donation";
+    await postAdminFundingCreateRequest(payload);
+    alert("펀딩 프로젝트가 등록되었습니다!");
+    window.location.href = "/admin/funding";
   };
-
 
   return (
     <div css={s.container}>
-      <h1>기부 프로젝트 등록</h1>
+      <h1>펀딩 프로젝트 등록</h1>
 
       <label>프로젝트 제목</label>
       <input
@@ -189,7 +191,11 @@ function AdminDonationCreatePage() {
         </div>
       ))}
 
-      <button onClick={() => setDetails([...details, { subtitle: "", content: "", imageUrl: "" }])}>
+      <button
+        onClick={() =>
+          setDetails([...details, { subtitle: "", content: "", imageUrl: "" }])
+        }
+      >
         상세 추가 +
       </button>
 
@@ -200,4 +206,4 @@ function AdminDonationCreatePage() {
   );
 }
 
-export default AdminDonationCreatePage;
+export default AdminFundingCreatePage;

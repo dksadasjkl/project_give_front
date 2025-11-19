@@ -30,17 +30,20 @@ export const table = css`
   border-radius: 10px;
   overflow: hidden;
 
-  th,
-  td {
+  th, td {
     padding: 12px;
     border-bottom: 1px solid #eee;
     font-size: 14px;
-    text-align: center;
   }
 
   th {
-    background: #eef3f8;
-    font-weight: 700;
+    background: #f0f4f8;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  td {
+    text-align: center;
   }
 `;
 
@@ -62,13 +65,13 @@ export const clickable = css`
 
 export const deleteButton = css`
   padding: 6px 12px;
-  background: #d32f2f;
-  color: #fff;
+  background: #e53935;
+  color: white;
   border-radius: 6px;
   cursor: pointer;
 
   &:hover {
-    background: #b71c1c;
+    background: #c62828;
   }
 `;
 
@@ -76,22 +79,22 @@ export const pagination = css`
   margin-top: 20px;
   display: flex;
   justify-content: center;
-  gap: 12px;
+  gap: 14px;
 
   button {
     padding: 6px 12px;
     border: 1px solid #ccc;
-    background: #fff;
+    background: white;
     border-radius: 6px;
     cursor: pointer;
 
     &:disabled {
-      opacity: 0.5;
+      opacity: 0.4;
       cursor: not-allowed;
     }
 
     &:hover:not(:disabled) {
-      background: #f3f3f3;
+      background: #f5f5f5;
     }
   }
 

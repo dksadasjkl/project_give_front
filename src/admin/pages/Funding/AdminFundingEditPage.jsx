@@ -1,9 +1,12 @@
 /** @jsxImportSource @emotion/react */
-import * as s from "./DonationEditPage.style";
+import * as s from "./AdminFundingEditPage.style";
 import { useRecoilState } from "recoil";
-import { adminDonationEditState } from "../../atoms/adminDonationEditAtom";
+import { adminFundingEditState } from "../../atoms/adminFundingEditAtom";
+
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { putAdminDonationUpdateRequest } from "../../apis/adminDonationApi";
+import { putAdminFundingUpdateRequest } from "../../apis/adminFundingApi";
+
+import { getAdminFundingCategoriesRequest } from "../../apis/adminFundingApi";
 
 import TopInput from "../../components/TopInput/TopInput";
 import TopSelect from "../../components/TopSelect/TopSelect";
@@ -13,31 +16,29 @@ import { v4 as uuid } from "uuid";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { storage } from "../../../apis/firebase/firebaseConfig";
 
-import { getAdminDonationCategoriesRequest } from "../../apis/adminDonationApi"; // 🔥 추가
+const AdminFundingEditPage = () => {
+  const [funding, setFunding] = useRecoilState(adminFundingEditState);
 
-const AdminDonationEditPage = () => {
-  const [donation, setDonation] = useRecoilState(adminDonationEditState);
-
-  /** 카테고리 불러오기 (DONATION 전용) */
+  /** 펀딩 카테고리 로드 (FUNDING 전용) */
   const { data: categoryData } = useQuery(
-    ["donationCategories"],
-    () => getAdminDonationCategoriesRequest(),
+    ["fundingCategories"],
+    () => getAdminFundingCategoriesRequest(),
     { refetchOnWindowFocus: false }
   );
 
+  /** map 해서 TopSelect 용 옵션 변환 */
   const categoryOptions = (categoryData?.data || []).map((c) => ({
     id: c.donationCategoryId,
     name: c.donationCategoryNameKor,
   }));
 
-  /** 대표 이미지 업로드 */
+  /** 이미지 업로드 */
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (!file) return;
-
     if (!window.confirm("이미지를 업로드하시겠습니까?")) return;
 
-    const storageRef = ref(storage, `donation/project/${uuid()}_${file.name}`);
+    const storageRef = ref(storage, `funding/project/${uuid()}_${file.name}`);
     const uploadTask = uploadBytesResumable(storageRef, file);
 
     uploadTask.on(
@@ -46,7 +47,7 @@ const AdminDonationEditPage = () => {
       () => alert("업로드 실패"),
       () => {
         getDownloadURL(storageRef).then((url) => {
-          setDonation((prev) => ({
+          setFunding((prev) => ({
             ...prev,
             donationProjectImageUrl: url,
           }));
@@ -56,39 +57,39 @@ const AdminDonationEditPage = () => {
     );
   };
 
-  /** 프로젝트 수정 요청 */
+  /** 펀딩 수정 API */
   const updateMutation = useMutation({
     mutationFn: () =>
-      putAdminDonationUpdateRequest(donation.donationProjectId, donation),
+      putAdminFundingUpdateRequest(funding.donationProjectId, funding),
     onSuccess: () => {
-      alert("기부 프로젝트 수정 완료");
-      window.location.href = "/admin/donation";
+      alert("펀딩 프로젝트 수정 완료");
+      window.location.href = "/admin/funding";
     },
     onError: () => alert("수정 실패"),
   });
 
-  /** RegisterTop 입력 그룹 */
+  /**  RegisterTop 필드 구성 */
   const registerInputs = [
     [
       <TopInput
         label="ID"
         name="donationProjectId"
         disabled
-        value={donation.donationProjectId}
-        setState={setDonation}
+        value={funding.donationProjectId}
+        setState={setFunding}
       />,
       <TopInput
         label="제목"
         name="donationProjectTitle"
-        value={donation.donationProjectTitle}
-        setState={setDonation}
+        value={funding.donationProjectTitle}
+        setState={setFunding}
       />,
       <TopSelect
         label="카테고리"
         name="donationCategoryId"
-        value={donation.donationCategoryId}
-        setState={setDonation}
-        options={categoryOptions}   
+        value={funding.donationCategoryId}
+        setState={setFunding}
+        options={categoryOptions} //  API 기반 옵션으로 변경됨
       />,
     ],
 
@@ -96,14 +97,14 @@ const AdminDonationEditPage = () => {
       <TopInput
         label="기관명"
         name="donationProjectOrganization"
-        value={donation.donationProjectOrganization}
-        setState={setDonation}
+        value={funding.donationProjectOrganization}
+        setState={setFunding}
       />,
       <TopInput
         label="목표 금액"
         name="donationProjectTargetAmount"
-        value={donation.donationProjectTargetAmount}
-        setState={setDonation}
+        value={funding.donationProjectTargetAmount}
+        setState={setFunding}
       />,
       <></>,
     ],
@@ -113,32 +114,28 @@ const AdminDonationEditPage = () => {
         type="date"
         label="시작일"
         name="donationProjectStartDate"
-        value={donation.donationProjectStartDate?.substring(0, 10)}
-        setState={setDonation}
+        value={funding.donationProjectStartDate?.substring(0, 10)}
+        setState={setFunding}
       />,
       <TopInput
         type="date"
         label="종료일"
         name="donationProjectEndDate"
-        value={donation.donationProjectEndDate?.substring(0, 10)}
-        setState={setDonation}
+        value={funding.donationProjectEndDate?.substring(0, 10)}
+        setState={setFunding}
       />,
       <></>,
     ],
 
     [
       <div css={s.imageUploadRow}>
-        {donation.donationProjectImageUrl && (
-          <img src={donation.donationProjectImageUrl} css={s.previewImg} />
+        {funding.donationProjectImageUrl && (
+          <img src={funding.donationProjectImageUrl} css={s.previewImg} />
         )}
 
         <label css={s.uploadButton}>
           대표 이미지 업로드
-          <input
-            type="file"
-            css={s.hiddenFileInput}
-            onChange={handleImageUpload}
-          />
+          <input type="file" onChange={handleImageUpload} css={s.hiddenFileInput} />
         </label>
       </div>,
       <></>,
@@ -149,7 +146,7 @@ const AdminDonationEditPage = () => {
   return (
     <>
       <div css={s.header}>
-        <h1 css={s.title}>기부 프로젝트 수정</h1>
+        <h1 css={s.title}>펀딩 프로젝트 수정</h1>
         <button css={s.button} onClick={() => updateMutation.mutate()}>
           수정 저장
         </button>
@@ -160,4 +157,4 @@ const AdminDonationEditPage = () => {
   );
 };
 
-export default AdminDonationEditPage;
+export default AdminFundingEditPage;

@@ -8,6 +8,7 @@ const AdminSidebar = () => {
   const menus = [
     { name: "Dashboard", path: "/admin" },
     { name: "기부 프로젝트 관리", path: "/admin/donation" },
+    { name: "펀딩 프로젝트 관리", path: "/admin/funding" },   // ⭐ 추가
     { name: "스토어 상품 관리", path: "/admin/store" },
     { name: "유저 관리", path: "/admin/user" },
     { name: "주문 / 배송 관리", path: "/admin/order" },

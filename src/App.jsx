@@ -23,6 +23,14 @@ import AdminDonationDetailManagePage from './admin/pages/Donation/AdminDonationD
 import AdminDonationCreatePage from './admin/pages/Donation/AdminDonationCreatePage';
 import AdminDonationCommentPage from './admin/pages/Donation/AdminDonationCommentPage';
 import AdminDonationContributionPage from './admin/pages/Donation/AdminDonationContributionPage';
+import AdminFundingCreatePage from './admin/pages/Funding/AdminFundingCreatePage';
+import AdminFundingListPage from './admin/pages/Funding/AdminFundingListPage';
+import AdminFundingDetailPage from './admin/pages/Funding/AdminFundingDetailPage';
+import AdminFundingEditPage from './admin/pages/Funding/AdminFundingEditPage';
+import AdminFundingDetailManagePage from './admin/pages/Funding/AdminFundingDetailManagePage';
+import AdminFundingRewardManagePage from './admin/pages/Funding/AdminFundingRewardManagePage';
+import AdminFundingCommentPage from './admin/pages/Funding/AdminFundingCommentPage';
+import AdminFundingContributionPage from './admin/pages/Funding/AdminFundingContributionPage';
 
 function App() {
 
@@ -56,14 +64,26 @@ function App() {
             <Route path="donation/:projectId/details" element={<AdminDonationDetailManagePage />} />
             <Route path="donation/:projectId/comments" element={<AdminDonationCommentPage />} />
             <Route path="donation/:projectId/contributions" element={<AdminDonationContributionPage />} />
+
+
+            <Route path="funding" element={<AdminFundingListPage />} />
+            <Route path="funding/create" element={<AdminFundingCreatePage />} />
+            <Route path="funding/:projectId" element={<AdminFundingDetailPage />} />
+            <Route path="funding/:projectId/edit" element={<AdminFundingEditPage />} />
+            <Route path="funding/:projectId/details" element={<AdminFundingDetailManagePage />} />
+            <Route path="funding/:projectId/rewards" element={<AdminFundingRewardManagePage />} />
+            <Route path="funding/:projectId/comments" element={<AdminFundingCommentPage />} />
+            <Route path="funding/:projectId/contributions" element={<AdminFundingContributionPage />} />
           </Route>
+
+
 
             {/* 메인 페이지 */}
             <Route path="/" element={
               <MainRoute principal={principalQuery.data?.data?.principal} />
             } />
 
-            {/* 🔥 내 주변 기부 지도 */}
+            {/* 내 주변 기부 지도 */}
             <Route path="/map" element={<DonationNearbyMap principal={principalQuery.data?.data?.principal} />} />
 
             <Route path="/*" element={
