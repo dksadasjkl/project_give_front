@@ -21,6 +21,8 @@ import AdminDonationDetailPage from './admin/pages/Donation/AdminDonationDetailP
 import AdminDonationEditPage from './admin/pages/Donation/AdminDonationEditPage';
 import AdminDonationDetailManagePage from './admin/pages/Donation/AdminDonationDetailManagePage';
 import AdminDonationCreatePage from './admin/pages/Donation/AdminDonationCreatePage';
+import AdminDonationCommentPage from './admin/pages/Donation/AdminDonationCommentPage';
+import AdminDonationContributionPage from './admin/pages/Donation/AdminDonationContributionPage';
 
 function App() {
 
@@ -48,10 +50,12 @@ function App() {
 
             {/* 기부 프로젝트 */}
             <Route path="donation" element={<AdminDonationListPage />} />
-            <Route path="donation/create" element={<AdminDonationCreatePage />} />   {/* 🔥 신규 */}
+            <Route path="donation/create" element={<AdminDonationCreatePage />} /> 
             <Route path="donation/:projectId" element={<AdminDonationDetailPage />} />
             <Route path="donation/:projectId/edit" element={<AdminDonationEditPage />} />
             <Route path="donation/:projectId/details" element={<AdminDonationDetailManagePage />} />
+            <Route path="donation/:projectId/comments" element={<AdminDonationCommentPage />} />
+            <Route path="donation/:projectId/contributions" element={<AdminDonationContributionPage />} />
           </Route>
 
             {/* 메인 페이지 */}

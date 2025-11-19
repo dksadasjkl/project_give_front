@@ -100,6 +100,18 @@ const AdminDonationDetailPage = () => {
       >
         상세 콘텐츠 관리
       </button>
+      <button
+        css={s.detailManageBtn}
+        onClick={() => navigate(`/admin/donation/${projectId}/comments`)}
+      >
+        댓글 관리
+      </button>
+      <button
+        css={s.detailManageBtn}
+        onClick={() => navigate(`/admin/donation/${projectId}/contributions`)}
+      >
+        후원 내역 관리
+      </button>
     </div>
   );
 };

@@ -15,12 +15,12 @@ export const postAdminDonationCreateRequest = async (data) => {
   return await instance.post(`/admin/donation/projects`, data);
 };
 
-/** ✅ 기부 프로젝트 수정 ( 수정됨) */
+/** ✅ 기부 프로젝트 수정 */
 export const putAdminDonationUpdateRequest = async (donationProjectId, data) => {
   return await instance.put(`/admin/donation/projects/${donationProjectId}`, data);
 };
 
-/** ✅ 기부 프로젝트 삭제 (수정됨) */
+/** ✅ 기부 프로젝트 삭제 */
 export const deleteAdminDonationDeleteRequest = async (donationProjectId) => {
   return await instance.delete(`/admin/donation/projects/${donationProjectId}`);
 };
@@ -44,4 +44,30 @@ export const putAdminProjectDetail = async (detailId, data) => {
 /** 기부 상세 삭제 */
 export const deleteAdminProjectDetail = async (detailId) => {
   return await instance.delete(`/admin/donation/projects/details/${detailId}`);
+};
+
+/** 댓글 조회 */
+export const getAdminCommentsRequest = async (projectId, page, size) => {
+  return await instance.get(`/admin/donation/comments?projectId=${projectId}&page=${page}&size=${size}`);
+};
+
+/** 댓글 삭제 */
+export const deleteAdminCommentRequest = async (commentId) => {
+  return await instance.delete(`/admin/donation/comments/${commentId}`);
+};
+
+/** 후원 내역 조회 */
+export const getAdminContributionsRequest = async (projectId, page, size) => {
+  return await instance.get(
+    `/admin/donation/contributions?projectId=${projectId}&page=${page}&size=${size}`
+  );
+};
+
+/** 후원 내역 삭제 */
+export const deleteAdminContributionRequest = async (contributionId) => {
+  return await instance.delete(`/admin/donation/contributions/${contributionId}`);
+};
+
+export const getAdminDonationCategoriesRequest = async () => {
+  return await instance.get("/admin/donation/categories");
 };

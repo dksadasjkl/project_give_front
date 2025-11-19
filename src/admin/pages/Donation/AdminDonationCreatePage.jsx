@@ -3,8 +3,7 @@ import * as s from "./AdminDonationCreatePage.style";
 import { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { getDonationCategoriesRequest } from "../../../apis/api/Categorie/categorie";
-import { postAdminDonationCreateRequest } from "../../apis/adminDonationApi";
+import { getAdminDonationCategoriesRequest, postAdminDonationCreateRequest } from "../../apis/adminDonationApi";
 
 import { v4 as uuid } from "uuid";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
@@ -35,7 +34,7 @@ function AdminDonationCreatePage() {
   ]);
 
   useEffect(() => {
-    getDonationCategoriesRequest().then((res) =>
+    getAdminDonationCategoriesRequest().then((res) =>
       setCategories(res.data || [])
     );
   }, []);

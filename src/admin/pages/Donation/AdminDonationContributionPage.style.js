@@ -1,9 +1,13 @@
 import { css } from "@emotion/react";
 
+export const container = css`
+  width: 100%;
+`;
+
 export const title = css`
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 20px;
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 30px;
 `;
 
 export const table = css`
@@ -25,10 +29,16 @@ export const table = css`
   }
 `;
 
-export const row = css`
+export const deleteBtn = css`
+  padding: 6px 12px;
+  background: #ff4d4f;
+  color: #fff;
+  border-radius: 6px;
+  border: none;
   cursor: pointer;
+
   &:hover {
-    background: #fafafa;
+    background: #ff7875;
   }
 `;
 
@@ -62,39 +72,9 @@ export const pagination = css`
   }
 `;
 
-export const topBar = css`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
+export const noData = css`
+  text-align: center;
+  padding: 30px 0;
+  font-size: 16px;
+  color: #777;
 `;
-
-export const createButton = css`
-  margin-bottom: 15px;
-  padding: 8px 14px;
-  background: #4caf50;
-  color: white;
-  border-radius: 6px;
-  border: none;
-  cursor: pointer;
-  font-weight: bold;
-
-  &:hover {
-    background: #45a049;
-  }
-`;
-
-export const deleteButton = css`
-  padding: 6px 10px;
-  background: #ff4444;
-  color: white;
-  border-radius: 6px;
-  border: none;
-  cursor: pointer;
-  font-size: 12px;
-
-  &:hover {
-    background: #dd3333;
-  }
-`;
-
