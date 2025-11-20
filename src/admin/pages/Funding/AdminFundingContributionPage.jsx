@@ -38,7 +38,7 @@ const AdminFundingContributionPage = () => {
 
   return (
     <div css={s.container}>
-      <h1 css={s.title}>펀딩 참여내역 관리</h1>
+      <h1 css={s.title}>후원 내역 관리</h1>
 
       <table css={s.table}>
         <thead>

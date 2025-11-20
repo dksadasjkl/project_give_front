@@ -31,6 +31,10 @@ import AdminFundingDetailManagePage from './admin/pages/Funding/AdminFundingDeta
 import AdminFundingRewardManagePage from './admin/pages/Funding/AdminFundingRewardManagePage';
 import AdminFundingCommentPage from './admin/pages/Funding/AdminFundingCommentPage';
 import AdminFundingContributionPage from './admin/pages/Funding/AdminFundingContributionPage';
+import AdminStoreProductListPage from './admin/pages/Store/Product/AdminStoreProductListPage';
+import AdminStoreProductDetailPage from './admin/pages/Store/Product/AdminStoreProductDetailPage';
+import AdminStoreProductEditPage from './admin/pages/Store/Product/AdminStoreProductEditPage';
+import AdminStoreProductCreatePage from './admin/pages/Store/Product/AdminStoreProductCreatePage';
 
 function App() {
 
@@ -65,7 +69,7 @@ function App() {
             <Route path="donation/:projectId/comments" element={<AdminDonationCommentPage />} />
             <Route path="donation/:projectId/contributions" element={<AdminDonationContributionPage />} />
 
-
+            {/* 펀딩 프로젝트 */}
             <Route path="funding" element={<AdminFundingListPage />} />
             <Route path="funding/create" element={<AdminFundingCreatePage />} />
             <Route path="funding/:projectId" element={<AdminFundingDetailPage />} />
@@ -74,6 +78,27 @@ function App() {
             <Route path="funding/:projectId/rewards" element={<AdminFundingRewardManagePage />} />
             <Route path="funding/:projectId/comments" element={<AdminFundingCommentPage />} />
             <Route path="funding/:projectId/contributions" element={<AdminFundingContributionPage />} />
+
+            {/* ---------------- Store 관리자 ---------------- */}
+            <Route path="/admin/store" element={<AdminStoreProductListPage />} />
+            <Route path="/admin/store/products" element={<AdminStoreProductListPage />} />
+            <Route path="/admin/store/products/create" element={<AdminStoreProductCreatePage />} />
+            <Route path="/admin/store/products/:productId" element={<AdminStoreProductDetailPage />} />
+            <Route path="/admin/store/products/:productId/edit" element={<AdminStoreProductEditPage />} />
+
+            {/* <Route path="/admin/store/orders" element={<AdminStoreOrderListPage />} /> */}
+            {/* <Route path="/admin/store/orders/:orderId" element={<AdminStoreOrderDetailPage />} /> */}
+
+            {/* <Route path="/admin/store/payments" element={<AdminStorePaymentListPage />} /> */}
+            {/* <Route path="/admin/store/payments/:paymentId" element={<AdminStorePaymentDetailPage />} /> */}
+
+            {/* <Route path="/admin/store/shipping" element={<AdminStoreShippingListPage />} /> */}
+            {/* <Route path="/admin/store/shipping/:shippingId" element={<AdminStoreShippingDetailPage />} /> */}
+
+            {/* <Route path="/admin/store/reviews" element={<AdminStoreReviewListPage />} /> */}
+            {/* <Route path="/admin/store/reviews/:commentId" element={<AdminStoreReviewDetailPage />} /> */}
+
+            {/* <Route path="/admin/store/reports" element={<AdminStoreReportListPage />} /> */}
           </Route>
 
 

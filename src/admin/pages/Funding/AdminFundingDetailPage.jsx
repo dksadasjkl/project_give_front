@@ -114,7 +114,7 @@ const AdminFundingDetailPage = () => {
         css={s.manageBtn}
         onClick={() => navigate(`/admin/funding/${projectId}/contributions`)}
       >
-        참여 내역 관리
+        후원 내역 관리
       </button>
     </div>
   );

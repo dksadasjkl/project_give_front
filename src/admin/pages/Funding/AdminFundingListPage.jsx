@@ -122,7 +122,11 @@ const AdminFundingListPage = () => {
                   />
                 </td>
 
-                <td css={s.clickable}>
+                <td css={s.clickable}
+                    onClick={() =>
+                    navigate(`/admin/funding/${item.donationProjectId}`)
+                  }
+                >
                   {item.donationProjectTitle}
                 </td>
 

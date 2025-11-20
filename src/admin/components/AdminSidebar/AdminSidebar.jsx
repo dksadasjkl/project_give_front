@@ -8,10 +8,15 @@ const AdminSidebar = () => {
   const menus = [
     { name: "Dashboard", path: "/admin" },
     { name: "기부 프로젝트 관리", path: "/admin/donation" },
-    { name: "펀딩 프로젝트 관리", path: "/admin/funding" },   // ⭐ 추가
-    { name: "스토어 상품 관리", path: "/admin/store" },
-    { name: "유저 관리", path: "/admin/user" },
-    { name: "주문 / 배송 관리", path: "/admin/order" },
+    { name: "펀딩 프로젝트 관리", path: "/admin/funding" },
+
+    { name: "스토어 상품 관리", path: "/admin/store/products" },
+    { name: "스토어 주문 관리", path: "/admin/store/orders" },
+    { name: "스토어 결제 관리", path: "/admin/store/payments" },
+    { name: "스토어 배송 관리", path: "/admin/store/shipping" },
+    { name: "스토어 리뷰 관리", path: "/admin/store/reviews" },
+    { name: "스토어 리뷰 신고 관리", path: "/admin/store/reports" },
+    // 유저관리 추가 예정
   ];
 
   const isActive = (menuPath) => {
