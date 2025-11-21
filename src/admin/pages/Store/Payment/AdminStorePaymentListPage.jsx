@@ -3,6 +3,7 @@ import * as s from "./AdminStorePaymentListPage.style";
 import { useQuery } from "@tanstack/react-query";
 import { getAdminStorePaymentList } from "../../../apis/storeAdminApi";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const PAYMENT_METHOD_MAP = {
   KAKAO_PAY: "카카오페이"
@@ -16,14 +17,18 @@ const PAYMENT_STATUS_MAP = {
 
 function AdminStorePaymentListPage() {
   const navigate = useNavigate();
+  const [page, setPage] = useState(1);
+  const size = 10;
 
   const { data, isLoading, error } = useQuery(
-    ["adminStorePaymentList"],
-    () => getAdminStorePaymentList(),
+    ["adminStorePaymentList", page],
+    () => getAdminStorePaymentList(page, size),
     { refetchOnWindowFocus: false }
   );
 
   const payments = Array.isArray(data?.data?.items) ? data.data.items : [];
+  const total = data?.data?.total || 0;
+  const totalPages = Math.ceil(total / size);
 
   if (isLoading) return <p>로딩중...</p>;
   if (error) return <p>에러 발생</p>;
@@ -72,6 +77,38 @@ function AdminStorePaymentListPage() {
           ))}
         </tbody>
       </table>
+
+      {/*   페이지네이션  */}
+        <div css={s.pagination}>
+            <button
+                css={s.pageBtn}
+                disabled={page === 1}
+                onClick={() => setPage(page - 1)}
+            >
+                이전
+            </button>
+
+            {[...Array(totalPages)].map((_, idx) => {
+                const pageNum = idx + 1;
+                return (
+                <button
+                    key={pageNum}
+                    css={s.pageNumber(pageNum === page)}
+                    onClick={() => setPage(pageNum)}
+                >
+                    {pageNum}
+                </button>
+                );
+            })}
+
+            <button
+                css={s.pageBtn}
+                disabled={page === totalPages}
+                onClick={() => setPage(page + 1)}
+            >
+                다음
+            </button>
+        </div>
     </div>
   );
 }

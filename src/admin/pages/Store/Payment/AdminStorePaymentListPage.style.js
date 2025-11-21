@@ -81,3 +81,40 @@ export const status = (state) => {
     color: ${color};
   `;
 };
+
+export const pagination = css`
+  margin-top: 24px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+`;
+
+export const pageBtn = css`
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  background: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &:hover:not(:disabled) {
+    background: #f5f5f5;
+  }
+`;
+
+export const pageNumber = (active) => css`
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 1px solid ${active ? "#1565c0" : "#ccc"};
+  background: ${active ? "#1565c0" : "#fff"};
+  color: ${active ? "#fff" : "#000"};
+
+  &:hover {
+    background: ${active ? "#0d47a1" : "#f3f3f3"};
+  }
+`;
