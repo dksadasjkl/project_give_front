@@ -41,6 +41,8 @@ import AdminStorePaymentListPage from './admin/pages/Store/Payment/AdminStorePay
 import AdminStorePaymentDetailPage from './admin/pages/Store/Payment/AdminStorePaymentDetailPage';
 import AdminStoreShippingListPage from './admin/pages/Store/Shipping/AdminStoreShippingListPage';
 import AdminStoreShippingDetailPage from './admin/pages/Store/Shipping/AdminStoreShippingDetailPage';
+import AdminStoreReviewListPage from './admin/pages/Store/Review/AdminStoreReviewListPage';
+import AdminStoreReviewDetailPage from './admin/pages/Store/Review/AdminStoreReviewDetailPage';
 
 function App() {
 
@@ -101,8 +103,8 @@ function App() {
             <Route path="/admin/store/shipping" element={<AdminStoreShippingListPage />} />
             <Route path="/admin/store/shipping/:shippingId" element={<AdminStoreShippingDetailPage />} />
 
-            {/* <Route path="/admin/store/reviews" element={<AdminStoreReviewListPage />} /> */}
-            {/* <Route path="/admin/store/reviews/:commentId" element={<AdminStoreReviewDetailPage />} /> */}
+            <Route path="/admin/store/reviews" element={<AdminStoreReviewListPage />} />
+            <Route path="/admin/store/reviews/:reviewId" element={<AdminStoreReviewDetailPage />} />
 
             {/* <Route path="/admin/store/reports" element={<AdminStoreReportListPage />} /> */}
           </Route>
