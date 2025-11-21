@@ -103,3 +103,37 @@ export const putAdminStoreReviewReportResolve = async (reportId) =>
 
 export const deleteAdminStoreReviewReportAndReview = async (reportId) =>
   await instance.delete(`/admin/store/reviews/reports/${reportId}/delete-review`);
+
+/** ========================================================
+ *  STORE — QnA (문의)
+ * ======================================================== */
+
+/** STORE — 전체 QnA 목록 조회 */
+export const getAdminStoreQnaList = async (page = 1, size = 10, productId) =>
+  await instance.get(`/admin/store/qna`, {
+    params: { page, size, productId },
+  });
+
+/** STORE — QnA 상세 조회 */
+export const getAdminStoreQnaDetail = async (qnaId) =>
+  await instance.get(`/admin/store/qna/${qnaId}`);
+
+/** STORE — QnA 답변 등록 */
+export const postAdminStoreQnaAnswer = async (qnaId, answer) =>
+  await instance.post(`/admin/store/qna/${qnaId}/answer`, null, {
+    params: { answer },
+  });
+
+/** STORE — QnA 답변 수정 */
+export const putAdminStoreQnaAnswer = async (qnaId, answer) =>
+  await instance.put(`/admin/store/qna/${qnaId}/answer`, null, {
+    params: { answer },
+  });
+
+/** STORE — QnA 삭제 */
+export const deleteAdminStoreQna = async (qnaId) =>
+  await instance.delete(`/admin/store/qna/${qnaId}`);
+
+/** STORE — 포인트 전체 조회 */
+export const getAdminStorePointList = async (page = 1, size = 20) =>
+  await instance.get(`/admin/store/points?page=${page}&size=${size}`);

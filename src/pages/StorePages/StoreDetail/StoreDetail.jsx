@@ -14,7 +14,7 @@ function StoreDetail({ principal }) {
   const { productId } = useParams();
   const [product, setProduct] = useState(null);
 
-  // ✅ 리뷰 관련 상태
+  //  리뷰 관련 상태
   const [reviews, setReviews] = useState([]);
   const [avgRating, setAvgRating] = useState(0);
   const [distribution, setDistribution] = useState([]);
@@ -27,7 +27,7 @@ function StoreDetail({ principal }) {
   const reviewRef = useRef(null);
   const qnaRef = useRef(null);
 
-  // ✅ 상품 상세 조회
+  //  상품 상세 조회
   useQuery(
     ["getStoreProductDetailRequest", productId],
     async () => await getStoreProductDetailRequest(productId),
@@ -38,7 +38,7 @@ function StoreDetail({ principal }) {
     }
   );
 
-  // ✅ 리뷰 조회 (평균 / 분포 / 총 리뷰 포함)
+  //  리뷰 조회 (평균 / 분포 / 총 리뷰 포함)
   useQuery(
     ["getStoreReviewsWithRatingsRequest", productId],
     async () => await getStoreReviewsWithRatingsRequest(productId),
@@ -54,7 +54,7 @@ function StoreDetail({ principal }) {
     }
   );
 
-  // ✅ 섹션 감지 (스크롤 탭)
+  //  섹션 감지 (스크롤 탭)
   useEffect(() => {
     const sections = [
       { id: "detail", ref: detailRef },
@@ -83,7 +83,7 @@ function StoreDetail({ principal }) {
 
   return (
     <div css={s.container}>
-      {/* ✅ 상세정보 */}
+      {/*  상세정보 */}
       <div id="detail" ref={detailRef}>
         <ProductInfo
           product={{
@@ -94,7 +94,7 @@ function StoreDetail({ principal }) {
           principal={principal}
         />
 
-        {/* ✅ 탭바 */}
+        {/*  탭바 */}
         <div css={s.actionBar}>
           <button
             css={[s.tabButton, activeTab === "detail" && s.activeTab]}
@@ -116,7 +116,7 @@ function StoreDetail({ principal }) {
           </button>
         </div>
 
-        {/* ✅ 상세 이미지 토글 */}
+        {/*  상세 이미지 토글 */}
         <div css={s.detailSection}>
           <div css={() => s.detailImageBox(isDetailPage)}>
             <img src={product.productImageDetailUrl} alt="상세 이미지" />
@@ -138,7 +138,7 @@ function StoreDetail({ principal }) {
         </div>
       </div>
 
-      {/* ✅ 리뷰 */}
+      {/*  리뷰 */}
       <div id="review" ref={reviewRef}>
         <ProductReview
           productId={productId}
@@ -151,7 +151,7 @@ function StoreDetail({ principal }) {
         />
       </div>
 
-      {/* ✅ Q&A */}
+      {/*  Q&A */}
       <div id="qna" ref={qnaRef}>
         <ProductQna productId={productId} principal={principal} />
       </div>

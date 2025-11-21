@@ -43,6 +43,10 @@ import AdminStoreShippingListPage from './admin/pages/Store/Shipping/AdminStoreS
 import AdminStoreShippingDetailPage from './admin/pages/Store/Shipping/AdminStoreShippingDetailPage';
 import AdminStoreReviewListPage from './admin/pages/Store/Review/AdminStoreReviewListPage';
 import AdminStoreReviewDetailPage from './admin/pages/Store/Review/AdminStoreReviewDetailPage';
+import AdminStoreReportListPage from './admin/pages/Store/Report/AdminStoreReportListPage';
+import AdminStoreQnAListPage from './admin/pages/Store/QnA/AdminStoreQnAListPage';
+import AdminStoreQnADetailPage from './admin/pages/Store/QnA/AdminStoreQnADetailPage';
+import AdminStorePointListPage from './admin/pages/Store/Point/AdminStorePointListPage';
 
 function App() {
 
@@ -106,7 +110,12 @@ function App() {
             <Route path="/admin/store/reviews" element={<AdminStoreReviewListPage />} />
             <Route path="/admin/store/reviews/:reviewId" element={<AdminStoreReviewDetailPage />} />
 
-            {/* <Route path="/admin/store/reports" element={<AdminStoreReportListPage />} /> */}
+            <Route path="/admin/store/reports" element={<AdminStoreReportListPage />} />
+
+            <Route path="/admin/store/qna" element={<AdminStoreQnAListPage />} />
+            <Route path="/admin/store/qna/:qnaId" element={<AdminStoreQnADetailPage />} />
+
+            <Route path="/admin/store/points" element={<AdminStorePointListPage />} />
           </Route>
 
 
