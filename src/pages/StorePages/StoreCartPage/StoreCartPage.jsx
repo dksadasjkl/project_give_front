@@ -6,6 +6,7 @@ import {
   getMyStoreCartRequest,
   putStoreCartQuantityRequest,
   deleteStoreCartItemRequest,
+  deleteStoreCartAllRequest,
 } from "../../../apis/api/Store/storeCart";
 import { useNavigate } from "react-router-dom";
 
@@ -14,7 +15,7 @@ function StoreCartPage({ principal }) {
   const queryClient = useQueryClient();
   const [cartList, setCartList] = useState([]);
 
-  //  장바구니 조회
+  // 장바구니 조회
   useQuery(["getMyStoreCartRequest"], getMyStoreCartRequest, {
     refetchOnWindowFocus: false,
     enabled: !!principal,
@@ -22,7 +23,7 @@ function StoreCartPage({ principal }) {
     onError: (err) => console.error("장바구니 조회 오류:", err),
   });
 
-  //  수량 변경
+  // 수량 변경
   const updateQuantityMutation = useMutation(
     ({ cartId, quantity }) => putStoreCartQuantityRequest(cartId, quantity),
     {
@@ -31,17 +32,23 @@ function StoreCartPage({ principal }) {
     }
   );
 
-  //  상품 삭제
+  // 개별 삭제
   const deleteCartMutation = useMutation(deleteStoreCartItemRequest, {
     onSuccess: () => {
-      alert("상품이 장바구니에서 삭제되었습니다 🗑️");
+      alert("상품이 장바구니에서 삭제되었습니다");
+      queryClient.invalidateQueries(["getMyStoreCartRequest"]);
+    },
+  });
+
+  // 전체 삭제
+  const clearCartMutation = useMutation(deleteStoreCartAllRequest, {
+    onSuccess: () => {
+      alert("장바구니가 전체 비워졌습니다");
       queryClient.invalidateQueries(["getMyStoreCartRequest"]);
     },
   });
 
   if (!principal) return <p css={s.loginNotice}>로그인 후 이용 가능합니다.</p>;
-  if (!cartList.length)
-    return <p css={s.loading}>장바구니를 불러오는 중...</p>;
 
   const totalPrice = cartList.reduce(
     (acc, item) => acc + (item.productPrice || 0) * item.quantity,
@@ -50,12 +57,26 @@ function StoreCartPage({ principal }) {
 
   return (
     <div css={s.container}>
-      <h2 css={s.title}>🛒 내 장바구니</h2>
+      <h2 css={s.title}>내 장바구니</h2>
 
+      {/*  장바구니 비었을 때 */}
       {cartList.length === 0 ? (
         <p css={s.empty}>장바구니가 비어 있습니다.</p>
       ) : (
         <>
+          {/* 전체 삭제 버튼 */}
+          <div css={s.clearBox}>
+            <button
+              css={s.clearBtn}
+              onClick={() => {
+                if (window.confirm("장바구니를 전체 비우시겠습니까?"))
+                  clearCartMutation.mutate();
+              }}
+            >
+              전체 삭제
+            </button>
+          </div>
+
           {cartList.map((item) => (
             <div key={item.cartId} css={s.cartItem}>
               <img
@@ -106,6 +127,7 @@ function StoreCartPage({ principal }) {
           <div css={s.summary}>
             <h3>총 결제 금액</h3>
             <p css={s.total}>{totalPrice.toLocaleString()}원</p>
+
             <button
               css={s.orderBtn}
               onClick={() =>

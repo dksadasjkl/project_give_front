@@ -8,6 +8,7 @@ import { postStorePaymentRequest } from "../../../apis/api/Store/storePayment";
 import { postStoreShippingRequest } from "../../../apis/api/Store/storeShipping";
 import { portOnePayRequest } from "../../../apis/api/Order/portOne";
 import { useState } from "react";
+import { deleteStoreCartAllRequest } from "../../../apis/api/Store/storeCart";
 import DaumPostcode from "react-daum-postcode";
 
 function StorePaymentPage({ principal }) {
@@ -140,6 +141,14 @@ function StorePaymentPage({ principal }) {
         })
       )
     );
+
+    if (fromCart) {
+      try {
+        await deleteStoreCartAllRequest();
+      } catch (err) {
+        console.error("장바구니 전체 삭제 오류:", err);
+      }
+    }
 
     alert("결제가 완료되었습니다.");
     navigate("/store/orders");
