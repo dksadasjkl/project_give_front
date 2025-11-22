@@ -2,55 +2,79 @@ import { css } from "@emotion/react";
 
 export const container = css`
   width: 100%;
+  padding: 24px 30px;
 `;
 
 export const title = css`
   font-size: 26px;
   font-weight: 700;
-  margin-bottom: 30px;
+  margin-bottom: 24px;
 `;
 
 export const table = css`
   width: 100%;
   border-collapse: collapse;
-  background: #fff;
-  border-radius: 8px;
+  background: #ffffff;
+  border-radius: 10px;
   overflow: hidden;
 
-  th, td {
-    padding: 12px;
-    border-bottom: 1px solid #eee;
-    text-align: left;
+  th,
+  td {
+    padding: 12px 14px;
+    border-bottom: 1px solid #e5e7eb;
+    text-align: center;
+    font-size: 14px;
   }
 
   th {
-    background: #f2f2f2;
-    font-weight: bold;
+    background: #f3f4f6;
+    font-weight: 700;
   }
 `;
 
 export const deleteBtn = css`
   padding: 6px 12px;
-  background: #ff4d4f;
+  background: #ef4444;
   color: #fff;
   border-radius: 6px;
   cursor: pointer;
+  border: none;
 
   &:hover {
-    background: #ff7875;
+    background: #dc2626;
   }
 `;
 
 export const pagination = css`
-  margin-top: 20px;
+  margin-top: 22px;
   display: flex;
   justify-content: center;
   gap: 12px;
+
+  button {
+    padding: 6px 12px;
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    &:hover:not(:disabled) {
+      background: #f3f4f3;
+    }
+  }
+
+  span {
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+  }
 `;
 
 export const noData = css`
+  padding: 40px 0;
   text-align: center;
-  padding: 30px 0;
-  color: #777;
-  font-size: 16px;
+  color: #6b7280;
 `;

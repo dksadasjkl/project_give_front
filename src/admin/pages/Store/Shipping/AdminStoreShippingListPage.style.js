@@ -2,66 +2,77 @@ import { css } from "@emotion/react";
 
 export const container = css`
   width: 100%;
+  margin: 0 auto;
+  padding: 24px 30px;
 `;
 
 export const title = css`
   font-size: 26px;
   font-weight: 700;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
+  color: #111827;
 `;
 
 export const table = css`
   width: 100%;
   border-collapse: collapse;
   background: white;
-  border-radius: 8px;
+  border-radius: 12px;
   overflow: hidden;
+  border: 1px solid #e5e7eb;
 
-  th, td {
-    padding: 12px;
+  th,
+  td {
+    padding: 12px 14px;
     font-size: 14px;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #e5e7eb;
     text-align: center;
   }
 
   th {
-    background: #f5f7fa;
+    background: #f3f4f6;
+    font-weight: 700;
+    color: #374151;
   }
 `;
 
 export const row = css`
   cursor: pointer;
+  transition: 0.15s;
+
   &:hover {
-    background: #f1f1f1;
+    background: #f9fafb;
   }
 `;
 
 export const pagination = css`
-  margin-top: 20px;
+  margin-top: 24px;
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 14px;
 
   button {
     padding: 6px 12px;
-    border: 1px solid #ccc;
     background: white;
-    border-radius: 6px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
     cursor: pointer;
+    font-size: 14px;
 
     &:disabled {
-      opacity: 0.5;
+      opacity: 0.45;
       cursor: not-allowed;
     }
 
     &:hover:not(:disabled) {
-      background: #f3f3f3;
+      background: #f3f4f3;
     }
   }
-`;
 
-export const pageNumber = (active) => css`
-  background: ${active ? "#1565c0" : "white"};
-  color: ${active ? "white" : "black"};
-  border-color: ${active ? "#1565c0" : "#ccc"};
+  span {
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    color: #374151;
+  }
 `;

@@ -78,22 +78,13 @@ const DashboardChart = ({ donationDailyStats = [], salesDailyStats = [] }) => {
         </div>
 
         <div css={s.rightGroup}>
-          <button
-            css={s.btn(period === "daily")}
-            onClick={() => setPeriod("daily")}
-          >
+          <button css={s.btn(period === "daily")} onClick={() => setPeriod("daily")}>
             일
           </button>
-          <button
-            css={s.btn(period === "weekly")}
-            onClick={() => setPeriod("weekly")}
-          >
+          <button css={s.btn(period === "weekly")} onClick={() => setPeriod("weekly")}>
             주
           </button>
-          <button
-            css={s.btn(period === "monthly")}
-            onClick={() => setPeriod("monthly")}
-          >
+          <button css={s.btn(period === "monthly")} onClick={() => setPeriod("monthly")}>
             월
           </button>
         </div>
@@ -101,9 +92,14 @@ const DashboardChart = ({ donationDailyStats = [], salesDailyStats = [] }) => {
 
       {/* === 차트 === */}
       <ResponsiveContainer width="100%" height={300}>
-        <LineChart data={chartData}>
+        <LineChart
+          data={chartData}
+          margin={{ top: 20, right: 10, left: 10, bottom: 30 }}  
+        >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="date" />
+
+          <XAxis dataKey="date" dy={10} />
+
           <YAxis tickFormatter={(v) => `${(v / 10000).toFixed(0)}만`} />
 
           <Tooltip

@@ -2,7 +2,9 @@ import { css } from "@emotion/react";
 
 export const container = css`
   width: 100%;
-  padding: 20px 30px;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px 30px;
 `;
 
 export const title = css`
@@ -15,6 +17,10 @@ export const form = css`
   display: flex;
   flex-direction: column;
   gap: 16px;
+  background: #fff;
+  padding: 22px;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
   max-width: 650px;
 `;
 
@@ -43,7 +49,6 @@ export const select = css`
   border-radius: 8px;
 `;
 
-/* 🔥 미리보기 박스 */
 export const previewBox = css`
   width: 150px;
   height: 150px;

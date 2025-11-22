@@ -80,35 +80,18 @@ function AdminStorePaymentListPage() {
 
       {/*   페이지네이션  */}
         <div css={s.pagination}>
-            <button
-                css={s.pageBtn}
-                disabled={page === 1}
-                onClick={() => setPage(page - 1)}
-            >
+              <button disabled={page === 1} onClick={() => setPage(page - 1)}>
                 이전
-            </button>
-
-            {[...Array(totalPages)].map((_, idx) => {
-                const pageNum = idx + 1;
-                return (
-                <button
-                    key={pageNum}
-                    css={s.pageNumber(pageNum === page)}
-                    onClick={() => setPage(pageNum)}
-                >
-                    {pageNum}
-                </button>
-                );
-            })}
-
-            <button
-                css={s.pageBtn}
-                disabled={page === totalPages}
-                onClick={() => setPage(page + 1)}
-            >
+              </button>
+      
+              <span>
+                {page} / {totalPages}
+              </span>
+      
+              <button disabled={page === totalPages} onClick={() => setPage(page + 1)}>
                 다음
-            </button>
-        </div>
+              </button>
+            </div>
     </div>
   );
 }

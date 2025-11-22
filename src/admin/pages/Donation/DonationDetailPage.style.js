@@ -2,25 +2,27 @@ import { css } from "@emotion/react";
 
 export const container = css`
   width: 100%;
+  padding: 30px;
 `;
 
 export const title = css`
-  font-size: 26px;
+  font-size: 28px;
   font-weight: 700;
-  margin-bottom: 30px;
+  margin-bottom: 28px;
 `;
 
 export const detailBox = css`
   display: flex;
-  gap: 25px;
+  gap: 30px;
   margin-bottom: 30px;
 `;
 
 export const thumbnail = css`
-  width: 260px;
-  height: 260px;
-  border-radius: 8px;
+  width: 280px;
+  height: 280px;
   object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
 `;
 
 export const infoBox = css`
@@ -34,51 +36,35 @@ export const infoBox = css`
 `;
 
 export const projectTitle = css`
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 700;
   margin-bottom: 10px;
 `;
 
-export const section = css`
-  margin-top: 20px;
-`;
-
-export const description = css`
-  white-space: pre-wrap;
-  background: #fafafa;
-  padding: 16px;
-  border-radius: 8px;
-  border: 1px solid #eee;
-`;
-
 export const editBtn = css`
-  margin: 20px 5px 0;
-  padding: 10px 16px;
-  background: #333;
-  color: #fff;
-  border-radius: 6px;
-  cursor: pointer;
+  padding: 10px 18px;
+  background: #4f46e5;
+  color: white;
+  border-radius: 8px;
   border: none;
-  font-size: 15px;
-  font-weight: 600;
+  cursor: pointer;
+  margin: 6px 5px;
 
   &:hover {
-    background: #555;
+    background: #4338ca;
   }
 `;
 
 export const detailManageBtn = css`
-  margin: 20px 5px 0;
-  background: #4f46e5;
-  color: white;
   padding: 10px 18px;
+  background: #6b7280;
+  color: white;
   border-radius: 8px;
   border: none;
   cursor: pointer;
-  font-size: 15px;
-  transition: 0.15s ease;
+  margin: 6px 5px;
 
   &:hover {
-    background: #4338ca;
+    background: #4b5563;
   }
 `;

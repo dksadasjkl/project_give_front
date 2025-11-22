@@ -4,12 +4,13 @@ export const container = css`
   width: 100%;
   max-width: 900px;
   margin: 0 auto;
+  padding: 30px 0;
 `;
 
 export const title = css`
   font-size: 26px;
   font-weight: 700;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 `;
 
 export const form = css`
@@ -51,7 +52,6 @@ export const select = css`
   background: white;
 `;
 
-/* 🔥 미리보기 */
 export const previewBox = css`
   width: 150px;
   height: 150px;
@@ -62,6 +62,12 @@ export const previewBox = css`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+export const previewImage = css`
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
 `;
 
 export const previewBoxLarge = css`
@@ -75,12 +81,6 @@ export const previewBoxLarge = css`
   display: flex;
   align-items: center;
   justify-content: center;
-`;
-
-export const previewImage = css`
-  width: 150px;
-  height: 150px;
-  object-fit: cover;
 `;
 
 export const previewLargeImage = css`

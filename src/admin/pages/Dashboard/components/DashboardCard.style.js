@@ -4,23 +4,27 @@ export const card = css`
   background: linear-gradient(145deg, #ffffff, #f9fafb);
   padding: 20px 22px;
   border-radius: 18px;
-  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 6px;
-  border: 1px solid rgba(229, 231, 235, 0.7);
-  transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
+  border: 1px solid rgba(229, 231, 235, 0.9);
+  transition: transform 0.15s ease-out, box-shadow 0.15s ease-out,
+    border-color 0.15s ease-out, background 0.15s ease-out;
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.14);
+    border-color: #c7d2fe;
+    background: linear-gradient(145deg, #ffffff, #eef2ff);
   }
 `;
 
 export const title = css`
   font-size: 13px;
   color: #9ca3af;
+  letter-spacing: 0.01em;
 `;
 
 export const value = css`
@@ -32,4 +36,5 @@ export const value = css`
 export const sub = css`
   font-size: 12px;
   color: #6b7280;
+  margin-top: 2px;
 `;

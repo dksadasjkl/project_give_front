@@ -33,30 +33,30 @@ export const listBox = css`
 
 export const card = css`
   background: white;
-  padding: 18px;
+  padding: 20px;
   border-radius: 14px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 `;
 
 export const subtitle = css`
-  font-weight: 600;
-  font-size: 17px;
+  font-weight: 700;
+  font-size: 16px;
 `;
 
 export const thumb = css`
   width: 100%;
-  height: 150px;
+  height: 160px;
   object-fit: cover;
   border-radius: 10px;
-  border: 1px solid #ddd;
+  border: 1px solid #e5e7eb;
 `;
 
 export const order = css`
   font-size: 14px;
-  color: #666;
+  color: #6b7280;
 `;
 
 export const cardButtons = css`
@@ -66,12 +66,12 @@ export const cardButtons = css`
 
 export const editBtn = css`
   flex: 1;
-  padding: 8px;
-  border-radius: 6px;
+  padding: 8px 10px;
   background: #3b82f6;
   color: white;
-  border: none;
+  border-radius: 8px;
   cursor: pointer;
+  border: none;
 
   &:hover {
     background: #2563eb;
@@ -80,12 +80,12 @@ export const editBtn = css`
 
 export const deleteBtn = css`
   flex: 1;
-  padding: 8px;
-  border-radius: 6px;
+  padding: 8px 10px;
   background: #ef4444;
   color: white;
-  border: none;
+  border-radius: 8px;
   cursor: pointer;
+  border: none;
 
   &:hover {
     background: #dc2626;

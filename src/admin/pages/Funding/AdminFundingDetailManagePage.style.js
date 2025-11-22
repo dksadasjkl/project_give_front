@@ -1,87 +1,91 @@
 import { css } from "@emotion/react";
 
 export const container = css`
-  padding: 20px;
+  padding: 30px;
 `;
 
 export const title = css`
   font-size: 26px;
-  font-weight: bold;
+  font-weight: 700;
   margin-bottom: 20px;
 `;
 
 export const addButton = css`
-  padding: 10px 14px;
-  background: #1565c0;
+  background: #4f46e5;
   color: white;
+  padding: 10px 18px;
   border-radius: 8px;
+  border: none;
   cursor: pointer;
+  font-size: 15px;
   margin-bottom: 20px;
 
   &:hover {
-    background: #0d47a1;
+    background: #4338ca;
   }
 `;
 
 export const listBox = css`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 20px;
 `;
 
 export const card = css`
-  border: 1px solid #ddd;
-  padding: 16px;
-  border-radius: 8px;
   background: white;
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 `;
 
 export const subtitle = css`
-  font-size: 18px;
-  margin-bottom: 12px;
-  font-weight: bold;
+  font-size: 16px;
+  font-weight: 700;
 `;
 
 export const thumb = css`
   width: 100%;
-  height: 140px;
+  height: 160px;
   object-fit: cover;
-  border-radius: 8px;
-  margin-bottom: 12px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
 `;
 
 export const order = css`
   font-size: 14px;
-  margin-bottom: 12px;
-  color: #555;
+  color: #6b7280;
 `;
 
 export const cardButtons = css`
   display: flex;
-  justify-content: space-between;
-  margin-top: 10px;
+  gap: 10px;
 `;
 
 export const editBtn = css`
-  padding: 6px 12px;
-  background: #4caf50;
+  flex: 1;
+  padding: 8px 10px;
+  background: #3b82f6;
   color: white;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
 
   &:hover {
-    background: #388e3c;
+    background: #2563eb;
   }
 `;
 
 export const deleteBtn = css`
-  padding: 6px 12px;
-  background: #d32f2f;
+  flex: 1;
+  padding: 8px 10px;
+  background: #ef4444;
   color: white;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
 
   &:hover {
-    background: #b71c1c;
+    background: #dc2626;
   }
 `;

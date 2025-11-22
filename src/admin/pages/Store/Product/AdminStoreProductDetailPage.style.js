@@ -26,7 +26,6 @@ export const thumb = css`
   height: 300px;
   border-radius: 12px;
   object-fit: cover;
-  cursor: pointer;
 `;
 
 export const infoBox = css`
@@ -81,10 +80,7 @@ export const detailImage = css`
   width: 100%;
   max-width: 700px;
   height: auto;
-  margin: 0 auto;
-  display: block;
   border-radius: 10px;
-  cursor: pointer;
 `;
 
 export const buttonGroup = css`
@@ -96,8 +92,8 @@ export const buttonGroup = css`
 export const editBtn = css`
   padding: 10px 16px;
   background: #1565c0;
-  color: #fff;
-  border-radius: 6px;
+  color: white;
+  border-radius: 8px;
   cursor: pointer;
 
   &:hover {
@@ -107,12 +103,12 @@ export const editBtn = css`
 
 export const deleteBtn = css`
   padding: 10px 16px;
-  background: #d32f2f;
-  color: #fff;
-  border-radius: 6px;
+  background: #ef4444;
+  color: white;
+  border-radius: 8px;
   cursor: pointer;
 
   &:hover {
-    background: #b71c1c;
+    background: #dc2626;
   }
 `;

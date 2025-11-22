@@ -1,9 +1,8 @@
 import { css } from "@emotion/react";
 
 export const layout = css`
-  max-width: 1320px;
-  margin: 30px auto 60px;
-  padding: 0 24px;
+  margin: 32px auto 56px;
+  padding: 0 24px 32px;
   background: #f3f4fb;
   min-height: calc(100vh - 80px);
 `;
@@ -48,16 +47,17 @@ export const kpiGrid = css`
 
 export const chartBox = css`
   background: #ffffff;
-  padding: 22px 24px;
+  padding: 20px 22px;
   border-radius: 18px;
-  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
-  margin-bottom: 28px;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+  margin-bottom: 26px;
+  border: 1px solid #e5e7eb;
 `;
 
 export const sectionTitle = css`
   font-size: 17px;
   font-weight: 600;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
   color: #111827;
 `;
 
@@ -82,7 +82,8 @@ export const cardBox = css`
   background: #ffffff;
   padding: 18px 20px;
   border-radius: 18px;
-  box-shadow: 0 14px 35px rgba(15, 23, 42, 0.06);
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.06);
+  border: 1px solid #e5e7eb;
 `;
 
 export const emptyText = css`
@@ -90,7 +91,7 @@ export const emptyText = css`
   color: #9ca3af;
 `;
 
-/* 최근 후원 테이블에 적용할 때 높이 제한 주고 스크롤 나오게 */
+// 필요 시 테이블에 적용 가능 (지금 구조는 그대로 둠)
 export const tableScrollable = css`
   max-height: 360px;
   overflow-y: auto;

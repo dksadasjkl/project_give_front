@@ -14,14 +14,15 @@ export const row = css`
 `;
 
 export const submitBtn = css`
-  margin-top: 10px;
-  padding: 8px 14px;
-  background: #333;
+  margin-top: 20px;
+  padding: 10px 16px;
+  background: #4f46e5;
   color: #fff;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
+  float: right;
 
   &:hover {
-    background: #555;
+    background: #4338ca;
   }
 `;

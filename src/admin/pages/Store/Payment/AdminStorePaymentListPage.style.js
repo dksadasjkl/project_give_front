@@ -1,40 +1,38 @@
-/** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 
 export const container = css`
   width: 100%;
-  max-width: 1200px;
   margin: 40px auto;
   padding: 0 20px;
 `;
 
 export const title = css`
-  font-size: 28px;
+  font-size: 26px;
   font-weight: 700;
-  margin-bottom: 30px;
+  margin-bottom: 24px;
+  color: #111827;
 `;
 
 export const table = css`
   width: 100%;
   border-collapse: collapse;
   background: #ffffff;
-  border-radius: 10px;
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e5e7eb;
 
-  th {
-    background: #f7f7f7;
-    padding: 15px;
-    border-bottom: 1px solid #e3e3e3;
-    font-size: 15px;
-    font-weight: 600;
+  th,
+  td {
+    padding: 12px 14px;
+    border-bottom: 1px solid #e5e7eb;
+    text-align: center;
+    font-size: 14px;
   }
 
-  td {
-    padding: 15px;
-    text-align: center;
-    border-bottom: 1px solid #efefef;
-    font-size: 14px;
+  th {
+    background: #f3f4f6;
+    font-weight: 700;
+    color: #374151;
   }
 
   tr:hover td {
@@ -42,24 +40,9 @@ export const table = css`
   }
 `;
 
-export const detailBtn = css`
-  padding: 6px 12px;
-  background: #4a6bff;
-  color: #ffffff;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 13px;
-
-  &:hover {
-    background: #3b56d4;
-  }
-`;
-
-// 결제 상태별 컬러 태그
 export const status = (state) => {
-  let bg = "#ddd";
-  let color = "#333";
+  let bg = "#e5e7eb";
+  let color = "#374151";
 
   if (state === "SUCCESS") {
     bg = "#e8f7e9";
@@ -73,7 +56,7 @@ export const status = (state) => {
   }
 
   return css`
-    padding: 5px 10px;
+    padding: 6px 10px;
     border-radius: 6px;
     font-size: 13px;
     font-weight: 600;
@@ -82,39 +65,48 @@ export const status = (state) => {
   `;
 };
 
+export const detailBtn = css`
+  padding: 8px 14px;
+  background: #1565c0;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  border: none;
+
+  &:hover {
+    background: #0d47a1;
+  }
+`;
+
 export const pagination = css`
   margin-top: 24px;
   display: flex;
   justify-content: center;
-  gap: 8px;
-`;
+  gap: 12px;
 
-export const pageBtn = css`
-  padding: 6px 12px;
-  border: 1px solid #ccc;
-  background: #fff;
-  border-radius: 6px;
-  cursor: pointer;
+  button {
+    padding: 6px 12px;
+    background: #ffffff;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
 
-  &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
+    &:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    &:hover:not(:disabled) {
+      background: #f3f4f3;
+    }
   }
 
-  &:hover:not(:disabled) {
-    background: #f5f5f5;
-  }
-`;
-
-export const pageNumber = (active) => css`
-  padding: 6px 12px;
-  border-radius: 6px;
-  cursor: pointer;
-  border: 1px solid ${active ? "#1565c0" : "#ccc"};
-  background: ${active ? "#1565c0" : "#fff"};
-  color: ${active ? "#fff" : "#000"};
-
-  &:hover {
-    background: ${active ? "#0d47a1" : "#f3f3f3"};
+  span {
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    color: #374151;
   }
 `;

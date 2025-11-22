@@ -1,15 +1,14 @@
 import { css } from "@emotion/react";
 
-/** 전체 컨테이너 */
 export const container = css`
   width: 100%;
   max-width: 900px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 24px 30px;
 
   h1 {
     font-size: 28px;
-    font-weight: bold;
+    font-weight: 700;
     margin-bottom: 25px;
   }
 
@@ -26,75 +25,57 @@ export const container = css`
     width: 100%;
     padding: 12px;
     font-size: 15px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
     outline: none;
-    box-sizing: border-box;
+    transition: 0.15s;
+
+    &:focus {
+      border-color: #4f46e5;
+      box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.15);
+    }
   }
 
   textarea {
     height: 140px;
     resize: vertical;
   }
-
-  button {
-    cursor: pointer;
-  }
 `;
 
-/** 대표 이미지 & 기관 로고 */
 export const previewImg = css`
   width: 260px;
-  height: auto;
   border-radius: 10px;
   margin-top: 10px;
-  border: 1px solid #eee;
+  border: 1px solid #e5e7eb;
 `;
 
-/** 상세 정보 박스 */
 export const detailBox = css`
-  border: 1px solid #ddd;
-  padding: 15px;
-  margin: 15px 0;
-  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  padding: 18px;
+  margin: 18px 0;
+  border-radius: 12px;
   background: #fafafa;
 `;
 
-/** 상세 이미지 */
 export const detailPreview = css`
   width: 200px;
-  height: auto;
+  border-radius: 10px;
   margin-top: 10px;
-  border-radius: 6px;
-  border: 1px solid #eee;
+  border: 1px solid #e5e7eb;
 `;
 
-/** 리워드 박스 */
-export const rewardBox = css`
-  border: 1px solid #ccc;
-  padding: 15px;
-  margin: 15px 0;
-  border-radius: 8px;
-  background: #f5faff;
-
-  input {
-    margin-bottom: 10px;
-  }
-`;
-
-/** 등록 버튼 */
 export const submitBtn = css`
   margin-top: 30px;
   padding: 14px;
   width: 100%;
-  background: #1565c0;
-  color: white;
+  background: #4f46e5;
+  color: #fff;
   font-size: 18px;
-  font-weight: bold;
-  border-radius: 8px;
-  border: none;
+  font-weight: 700;
+  border-radius: 10px;
+  cursor: pointer;
 
   &:hover {
-    background: #0d47a1;
+    background: #4338ca;
   }
 `;

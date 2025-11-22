@@ -1,79 +1,97 @@
-/** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 
 export const container = css`
-  padding: 24px;
+  width: 100%;
+  padding: 24px 30px;
 `;
 
 export const title = css`
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 700;
-  margin-bottom: 20px;
+  margin-bottom: 22px;
+  color: #111827;
 `;
 
 export const table = css`
   width: 100%;
   border-collapse: collapse;
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
   font-size: 14px;
 
   th,
   td {
-    border: 1px solid #e0e0e0;
-    padding: 10px 12px;
+    padding: 12px 14px;
+    border-bottom: 1px solid #e5e7eb;
     text-align: center;
   }
 
   th {
-    background-color: #f5f5f5;
-    font-weight: 600;
+    background: #f3f4f6;
+    font-weight: 700;
+    color: #374151;
   }
 
-  tbody tr:nth-of-type(even) {
-    background-color: #fafafa;
+  tr:hover td {
+    background: #fafafa;
   }
 `;
 
 export const roleTag = css`
   display: inline-block;
   margin: 2px;
-  padding: 2px 6px;
-  border-radius: 4px;
+  padding: 4px 8px;
+  border-radius: 6px;
   background-color: #eef2ff;
+  color: #374151;
   font-size: 12px;
+  font-weight: 600;
 `;
 
 export const detailBtn = css`
-  padding: 6px 10px;
-  border-radius: 4px;
-  border: none;
-  background-color: #2563eb;
+  padding: 6px 12px;
+  background: #1565c0;
   color: #fff;
-  font-size: 12px;
+  border-radius: 8px;
   cursor: pointer;
+  font-size: 13px;
+  border: none;
 
   &:hover {
-    background-color: #1d4ed8;
+    background: #0d47a1;
   }
 `;
 
 export const pagination = css`
+  margin-top: 24px;
   display: flex;
   justify-content: center;
-  align-items: center;
   gap: 12px;
-  margin-top: 20px;
 
   button {
     padding: 6px 12px;
-    border-radius: 4px;
-    border: 1px solid #d4d4d4;
-    background-color: #ffffff;
+    background: #ffffff;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
     cursor: pointer;
-    font-size: 13px;
+    font-size: 14px;
 
     &:disabled {
+      opacity: 0.45;
       cursor: not-allowed;
-      opacity: 0.5;
     }
+
+    &:hover:not(:disabled) {
+      background: #f3f4f3;
+    }
+  }
+
+  span {
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    color: #374151;
   }
 `;

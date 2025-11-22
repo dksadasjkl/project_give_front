@@ -2,48 +2,57 @@ import { css } from "@emotion/react";
 
 export const wrap = css`
   width: 100%;
+  padding: 30px 20px;
+  margin: 0 auto;
 `;
 
 export const title = css`
   font-size: 26px;
   font-weight: 700;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
+  color: #111827;
 `;
 
 export const createButton = css`
-  padding: 10px 16px;
-  background: #1565c0;
+  padding: 10px 18px;
+  background: #4f46e5;
   color: white;
   border-radius: 8px;
   cursor: pointer;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
+  font-size: 14px;
+  font-weight: 600;
 
   &:hover {
-    background: #0d47a1;
+    background: #4338ca;
   }
 `;
 
 export const table = css`
   width: 100%;
   border-collapse: collapse;
-  background: #fff;
-  border-radius: 10px;
+  background: #ffffff;
+  border-radius: 12px;
   overflow: hidden;
+  border: 1px solid #e5e7eb;
 
-  th, td {
-    padding: 12px;
-    border-bottom: 1px solid #eee;
+  th,
+  td {
+    padding: 12px 14px;
+    border-bottom: 1px solid #e5e7eb;
     font-size: 14px;
+    text-align: center;
+    color: #111827;
   }
 
   th {
-    background: #f0f4f8;
-    font-weight: bold;
-    text-align: center;
+    background: #f3f4f6;
+    font-weight: 700;
+    color: #374151;
   }
 
-  td {
-    text-align: center;
+  tr:hover td {
+    background: #fafafa;
   }
 `;
 
@@ -52,10 +61,12 @@ export const thumb = css`
   height: 60px;
   object-fit: cover;
   border-radius: 8px;
+  border: 1px solid #e5e7eb;
 `;
 
 export const clickable = css`
   cursor: pointer;
+  font-weight: 600;
 
   &:hover {
     color: #1565c0;
@@ -65,42 +76,46 @@ export const clickable = css`
 
 export const deleteButton = css`
   padding: 6px 12px;
-  background: #e53935;
+  background: #ef4444;
+  border-radius: 8px;
   color: white;
-  border-radius: 6px;
   cursor: pointer;
+  font-size: 13px;
+  border: none;
 
   &:hover {
-    background: #c62828;
+    background: #dc2626;
   }
 `;
 
 export const pagination = css`
-  margin-top: 20px;
+  margin-top: 24px;
   display: flex;
   justify-content: center;
-  gap: 14px;
+  gap: 12px;
 
   button {
     padding: 6px 12px;
-    border: 1px solid #ccc;
-    background: white;
-    border-radius: 6px;
+    background: #ffffff;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
     cursor: pointer;
+    font-size: 14px;
 
     &:disabled {
-      opacity: 0.4;
+      opacity: 0.45;
       cursor: not-allowed;
     }
 
     &:hover:not(:disabled) {
-      background: #f5f5f5;
+      background: #f3f4f3;
     }
   }
 
   span {
     display: flex;
     align-items: center;
-    font-weight: bold;
+    font-weight: 600;
+    color: #374151;
   }
 `;

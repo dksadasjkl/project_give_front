@@ -83,25 +83,19 @@ function AdminStoreShippingListPage() {
       </table>
 
       {/* 페이지네이션 */}
-      <div css={s.pagination}>
-        <button disabled={page === 1} onClick={() => setPage(page - 1)}>
-          이전
-        </button>
-
-        {[...Array(totalPages)].map((_, index) => (
-          <button
-            key={index}
-            css={s.pageNumber(page === index + 1)}
-            onClick={() => setPage(index + 1)}
-          >
-            {index + 1}
+        <div css={s.pagination}>
+          <button disabled={page === 1} onClick={() => setPage(page - 1)}>
+            이전
           </button>
-        ))}
 
-        <button disabled={page === totalPages} onClick={() => setPage(page + 1)}>
-          다음
-        </button>
-      </div>
+          <span>
+            {page} / {totalPages}
+          </span>
+
+          <button disabled={page === totalPages} onClick={() => setPage(page + 1)}>
+            다음
+          </button>
+        </div>
     </div>
   );
 }

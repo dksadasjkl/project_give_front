@@ -1,218 +1,189 @@
 import { css } from "@emotion/react";
 
-/* 페이지 컨테이너 */
 export const container = css`
-  padding: 20px;
+  padding: 30px;
 `;
 
-/* 제목 */
 export const title = css`
-  font-size: 26px;
-  font-weight: bold;
-  margin-bottom: 20px;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 24px;
 `;
 
-/* 리워드 추가 버튼 */
 export const addButton = css`
-  padding: 10px 14px;
-  background: #1565c0;
+  padding: 10px 18px;
+  background: #4f46e5;
   color: white;
   border-radius: 8px;
+  font-size: 15px;
   cursor: pointer;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 
   &:hover {
-    background: #0d47a1;
+    background: #4338ca;
   }
 `;
 
-/* 리스트 영역 */
 export const rewardList = css`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 22px;
 `;
 
-/* 카드 전체 */
 export const card = css`
   display: flex;
   gap: 20px;
   padding: 20px;
   background: white;
-  border-radius: 10px;
-  border: 1px solid #e0e0e0;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.06);
 `;
 
-/* 이미지 wrapper */
 export const imageWrap = css`
   width: 180px;
   height: 180px;
-  flex-shrink: 0;
-  border-radius: 8px;
+  border-radius: 10px;
   overflow: hidden;
-  border: 1px solid #ddd;
+  border: 1px solid #e5e7eb;
 `;
 
-/* 이미지 스타일 */
 export const image = css`
   width: 100%;
   height: 100%;
   object-fit: cover;
 `;
 
-/* 오른쪽 정보 영역 */
 export const infoWrap = css`
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
+  flex: 1;
 `;
 
-/* 리워드 제목 */
 export const rewardTitle = css`
   font-size: 20px;
-  font-weight: bold;
+  font-weight: 700;
   margin-bottom: 8px;
 `;
 
-/* 간단 설명 */
 export const rewardDesc = css`
   font-size: 14px;
-  color: #555;
+  color: #6b7280;
   margin-bottom: 12px;
 `;
 
-/* 가격 */
 export const rewardPrice = css`
   font-size: 16px;
   margin-bottom: 6px;
 `;
 
-/* 총 수량 */
 export const rewardQuantity = css`
   font-size: 16px;
   margin-bottom: 6px;
 `;
 
-/* 남은 수량 */
 export const rewardRemain = css`
   font-size: 16px;
-  margin-bottom: 14px;
-  font-weight: 500;
+  font-weight: 600;
   color: #d84315;
+  margin-bottom: 16px;
 `;
 
-/* 버튼 그룹 */
 export const btnGroup = css`
   display: flex;
   gap: 10px;
-  margin-top: auto; /* 카드 아래쪽으로 밀기 */
+  margin-top: auto;
 `;
 
-/* 수정 버튼 */
 export const editBtn = css`
   padding: 8px 14px;
-  background: #4caf50;
+  background: #3b82f6;
   color: white;
-  border-radius: 6px;
-  font-size: 14px;
+  border-radius: 8px;
 
   &:hover {
-    background: #388e3c;
+    background: #2563eb;
   }
 `;
 
-/* 삭제 버튼 */
 export const deleteBtn = css`
   padding: 8px 14px;
-  background: #d32f2f;
+  background: #ef4444;
   color: white;
-  border-radius: 6px;
-  font-size: 14px;
+  border-radius: 8px;
 
   &:hover {
-    background: #b71c1c;
+    background: #dc2626;
   }
 `;
 
-/* 모달 배경 */
 export const modalOverlay = css`
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   background: rgba(0,0,0,0.5);
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
-/* 모달 박스 */
 export const modal = css`
-  width: 450px;
+  width: 460px;
   background: white;
-  border-radius: 10px;
+  border-radius: 14px;
   padding: 26px;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+  box-shadow: 0 3px 20px rgba(0,0,0,0.2);
 `;
 
-/* 라벨 */
 export const label = css`
   font-size: 14px;
-  margin-bottom: 4px;
-  font-weight: 500;
+  font-weight: 600;
+  margin-bottom: 6px;
 `;
 
-/* 텍스트 input */
 export const input = css`
   width: 100%;
   padding: 10px;
   margin-bottom: 14px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
   font-size: 14px;
 `;
 
-/* textarea */
 export const textarea = css`
   width: 100%;
   padding: 10px;
   margin-bottom: 14px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 14px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
   resize: vertical;
+  font-size: 14px;
 `;
 
-/* 모달 버튼 영역 */
 export const modalBtnWrap = css`
   display: flex;
   justify-content: space-between;
-  margin-top: 16px;
+  margin-top: 20px;
 `;
 
-/* 저장 버튼 */
 export const saveBtn = css`
   padding: 8px 16px;
-  background: #1e88e5;
+  background: #4f46e5;
   color: white;
-  border-radius: 6px;
+  border-radius: 8px;
 
   &:hover {
-    background: #1565c0;
+    background: #4338ca;
   }
 `;
 
-/* 취소 버튼 */
 export const cancelBtn = css`
   padding: 8px 16px;
-  background: #888;
+  background: #9ca3af;
   color: white;
-  border-radius: 6px;
+  border-radius: 8px;
 
   &:hover {
-    background: #666;
+    background: #6b7280;
   }
 `;
 
@@ -220,7 +191,7 @@ export const previewImage = css`
   width: 100%;
   height: 200px;
   object-fit: cover;
-  border-radius: 8px;
-  margin-bottom: 12px;
-  border: 1px solid #ddd;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  margin-bottom: 14px;
 `;

@@ -2,6 +2,7 @@ import { css } from "@emotion/react";
 
 export const wrap = css`
   width: 100%;
+  padding: 30px;
 `;
 
 export const title = css`
@@ -11,48 +12,47 @@ export const title = css`
 `;
 
 export const createButton = css`
-  padding: 10px 16px;
-  background: #1565c0;
+  padding: 10px 18px;
+  background: #4f46e5;
   color: white;
   border-radius: 8px;
   cursor: pointer;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
+  font-size: 14px;
+  font-weight: 600;
 
   &:hover {
-    background: #0d47a1;
+    background: #4338ca;
   }
 `;
 
 export const table = css`
   width: 100%;
   border-collapse: collapse;
-  background: #fff;
-  border-radius: 10px;
+  background: white;
+  border-radius: 12px;
   overflow: hidden;
 
   th,
   td {
-    padding: 12px;
-    border-bottom: 1px solid #eee;
+    padding: 12px 14px;
+    border-bottom: 1px solid #e5e7eb;
+    text-align: center;
     font-size: 14px;
   }
 
   th {
-    background: #f0f4f8;
-    font-weight: bold;
-    text-align: center;
-  }
-
-  td {
-    text-align: center;
+    background: #f3f4f6;
+    font-weight: 700;
   }
 `;
 
 export const thumb = css`
   width: 60px;
   height: 60px;
-  object-fit: cover;
   border-radius: 8px;
+  object-fit: cover;
+  border: 1px solid #e5e7eb;
 `;
 
 export const clickable = css`
@@ -65,16 +65,17 @@ export const clickable = css`
 `;
 
 export const deleteButton = css`
-  padding: 6px 12px;
-  background: #e53935;
+  padding: 7px 14px;
+  background: #ef4444;
   color: white;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
 
   &:hover {
-    background: #c62828;
+    background: #dc2626;
   }
 `;
+
 
 export const pagination = css`
   margin-top: 20px;
