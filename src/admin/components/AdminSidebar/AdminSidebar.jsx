@@ -18,7 +18,7 @@ const AdminSidebar = () => {
     { name: "스토어 리뷰 신고 관리", path: "/admin/store/reports" },
     { name: "스토어 QnA 관리", path: "/admin/store/qna" },
     { name: "스토어 포인트 관리", path: "/admin/store/points" },
-    // 유저관리 추가 예정
+    { name: "유저 관리", path: "/admin/users" },
   ];
 
   const isActive = (menuPath) => {

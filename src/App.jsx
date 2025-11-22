@@ -47,6 +47,8 @@ import AdminStoreReportListPage from './admin/pages/Store/Report/AdminStoreRepor
 import AdminStoreQnAListPage from './admin/pages/Store/QnA/AdminStoreQnAListPage';
 import AdminStoreQnADetailPage from './admin/pages/Store/QnA/AdminStoreQnADetailPage';
 import AdminStorePointListPage from './admin/pages/Store/Point/AdminStorePointListPage';
+import AdminUserListPage from './admin/pages/User/AdminUserListPage';
+import AdminUserDetailPage from './admin/pages/User/AdminUserDetailPage';
 
 function App() {
 
@@ -91,7 +93,7 @@ function App() {
             <Route path="funding/:projectId/comments" element={<AdminFundingCommentPage />} />
             <Route path="funding/:projectId/contributions" element={<AdminFundingContributionPage />} />
 
-            {/* ---------------- Store 관리자 ---------------- */}
+            {/*Store*/}
             <Route path="/admin/store" element={<AdminStoreProductListPage />} />
             <Route path="/admin/store/products" element={<AdminStoreProductListPage />} />
             <Route path="/admin/store/products/create" element={<AdminStoreProductCreatePage />} />
@@ -116,6 +118,10 @@ function App() {
             <Route path="/admin/store/qna/:qnaId" element={<AdminStoreQnADetailPage />} />
 
             <Route path="/admin/store/points" element={<AdminStorePointListPage />} />
+            
+            {/* 유저 */}
+            <Route path="/admin/users" element={<AdminUserListPage />} />
+            <Route path="/admin/users/:userId" element={<AdminUserDetailPage />} />
           </Route>
 
 
