@@ -15,14 +15,14 @@ function StoreOrderPage({ principal }) {
   // queryClient.invalidateQueries({ queryKey: ["getMyStoreOrdersRequest"] });
 
 
-  // 🔢 페이지네이션 상태
+  // 페이지네이션 상태
   const [page, setPage] = useState(1);
   const size = 5;
   const pageBlock = 5;
 
   const [selectedOrder, setSelectedOrder] = useState(null);
 
-  // ✅ 주문 목록 조회 API (페이지네이션 포함)
+  // 주문 목록 조회 API (페이지네이션 포함)
   const { data, isLoading } = useQuery({
     queryKey: ["getMyStoreOrdersRequest", page],
     queryFn: () => getMyStoreOrdersRequest(page, size),
@@ -33,12 +33,12 @@ function StoreOrderPage({ principal }) {
   const totalCount = data?.data?.totalCount || 0;
   const totalPages = Math.ceil(totalCount / size) || 1;
 
-  // 🔢 페이지 블록 계산
+  // 페이지 블록 계산
   const startPage = Math.floor((page - 1) / pageBlock) * pageBlock + 1;
   const endPage = Math.min(startPage + pageBlock - 1, totalPages);
 
   // ----------------------------------------------------------------
-  // 🏷 주문 status 라벨
+  // 주문 status 라벨
   const getStatusText = (status) => {
     switch (status) {
       case "READY":
@@ -56,7 +56,7 @@ function StoreOrderPage({ principal }) {
     }
   };
 
-  // 🏷 결제 수단 라벨
+  // 결제 수단 라벨
   const getPaymentMethodLabel = (method) => {
     switch (method) {
       case "KAKAO_PAY":
@@ -66,7 +66,7 @@ function StoreOrderPage({ principal }) {
     }
   };
 
-  // 🏷 결제 상태 라벨
+  // 결제 상태 라벨
   const getPaymentStatusLabel = (status) => {
     switch (status) {
       case "PENDING":
@@ -94,7 +94,7 @@ function StoreOrderPage({ principal }) {
     }
   };
 
-  // 🔥 구매 확정
+  // 구매 확정
   const confirmOrderMutation = useMutation(putStoreOrderConfirmRequest, {
     onSuccess: () => {
       alert("구매가 확정되었습니다!");
@@ -124,7 +124,7 @@ function StoreOrderPage({ principal }) {
 
   return (
     <div css={s.container}>
-      <div css={s.title}>🧾 주문 내역</div>
+      <div css={s.title}>주문 내역</div>
 
       {orders.map((order) => {
         const statusInfo = getStatusText(order.orderStatus);
@@ -204,9 +204,9 @@ function StoreOrderPage({ principal }) {
                   )}
                 </div>
 
-                {/* 🚚 배송 정보 */}
+                {/* 배송 정보 */}
                 <div css={s.detailSection}>
-                  <h4>🚚 배송 정보</h4>
+                  <h4>배송 정보</h4>
                   {order.recipientName ? (
                     <ul>
                       <li>수령인: {order.recipientName}</li>
@@ -227,9 +227,7 @@ function StoreOrderPage({ principal }) {
         );
       })}
 
-      {/* ----------------------------------------- */}
-      {/* 📌 페이지네이션 */}
-      {/* ----------------------------------------- */}
+      {/* 페이지네이션 */}
       <div css={s.pagination}>
         {startPage > 1 && (
           <button onClick={() => setPage(startPage - 1)}>&lt; 이전</button>

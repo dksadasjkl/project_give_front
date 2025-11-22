@@ -22,13 +22,13 @@ function MyFundingList() {
     refetchOnReconnect: false,
   });
 
-  // ✅ 데이터 추출
+  //  데이터 추출
   const fundings = data?.data?.fundings || [];
   const totalCount = data?.data?.totalCount || 0;
   const totalPages = Math.ceil(totalCount / size) || 1;
   const totalAmount = fundings.reduce((acc, curr) => acc + (curr.totalContribution || 0), 0);
 
-  // ✅ 블록 계산
+  //  블록 계산
   const startPage = Math.floor((page - 1) / pageBlock) * pageBlock + 1;
   const endPage = Math.min(startPage + pageBlock - 1, totalPages);
 
@@ -37,7 +37,7 @@ function MyFundingList() {
       <div css={s.title}>펀딩 내역</div>
       <MyDonationBanner totalAmount={totalAmount} projectCount={totalCount} />
 
-      {/* ✅ 펀딩 카드 리스트 */}
+      {/*  펀딩 카드 리스트 */}
       <div css={s.donationCard}>
         {isLoading ? (
           <p>불러오는 중...</p>
@@ -72,7 +72,7 @@ function MyFundingList() {
         )}
       </div>
 
-      {/* ✅ 페이지네이션 */}
+      {/*  페이지네이션 */}
       <div css={s.pagination}>
         {startPage > 1 && (
           <button onClick={() => setPage(startPage - 1)}>&lt; 이전</button>

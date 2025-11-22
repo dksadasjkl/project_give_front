@@ -21,7 +21,7 @@ function MyCommentsList() {
     queryKey: ['getMyCommentsRequest', page],
     queryFn: () => getMyCommentsRequest(page, size),
     keepPreviousData: true,
-    staleTime: 1000 * 60 * 2, // ✅ 2분 캐시 유지
+    staleTime: 1000 * 60 * 2, // 2분 캐시 유지
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
   });
@@ -33,13 +33,13 @@ function MyCommentsList() {
   const totalComments = totalCount;
   const uniqueProjects = new Set(comments.map(c => c.donationProjectId)).size;
 
-  // ✅ 블록 계산
+  //  블록 계산
   const startPage = Math.floor((page - 1) / pageBlock) * pageBlock + 1;
   const endPage = Math.min(startPage + pageBlock - 1, totalPages);
 
   return (
     <div css={s.container}>
-      <div css={s.title}>💬 내가 남긴 댓글</div>
+      <div css={s.title}>내가 남긴 댓글</div>
 
       <MyCommentsBanner totalComments={totalComments} projectCount={uniqueProjects} />
 
@@ -66,7 +66,7 @@ function MyCommentsList() {
         )}
       </div>
 
-      {/* ✅ 페이지네이션 */}
+      {/* 페이지네이션 */}
       <div css={s.pagination}>
         {startPage > 1 && (
           <button onClick={() => setPage(startPage - 1)}>&lt; 이전</button>

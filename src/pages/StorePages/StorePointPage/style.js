@@ -9,50 +9,65 @@ export const container = css`
 `;
 
 export const title = css`
-  display: flex;
-  align-items: center;
-  gap: 8px;
   font-size: 24px;
   font-weight: 700;
   color: #111;
-  margin-bottom: 28px;
+  margin-bottom: 25px;
   font-family: "Pretendard", "NanumSquareWebFont", sans-serif;
 `;
 
+/* 공통 로딩 / empty */
 export const loading = css`
   text-align: center;
-  padding: 50px;
+  padding: 60px;
+  font-size: 18px;
+  color: #666;
 `;
 
 export const empty = css`
   text-align: center;
   color: #777;
   padding: 40px;
+  font-size: 16px;
 `;
 
+export const loginNotice = css`
+  text-align: center;
+  padding: 40px;
+  font-size: 18px;
+  color: #555;
+`;
+
+/* 테이블 박스 */
 export const tableWrapper = css`
   overflow-x: auto;
-  border-radius: 10px;
-  border: 1px solid #ddd;
+  border-radius: 12px;
+  border: 1px solid #d7e2eb;
   background: #fff;
+  margin-bottom: 20px;
 `;
 
+/* 테이블 */
 export const table = css`
   width: 100%;
   border-collapse: collapse;
   text-align: center;
 
-  th, td {
+  th,
+  td {
     padding: 14px 10px;
     border-bottom: 1px solid #eee;
+    font-size: 15px;
   }
 
   th {
-    background: #f8f8f8;
+    background: #f5f7fa;
     font-weight: 600;
+    color: #333;
   }
 `;
 
+/* 포인트 색상 */
 export const plus = css`
   color: #0078ff;
   font-weight: 600;
@@ -63,35 +78,31 @@ export const minus = css`
   font-weight: 600;
 `;
 
-export const loginNotice = css`
-  text-align: center;
-  padding: 40px;
-  font-size: 18px;
-`;
-
+/* 페이지네이션 */
 export const pagination = css`
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 6px;
-  margin-top: 30px;
+  margin-top: 28px;
 
   button {
-    padding: 6px 10px;
-    border: 1px solid #ccc;
-    background: #fff;
+    padding: 6px 12px;
+    border: 1px solid #e3e8ec;
+    background: #ffffff;
     border-radius: 6px;
     cursor: pointer;
+    color: #222;
     font-size: 14px;
-    transition: all 0.2s;
+    transition: all 0.2s ease;
 
     &:hover {
-      background: #007bff;
+      background: #03a94d;
       color: #fff;
     }
 
     &:disabled {
-      background: #eee;
+      background: #f3f3f3;
       color: #aaa;
       cursor: not-allowed;
     }
@@ -99,24 +110,24 @@ export const pagination = css`
 `;
 
 export const pageBtn = css`
-  padding: 6px 10px;
-  border: 1px solid #ccc;
-  background: #fff;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: all 0.2s;
+  border: 1px solid #e3e8ec;
+  background: #ffffff;
 
   &:hover {
-    background: #0078ff;
+    background: #03a94d;
     color: #fff;
   }
 `;
 
 export const pageBtnActive = css`
-  background: #0078ff !important;
+  background: #03a94d !important;
   color: #fff !important;
-  border: 1px solid #0078ff !important;
-  font-weight: 600;
+  border-color: #03a94d !important;
+  font-weight: 700;
   cursor: default;
+
+  &:hover {
+    background: #03a94d;
+    color: #fff;
+  }
 `;

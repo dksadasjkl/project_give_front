@@ -4,21 +4,22 @@ export const banner = css`
   display: flex;
   justify-content: center;
   width: 100%;
-  background-color: transparent;
-  border: 1px solid #d7e2eb;
-  border-radius: 15px;
-  margin-bottom: 20px;
+  border: 1px solid #e3e8ec;
+  border-radius: 12px;
   padding: 15px 0;
+  background: #ffffff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  margin-bottom: 20px;
 
-  & > div {
+  div {
     flex: 1;
     text-align: center;
-    font-weight: 500;
-    font-size: 16px;
-    font-family: "NanumBarunGothic, dotum, Sans-serif";
+    font-weight: 600;
+    font-size: 15px;
+    color: #222;
   }
 
-  & > div:not(:last-child) {
-    border-right: 1px solid #d7e2eb;
+  div:not(:last-child) {
+    border-right: 1px solid #e3e8ec;
   }
 `;

@@ -8,21 +8,27 @@ export const title = css`
   font-size: 22px;
   margin-bottom: 20px;
   font-weight: 700;
+  color: #222;
 `;
 
 export const donationCard = css`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 20px;
   justify-content: center;
+
   @media (max-width: 768px) {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   }
+
   @media (max-width: 480px) {
     grid-template-columns: 1fr;
   }
 `;
 
+/* ===============================
+    페이지네이션 (댓글/기부와 동일 UI)
+================================ */
 export const pagination = css`
   display: flex;
   justify-content: center;
@@ -31,21 +37,22 @@ export const pagination = css`
   margin-top: 30px;
 
   button {
-    padding: 6px 10px;
-    border: 1px solid #ccc;
+    padding: 6px 12px;
+    border: 1px solid #e3e8ec;
     background: #fff;
     border-radius: 6px;
     cursor: pointer;
     font-size: 14px;
-    transition: all 0.2s;
+    color: #222;
+    transition: all 0.2s ease;
 
     &:hover {
-      background: #007bff;
+      background: #03a94d;
       color: #fff;
     }
 
     &:disabled {
-      background: #eee;
+      background: #f2f2f2;
       color: #aaa;
       cursor: not-allowed;
     }
@@ -53,29 +60,24 @@ export const pagination = css`
 `;
 
 export const pageBtn = css`
-  padding: 6px 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #e3e8ec;
   background: #fff;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: all 0.2s;
 
   &:hover {
-    background: #0078ff;
+    background: #03a94d;
     color: #fff;
   }
 `;
 
 export const pageBtnActive = css`
-  background: #0078ff !important;
+  background: #03a94d !important;
   color: #fff !important;
-  border: 1px solid #0078ff !important;
-  font-weight: 600;
+  border-color: #03a94d !important;
+  font-weight: 700;
   cursor: default;
 
   &:hover {
-    background: #0078ff;
+    background: #03a94d;
     color: #fff;
   }
 `;

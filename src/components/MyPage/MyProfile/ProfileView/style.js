@@ -1,16 +1,5 @@
 import { css } from "@emotion/react";
 
-
-export const imgBox = css`
-    box-sizing: border-box;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 124px;
-    height: 124px;
-    direction: none;
-`;
-
 export const editimgBox = css`
     width: 100%;
     display: flex;
@@ -19,26 +8,37 @@ export const editimgBox = css`
     align-items: center;
 `;
 
-
-export const profileImg = css`
+export const imgBox = css`
     box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid #dbdbdb;
+    width: 124px;
+    height: 124px;
+`;
+
+export const profileImg = css`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 1px solid #e3e8ec;
     border-radius: 50%;
     width: 100%;
     height: 100%;
     overflow: hidden;
-    & > img {
-        height: 100%;   
-    }  
+    background-color: #fafafa;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 `;
 
 export const userBox = css`
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     margin-top: 10px;
     font-weight: 600;
@@ -46,20 +46,18 @@ export const userBox = css`
     row-gap: 5px;
 `;
 
-
 export const button = css`
-    box-sizing: border-box;
-    border: 1px solid #0e004a24;
-    border-radius: 5px;
+    border: 1px solid #ccd4dd;
+    border-radius: 6px;
     padding: 10px 25px;
-    margin-right: 5px;
     background-color: white;
-    color: #222222;
+    color: #222;
     font-weight: 600;
     cursor: pointer;
+    transition: background 0.2s ease;
 
     &:hover {
-        font-weight: 700    ;
-        background-color: #f7f7f7cc; 
+        background-color: #f4f4f4;
+        font-weight: 700;
     }
 `;

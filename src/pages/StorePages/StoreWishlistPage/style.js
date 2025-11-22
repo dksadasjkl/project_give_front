@@ -5,24 +5,19 @@ export const container = css`
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
-  font-family: "Pretendard";
 `;
 
 export const title = css`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 24px;
+  font-size: 22px;
+  margin-bottom: 20px;
   font-weight: 700;
-  color: #111;
-  margin-bottom: 28px;
-  font-family: "Pretendard", "NanumSquareWebFont", sans-serif;
+  color: #222;
 `;
 
 export const loading = css`
   text-align: center;
-  padding: 60px;
-  font-size: 18px;
+  padding: 50px;
+  font-size: 17px;
   color: #666;
 `;
 
@@ -33,28 +28,37 @@ export const empty = css`
   font-size: 16px;
 `;
 
+export const loginNotice = css`
+  text-align: center;
+  padding: 50px;
+  font-size: 18px;
+  color: #555;
+`;
+
 export const grid = css`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 24px;
+  gap: 22px;
 `;
 
 export const card = css`
   display: flex;
   flex-direction: column;
-  background: #fff;
-  border: 1px solid #e5e5e5;
-  border-radius: 14px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e3e8ec;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
   overflow: hidden;
   cursor: pointer;
   transition: all 0.25s ease;
+
   &:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+    transform: translateY(-4px);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
   }
 `;
 
+/* 이미지 */
 export const imageBox = css`
   width: 100%;
   height: 220px;
@@ -67,35 +71,36 @@ export const image = css`
   height: 100%;
   object-fit: cover;
   transition: transform 0.3s ease;
+
   ${card}:hover & {
     transform: scale(1.05);
   }
 `;
 
+/* 정보 영역 */
 export const info = css`
-  padding: 14px 16px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
+  padding: 14px 14px 18px;
+  text-align: center;
 
   h3 {
     font-size: 16px;
     font-weight: 600;
-    color: #333;
-    text-align: center;
+    color: #222;
+    margin-bottom: 6px;
     line-height: 1.4;
   }
 `;
 
 export const price = css`
-  color: #007bff;
+  color: #03a94d;
   font-weight: 700;
   font-size: 15px;
+  margin-bottom: 5px;
 `;
 
+/* 삭제 버튼 */
 export const removeBtn = css`
-  margin-top: 8px;
+  margin-top: 5px;
   padding: 6px 12px;
   border: none;
   border-radius: 6px;
@@ -105,16 +110,10 @@ export const removeBtn = css`
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
+
   &:hover {
     background: #e04848;
   }
-`;
-
-export const loginNotice = css`
-  text-align: center;
-  padding: 50px;
-  font-size: 18px;
-  color: #555;
 `;
 
 export const pagination = css`
@@ -122,24 +121,25 @@ export const pagination = css`
   justify-content: center;
   align-items: center;
   gap: 6px;
-  margin-top: 30px;
+  margin-top: 28px;
 
   button {
-    padding: 6px 10px;
-    border: 1px solid #ccc;
-    background: #fff;
+    padding: 6px 12px;
+    border: 1px solid #e3e8ec;
+    background: #ffffff;
     border-radius: 6px;
     cursor: pointer;
+    color: #222;
     font-size: 14px;
-    transition: all 0.2s;
+    transition: all 0.2s ease;
 
     &:hover {
-      background: #007bff;
+      background: #03a94d;
       color: #fff;
     }
 
     &:disabled {
-      background: #eee;
+      background: #f3f3f3;
       color: #aaa;
       cursor: not-allowed;
     }
@@ -147,24 +147,24 @@ export const pagination = css`
 `;
 
 export const pageBtn = css`
-  padding: 6px 10px;
-  border: 1px solid #ccc;
-  background: #fff;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: all 0.2s;
+  border: 1px solid #e3e8ec;
+  background: #ffffff;
 
   &:hover {
-    background: #0078ff;
+    background: #03a94d;
     color: #fff;
   }
 `;
 
 export const pageBtnActive = css`
-  background: #0078ff !important;
+  background: #03a94d !important;
   color: #fff !important;
-  border: 1px solid #0078ff !important;
-  font-weight: 600;
+  border-color: #03a94d !important;
+  font-weight: 700;
   cursor: default;
+
+  &:hover {
+    background: #03a94d;
+    color: #fff;
+  }
 `;

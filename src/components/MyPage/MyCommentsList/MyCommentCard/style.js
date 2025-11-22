@@ -1,25 +1,25 @@
 import { css } from '@emotion/react';
 
 export const commentCard = css`
-  border: 1px solid #dbdbdb;
-  border-radius: 10px;
+  border: 1px solid #e3e8ec;
+  border-radius: 12px;
   padding: 16px;
-  transition: all 0.3s;
   cursor: pointer;
   background: #fff;
   margin-bottom: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  transition: all 0.2s ease;
 
   &:hover {
     border-color: #03a94d;
-    transform: translateY(-3px);
+    transform: translateY(-2px);
   }
 `;
 
 export const projectInfo = css`
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 `;
 
 export const projectImage = css`
@@ -27,40 +27,15 @@ export const projectImage = css`
   height: 50px;
   border-radius: 8px;
   object-fit: cover;
-  border: 1px solid #d7e2eb;
+  border: 1px solid #e3e8ec;
   margin-right: 10px;
+  background-color: #fafafa;
 `;
 
 export const projectTitle = css`
   font-weight: 600;
-  font-size: 14px;
-  color: #333;
-  flex-grow: 1;
-`;
-
-export const nickname = css`
-  font-weight: 600;
-  color: #03a94d;
-`;
-
-export const commentFooter = css`
-  display: flex;
-  justify-content: space-between;
-  font-size: 14px;
-  color: #555;
-  margin-top: 8px;
-`;
-
-export const date = css`
-  color: #999;
-  flex-shrink: 0;
-`;
-
-export const commentText = css`
-  font-size: 16px;
+  font-size: 15px;
   color: #222;
-  white-space: pre-wrap;
-  line-height: 1.6;
   flex-grow: 1;
 `;
 
@@ -68,37 +43,44 @@ export const actionButtons = css`
   display: flex;
   gap: 6px;
 
-  & > button {
-    border: none;
+  button {
+    border: 1px solid #ccd4dd;
     border-radius: 6px;
     padding: 4px 8px;
     font-size: 12px;
     cursor: pointer;
-    transition: 0.2s;
+    background: #fff;
+    color: #222;
+    transition: background 0.2s ease;
+
+    &:hover {
+      background: #f4f4f4;
+    }
   }
 `;
 
 export const editBtn = css`
-  background-color: #e6f6eb;
   color: #03a94d;
+  border-color: #03a94d99;
 
   &:hover {
-    background-color: #d3f3e0;
+    background-color: #e9f6f0;
   }
 `;
 
 export const deleteBtn = css`
-  background-color: #fde7e7;
-  color: #e33;
+  color: #d32525;
+  border-color: #d3252533;
 
   &:hover {
-    background-color: #fbd3d3;
+    background-color: #fde9e9;
   }
 `;
 
 export const saveBtn = css`
   background-color: #03a94d;
   color: #fff;
+  border: none;
 
   &:hover {
     background-color: #02913e;
@@ -106,23 +88,53 @@ export const saveBtn = css`
 `;
 
 export const cancelBtn = css`
-  background-color: #f1f1f1;
-  color: #333;
+  background-color: #f4f4f4;
+  border-color: #ccc;
 
   &:hover {
-    background-color: #e1e1e1;
+    background-color: #e9e9e9;
   }
+`;
+
+export const nickname = css`
+  font-weight: 600;
+  color: #03a94d;
+  margin-bottom: 6px;
+  display: inline-block;
+`;
+
+export const commentFooter = css`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  font-size: 14px;
+  color: #555;
+  margin-top: 6px;
+`;
+
+export const commentText = css`
+  font-size: 15px;
+  color: #222;
+  white-space: pre-wrap;
+  line-height: 1.6;
+  flex-grow: 1;
+`;
+
+export const date = css`
+  color: #999;
+  font-size: 12px;
+  flex-shrink: 0;
+  margin-left: 10px;
 `;
 
 export const editTextarea = css`
   width: 100%;
-  min-height: 60px;
-  padding: 8px;
-  margin-right: 10px;
+  padding: 10px;
   border-radius: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #e3e8ec;
   resize: none;
   font-size: 14px;
   color: #222;
-  background-color: #fafafa;
+  background-color: #fbfbfd;
+  min-height: 70px;
 `;

@@ -16,14 +16,14 @@ function StoreWishlistPage({ principal }) {
     queryKey: ["getMyStoreWishlistRequest", page],
     queryFn: () => getMyStoreWishlistRequest(page, size),
     keepPreviousData: true,
-    staleTime: 1000 * 60 * 2, // ✅ 2분 캐시 유지
+    staleTime: 1000 * 60 * 2, // 2분 캐시 유지
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
   });
 
   const deleteWishlistMutation = useMutation(deleteStoreWishlistRequest, {
     onSuccess: () => {
-      alert("찜 목록에서 제거되었습니다 ❤️‍🔥");
+      alert("찜 목록에서 제거되었습니다");
       queryClient.invalidateQueries(["getMyStoreWishlistRequest"]);
     },
   });
@@ -39,7 +39,7 @@ function StoreWishlistPage({ principal }) {
 
   return (
     <div css={s.container}>
-      <div css={s.title}>❤️ 내 찜 목록</div>
+      <div css={s.title}>내 찜 목록</div>
 
       {isLoading ? (
         <p css={s.loading}>불러오는 중...</p>
@@ -74,7 +74,7 @@ function StoreWishlistPage({ principal }) {
             ))}
           </div>
 
-          {/* ✅ 페이지네이션 */}
+          {/* 페이지네이션 */}
           <div css={s.pagination}>
             {startPage > 1 && (
               <button onClick={() => setPage(startPage - 1)}>&lt; 이전</button>

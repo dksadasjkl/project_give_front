@@ -8,36 +8,57 @@ export const title = css`
   font-size: 22px;
   margin-bottom: 20px;
   font-weight: 700;
+  color: #222;
 `;
 
+/* ===============================
+    배너 (프로필 / 댓글 UI와 동일)
+================================ */
 export const banner = css`
-  background-color: #f5f7fa;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  border: 1px solid #e3e8ec;
   border-radius: 12px;
-  padding: 20px;
+  padding: 18px 0;
+  background: #ffffff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
   margin-bottom: 20px;
-  text-align: center;
-  h2 {
-    margin-bottom: 10px;
+
+  div {
+    flex: 1;
+    text-align: center;
+    font-weight: 600;
+    font-size: 15px;
+    color: #222;
   }
-  p {
-    margin: 5px 0;
-    font-weight: bold;
+
+  div:not(:last-child) {
+    border-right: 1px solid #e3e8ec;
   }
 `;
 
+/* ===============================
+    기부 카드 그리드
+================================ */
 export const donationCard = css`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 20px;
   justify-content: center;
+
   @media (max-width: 768px) {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   }
+
   @media (max-width: 480px) {
     grid-template-columns: 1fr;
   }
 `;
 
+/* ===============================
+    페이지네이션 (통일 버튼 UI)
+================================ */
 export const pagination = css`
   display: flex;
   justify-content: center;
@@ -46,50 +67,47 @@ export const pagination = css`
   margin-top: 30px;
 
   button {
-    padding: 6px 10px;
-    border: 1px solid #ccc;
+    padding: 6px 12px;
+    border: 1px solid #e3e8ec;
     background: #fff;
     border-radius: 6px;
     cursor: pointer;
     font-size: 14px;
-    transition: all 0.2s;
+    color: #222;
+    transition: all 0.2s ease;
 
     &:hover {
-      background: #007bff;
+      background: #03a94d;
       color: #fff;
     }
 
     &:disabled {
-      background: #eee;
+      background: #f2f2f2;
       color: #aaa;
       cursor: not-allowed;
     }
   }
 `;
+
 export const pageBtn = css`
-  padding: 6px 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #e3e8ec;
   background: #fff;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: all 0.2s;
 
   &:hover {
-    background: #0078ff;
+    background: #03a94d;
     color: #fff;
   }
 `;
 
 export const pageBtnActive = css`
-  background: #0078ff !important;   /* ✅ hover보다 강하게 지정 */
+  background: #03a94d !important;
   color: #fff !important;
-  border: 1px solid #0078ff !important;
-  font-weight: 600;
+  border-color: #03a94d !important;
+  font-weight: 700;
   cursor: default;
 
   &:hover {
-    background: #0078ff;
+    background: #03a94d;
     color: #fff;
   }
 `;

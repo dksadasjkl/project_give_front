@@ -34,8 +34,7 @@ function MyPage({ principal }) {
                 {/* 게시글/활동 */}
                 <Route path="/comments" element={<MyCommentsList />} />
 
-                        {/* 🛍️ 스토어 관련 페이지 */}
-                {/* <Route path="/store/cart" element={<StoreCartPage principal={principal} />} /> */}
+                {/* 스토어 관련 페이지 */}
                 <Route path="/store/wishlist" element={<StoreWishlistPage principal={principal} />} />
                 <Route path="/store/orders" element={<StoreOrderPage principal={principal} />} />
                 <Route path="/store/points" element={<StorePointPage principal={principal} />} />
