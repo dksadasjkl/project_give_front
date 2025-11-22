@@ -1,8 +1,5 @@
 import { css } from "@emotion/react";
 
-/* ================================
- * 기본 컨테이너
- * ================================ */
 export const container = css`
   width: 100%;
   max-width: 900px;
@@ -16,9 +13,6 @@ export const title = css`
   margin-bottom: 30px;
 `;
 
-/* ================================
- * 카드 섹션
- * ================================ */
 export const section = css`
   margin-bottom: 40px;
   padding: 22px 24px;
@@ -33,9 +27,6 @@ export const sectionTitle = css`
   margin-bottom: 18px;
 `;
 
-/* ================================
- * 정보 행
- * ================================ */
 export const infoRow = css`
   display: flex;
   justify-content: space-between;

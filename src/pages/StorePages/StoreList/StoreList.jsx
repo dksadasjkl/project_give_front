@@ -24,7 +24,7 @@ function StoreList() {
   const countPerPage = 20;
   const [totalCount, setTotalCount] = useState(0);
 
-  // ✅ 카테고리 조회
+  // 카테고리 조회
   useQuery(['getStoreCategoryQuery'], getStoreCategoriesRequest, {
     retry: 0,
     refetchOnWindowFocus: false,
@@ -32,7 +32,7 @@ function StoreList() {
     onError: (err) => console.error('카테고리 조회 오류:', err),
   });
 
-  // ✅ 상품 목록 조회 (페이징 + 필터 + 정렬)
+  // 상품 목록 조회 (페이징 + 필터 + 정렬)
   useQuery(
     ['storeProducts', selectedCategory, page, searchTypeId],
     async () =>
@@ -55,7 +55,7 @@ function StoreList() {
     }
   );
 
-  // ✅ 상품 총 개수 조회
+  // 상품 총 개수 조회
   useQuery(
     ['storeProductCount', selectedCategory],
     async () => await getStoreProductCountRequest({ categoryId: selectedCategory }),
@@ -84,7 +84,7 @@ function StoreList() {
 
   return (
     <div css={s.layout}>
-      {/* ✅ 카테고리 바 */}
+      {/* 카테고리 바 */}
       <div css={s.categoryBar}>
         <div
           css={s.category(selectedCategory, 0)}
@@ -114,7 +114,7 @@ function StoreList() {
         ))}
       </div>
 
-      {/* ✅ 헤더 바 */}
+      {/* 헤더 바 */}
       <div css={s.headerBar}>
         <div> </div>
         <SortDropdown
@@ -127,7 +127,7 @@ function StoreList() {
         />
       </div>
 
-      {/* ✅ 상품 카드 리스트 */}
+      {/* 상품 카드 리스트 */}
       <div css={s.cardGrid}>
         {storeList.map((item) => (
           <StoreCard
@@ -138,7 +138,7 @@ function StoreList() {
         ))}
       </div>
 
-      {/* ✅ 더보기 버튼 */}
+      {/* 더보기 버튼 */}
       <div css={s.Buttonlayout}>
         {page < totalPages && (
           <button css={s.plusButton} onClick={handleLoadMore}>

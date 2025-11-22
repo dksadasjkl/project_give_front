@@ -22,13 +22,16 @@ export const header = css`
 `;
 
 export const logoBox = css`
-  width: 90px;
+  display: flex;
+  align-items: center;
+  height: 130px;        
 `;
 
 export const logoimage = css`
-  width: 100%;
-  height: 100%;
+  height: 100%;       
+  width: auto;         
   object-fit: contain;
+  cursor: pointer;
 `;
 
 export const centerMenu = css`

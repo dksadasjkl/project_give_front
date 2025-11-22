@@ -2,7 +2,7 @@ import { css } from "@emotion/react";
 
 export const card = css`
   width: 100%;
-  height: 320px; /* 이미지 크게 → 카드도 약간 높게 */
+  height: 320px;
   border: 1px solid #eee;
   border-radius: 12px;
   background: #fff;
@@ -18,7 +18,7 @@ export const card = css`
 
 export const imageBox = css`
   width: 100%;
-  height: 220px; /* 🔥 크게 키움 */
+  height: 220px; 
   background: #f3f3f3;
 
   img {
@@ -30,11 +30,11 @@ export const imageBox = css`
 
 export const infoBox = css`
   padding: 12px;
-  height: 100px; /* 🔥 더 작고 컴팩트한 영역 */
+  height: 100px; 
 
   display: flex;
   flex-direction: column;
-  justify-content: center; /* 텍스트 중앙 정렬 */
+  justify-content: center;
 
   h4 {
     margin: 0;
