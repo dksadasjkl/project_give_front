@@ -8,7 +8,7 @@ import "swiper/css/pagination";
 import { useNavigate } from "react-router-dom";
 import * as s from "./MainBannerCarousel.style";
 
-function MainBannerCarousel({ donation, product }) {
+function MainBannerCarousel({ donation, product, funding }) {
   const navigate = useNavigate();
 
   const banners = [
@@ -20,11 +20,18 @@ function MainBannerCarousel({ donation, product }) {
       link: `/donation/${donation?.donationProjectId}`,
     },
     {
+      type: "funding",
+      image: funding?.donationProjectImageUrl,
+      title: funding?.donationProjectTitle,
+      sub: funding?.donationProjectOrganization,
+      link: `/funding/${funding?.donationProjectId}`,
+    },
+    {
       type: "store",
       image: product?.productImageUrl,
       title: product?.productName,
       sub: `${product?.productPrice?.toLocaleString()}원`,
-      link: `/store/${product?.productId}`
+      link: `/store/${product?.productId}`,
     }
   ];
 

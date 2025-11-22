@@ -31,6 +31,7 @@ export const headerBar = css`
   justify-content: flex-end;
   align-items: center;
   margin-right: 15px;
+  padding-bottom: 5px;
   font-size: 18px;
   
   margin-bottom: 10px;

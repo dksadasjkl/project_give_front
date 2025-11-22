@@ -2,7 +2,7 @@ import { css } from "@emotion/react";
 
 export const card = css`
   width: 100%;
-  height: 320px; /* 이미지 크게 → 카드도 약간 높게 */
+  height: 320px;
   border: 1px solid #eee;
   border-radius: 12px;
   background: #fff;
@@ -18,20 +18,19 @@ export const card = css`
 
 export const imageBox = css`
   width: 100%;
-  height: 220px; 
+  height: 220px;
   background: #f3f3f3;
 
   img {
     width: 100%;
     height: 100%;
-    object-fit: cover; 
+    object-fit: cover;
   }
 `;
 
 export const infoBox = css`
   padding: 12px;
-  height: 100px; 
-
+  height: 100px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -44,7 +43,6 @@ export const infoBox = css`
     overflow: hidden;
     text-overflow: ellipsis;
   }
-
   p {
     margin: 8px 0 0;
     font-size: 13px;
