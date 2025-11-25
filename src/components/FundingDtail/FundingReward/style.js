@@ -2,6 +2,7 @@ import { css } from "@emotion/react";
 
 export const container = css`
   font-family: "Pretendard", sans-serif;
+  margin-top: 20px;
   background: #fff;
   border-radius: 16px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);

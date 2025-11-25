@@ -53,17 +53,23 @@ export const clickable = css`
 export const productCell = css`
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 8px;
+  gap: 12px;
+  
+  span {
+    display: flex;
+    align-items: center;
+    line-height: 1.2;
+  }
 `;
 
 export const thumb = css`
-  width: 50px;
-  height: 50px;
+  width: 52px;
+  height: 52px;
   border-radius: 8px;
   object-fit: cover;
   border: 1px solid #e5e7eb;
   cursor: pointer;
+  flex-shrink: 0;  
 `;
 
 export const statusTag = css`

@@ -22,19 +22,23 @@ const AdminDashboard = () => {
   const dash = data?.data || {};
 
   const {
-    donationProjectCount = 0,
-    fundingProjectCount = 0,
-    totalDonationAmount = 0,
-    monthlyDonationAmount = 0,
-    totalSales = 0,
-    monthlySales = 0,
-    userCount = 0,
-    todayUserCount = 0,
-    donationDailyStats = [],
-    salesDailyStats = [],
-    recentDonations = [],
-    topDonationProjects = [],
-    topStoreProducts = [],
+      donationProjectCount = 0,
+      fundingProjectCount = 0,
+      totalDonationAmount = 0,
+      monthlyDonationAmount = 0,
+      totalSales = 0,
+      monthlySales = 0,
+      userCount = 0,
+      todayUserCount = 0,
+
+      donationDailyStats = [],
+      donationMonthlyStats = [],
+      salesDailyStats = [],
+      salesMonthlyStats = [],
+
+      recentDonations = [],
+      topDonationProjects = [],
+      topStoreProducts = [],
   } = dash;
 
   return (
@@ -75,7 +79,9 @@ const AdminDashboard = () => {
         <h3 css={s.sectionTitle}>일자별 기부 / 매출 추이</h3>
         <DashboardChart
           donationDailyStats={donationDailyStats}
+          donationMonthlyStats={donationMonthlyStats}
           salesDailyStats={salesDailyStats}
+          salesMonthlyStats={salesMonthlyStats}
         />
       </div>
 

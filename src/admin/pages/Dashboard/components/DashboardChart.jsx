@@ -47,15 +47,33 @@ function groupStats(stats, periodType) {
   return Object.values(map).sort((a, b) => a.date.localeCompare(b.date));
 }
 
-const DashboardChart = ({ donationDailyStats = [], salesDailyStats = [] }) => {
+const DashboardChart = ({
+  donationDailyStats = [],
+  donationMonthlyStats = [],
+  salesDailyStats = [],
+  salesMonthlyStats = [],
+}) => {
   const [selectedMetric, setSelectedMetric] = useState("donation"); // donation | sales
   const [period, setPeriod] = useState("daily"); // daily | weekly | monthly
 
-  const rawData =
-    selectedMetric === "donation" ? donationDailyStats : salesDailyStats;
+  // === rawData 선택 로직 수정 ===
+  let rawData = [];
+
+  if (period === "daily") {
+    rawData =
+      selectedMetric === "donation" ? donationDailyStats : salesDailyStats;
+  } else if (period === "weekly") {
+    // weekly는 daily 데이터 기준으로 그룹핑
+    rawData =
+      selectedMetric === "donation" ? donationDailyStats : salesDailyStats;
+  } else if (period === "monthly") {
+    rawData =
+      selectedMetric === "donation"
+        ? donationMonthlyStats
+        : salesMonthlyStats;
+  }
 
   const chartData = groupStats(rawData, period);
-
   const labelName = selectedMetric === "donation" ? "기부금액" : "매출액";
 
   return (
@@ -94,19 +112,15 @@ const DashboardChart = ({ donationDailyStats = [], salesDailyStats = [] }) => {
       <ResponsiveContainer width="100%" height={300}>
         <LineChart
           data={chartData}
-          margin={{ top: 20, right: 10, left: 10, bottom: 30 }}  
+          margin={{ top: 20, right: 10, left: 10, bottom: 30 }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-
           <XAxis dataKey="date" dy={10} />
-
           <YAxis tickFormatter={(v) => `${(v / 10000).toFixed(0)}만`} />
-
           <Tooltip
             formatter={(value) => `${Number(value).toLocaleString()}원`}
             labelFormatter={(label) => `날짜: ${label}`}
           />
-
           <Legend formatter={() => labelName} />
 
           <Line
