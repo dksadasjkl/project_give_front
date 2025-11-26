@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import { useQuery} from '@tanstack/react-query';
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { getDonationProjectDatatilRequest } from '../../../apis/api/Donation/donationDatail';
 import DonationBanner from "../../../components/DonationDtail/DonationBanner/DonationBanner";
@@ -36,6 +36,10 @@ function DonationDetail({ principal }) {
   const [ commentPage, setCommentPage ] = useState(1);
   const [ commentTotalCount, setCommentTotalCount] = useState(0);   // 댓글 전체 수
   const [ commentTotalLoadCount, setCommentTotalLoadCount] = useState(0); // 댓글 총 페이지
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []); 
 
   const getDonationProjectDatatilQuery = useQuery(
     ["getDonationProjectDatatilQuery", donationProjectId],

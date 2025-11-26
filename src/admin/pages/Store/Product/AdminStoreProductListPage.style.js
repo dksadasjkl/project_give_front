@@ -56,6 +56,7 @@ export const thumb = css`
 `;
 
 export const clickable = css`
+  font-weight: 600;
   cursor: pointer;
 
   &:hover {

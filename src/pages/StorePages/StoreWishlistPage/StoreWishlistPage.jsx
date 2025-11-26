@@ -16,7 +16,6 @@ function StoreWishlistPage({ principal }) {
     queryKey: ["getMyStoreWishlistRequest", page],
     queryFn: () => getMyStoreWishlistRequest(page, size),
     keepPreviousData: true,
-    staleTime: 1000 * 60 * 2, // 2분 캐시 유지
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
   });

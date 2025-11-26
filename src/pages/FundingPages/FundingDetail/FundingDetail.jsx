@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import { useQuery} from '@tanstack/react-query';
@@ -42,6 +42,10 @@ function  FundingDetail({ principal }) {
 
   // 리워드
   const [ rewards , setRewards ] = useState([]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const getDonationProjectDatatilQuery = useQuery(
     ["getDonationProjectDatatilQuery", donationProjectId],

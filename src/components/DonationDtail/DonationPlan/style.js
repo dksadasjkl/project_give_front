@@ -54,7 +54,7 @@ export const organizationBox = css`
     padding: 11px 10px 12px 0px;
     border: 1px solid #e5e5e5;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     border-radius: 10px; /* 박스 자체 둥글게 */
 
@@ -71,8 +71,8 @@ export const imgBox = css`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 55px;
-    height: 55px;    
+    width: 70px;
+    height: 60px;    
 
     & > img {
         height: 100%;
