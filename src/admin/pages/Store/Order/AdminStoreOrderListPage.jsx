@@ -28,15 +28,15 @@ const AdminStoreOrderListPage = () => {
 
   const orderStatusMap = {
     READY: "주문 접수",
-    PAID: "결제 완료",
-    SHIPPING: "배송 중",
+    CONFIRMED: "결제 완료",
+    IN_TRANSIT: "배송 중",
     DELIVERED: "배송 완료",
-    CANCELED: "주문 취소",
+    CANCELLED: "주문 취소",
   };
 
   const shippingStatusMap = {
     READY: "배송 준비",
-    SHIPPING: "배송 중",
+    IN_TRANSIT: "배송 중",
     DELIVERED: "배송 완료",
   };
 

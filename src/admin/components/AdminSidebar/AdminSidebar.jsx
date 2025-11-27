@@ -10,14 +10,14 @@ const AdminSidebar = () => {
     { name: "기부 프로젝트 관리", path: "/admin/donation" },
     { name: "펀딩 프로젝트 관리", path: "/admin/funding" },
 
-    { name: "스토어 상품 관리", path: "/admin/store/products" },
-    { name: "스토어 주문 관리", path: "/admin/store/orders" },
-    { name: "스토어 결제 관리", path: "/admin/store/payments" },
-    { name: "스토어 배송 관리", path: "/admin/store/shipping" },
-    { name: "스토어 리뷰 관리", path: "/admin/store/reviews" },
-    { name: "스토어 리뷰 신고 관리", path: "/admin/store/reports" },
-    { name: "스토어 QnA 관리", path: "/admin/store/qna" },
-    { name: "스토어 포인트 관리", path: "/admin/store/points" },
+    { name: "공감가게 상품 관리", path: "/admin/store/products" },
+    { name: "공감가게 주문 관리", path: "/admin/store/orders" },
+    { name: "공감가게 결제 관리", path: "/admin/store/payments" },
+    { name: "공감가게 배송 관리", path: "/admin/store/shipping" },
+    { name: "공감가게 리뷰 관리", path: "/admin/store/reviews" },
+    { name: "공감가게 리뷰 신고 관리", path: "/admin/store/reports" },
+    { name: "공감가게 QnA 관리", path: "/admin/store/qna" },
+    { name: "공감가게 포인트 관리", path: "/admin/store/points" },
     { name: "유저 관리", path: "/admin/users" },
   ];
 

@@ -111,7 +111,7 @@ const AdminFundingRewardManagePage = () => {
 
   return (
     <div css={s.container}>
-      <h1 css={s.title}>🎁 펀딩 리워드 관리</h1>
+      <h1 css={s.title}>펀딩 리워드 관리</h1>
 
       <button
         css={s.addButton}
@@ -187,8 +187,9 @@ const AdminFundingRewardManagePage = () => {
               onChange={(e) => handleUploadImage(e.target.files[0])}
             />
             {uploading && <p>업로드 중...</p>}
+            <div>
 
-            {/* 제목 */}
+            </div>
             <label css={s.label}>리워드명</label>
             <input
               css={s.input}
@@ -197,6 +198,7 @@ const AdminFundingRewardManagePage = () => {
                 setEditReward({ ...editReward, fundingProjectRewardTitle: e.target.value })
               }
             />
+            {/* 제목 */}
 
             {/* 간단 설명 */}
             <label css={s.label}>간단 설명</label>

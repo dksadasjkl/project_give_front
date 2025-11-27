@@ -24,9 +24,9 @@ const PAYMENT_METHOD_MAP = {
 };
 
 const PAYMENT_STATUS_MAP = {
+  PENDING: "결제 대기중",
   SUCCESS: "결제 완료",
   FAILED: "결제 실패",
-  PENDING: "결제 대기중",
 };
 
 const SHIPPING_STATUS_MAP = {

@@ -31,7 +31,7 @@ const AdminStoreProductListPage = () => {
 
   return (
     <div css={s.wrap}>
-      <h1 css={s.title}>스토어 상품 목록</h1>
+      <h1 css={s.title}>공감가게 상품 목록</h1>
 
       <button
         css={s.createButton}

@@ -50,6 +50,7 @@ import AdminStorePointListPage from './admin/pages/Store/Point/AdminStorePointLi
 import AdminUserListPage from './admin/pages/User/AdminUserListPage';
 import AdminUserDetailPage from './admin/pages/User/AdminUserDetailPage';
 import AdminOnlyRoute from './admin/route/AdminOnlyRoute';
+import ScrollToTop from './components/Root/ScrollToTop/ScrollToTop';
 
 function App() {
 
@@ -67,6 +68,8 @@ function App() {
   
   return (
     <RootLayout>
+       {/* 스크롤 초기화 추가 */}
+      <ScrollToTop />
       <RootHeader />  
       <RootContainer>
         <PageContainer>
