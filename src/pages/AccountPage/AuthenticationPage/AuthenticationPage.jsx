@@ -237,13 +237,13 @@ function AuthenticationPage() {
                                     <span onClick={() => setAuthState(2)}>회원가입</span>
                                 </div>
                                  <div css={s.oauth}>
-                                    <a href={`http://${getServerAddress()}/oauth2/authorization/google`}>
+                                    <a href={`https://${getServerAddress()}/oauth2/authorization/google`}>
                                         <img src="https://img.icons8.com/color/512/google-logo.png" alt="google"/>
                                     </a>
-                                    <a href={`http://${getServerAddress()}/oauth2/authorization/kakao`}>
+                                    <a href={`https://${getServerAddress()}/oauth2/authorization/kakao`}>
                                         <img src="https://d1nuzc1w51n1es.cloudfront.net/c9b51919f15c93b05ae8.png" alt="kakao"/>
                                     </a>
-                                    <a href={`http://${getServerAddress()}/oauth2/authorization/naver`}>
+                                    <a href={`https://${getServerAddress()}/oauth2/authorization/naver`}>
                                         <img src="https://d1nuzc1w51n1es.cloudfront.net/6e4f331986317290b3ee.png" alt="naver"/>
                                     </a>
                                 </div>
