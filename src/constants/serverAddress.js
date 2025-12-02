@@ -1,6 +1,6 @@
 export const LOCAL_ADDRESS = 'localhost:8080';
-export const DEPLOYT_ADDRESS = 'project-pet.store';
+export const DEPLOY_ADDRESS = 'give-portfolio.shop';
 
 export default function getServerAddress() {
-    return LOCAL_ADDRESS;
+    return DEPLOY_ADDRESS;
 }

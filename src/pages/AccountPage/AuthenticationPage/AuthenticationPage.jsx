@@ -12,22 +12,22 @@ import FindPasswordModal from "../../../components/Modal/FindPasswordModal";
 
 function AuthenticationPage() {
     const navigate = useNavigate();
-    const [ authState, setAuthState ] = useState(1); // 1 : 로그인 2 : 회원가입
-    // 로그인
-    const [ username, usernameChange ] = useInput(); 
-    const [ password, passwordChange ] = useInput(); 
-    // 회원가입
-     const [ userName, userNameChange, userNameMessage, setUserNameMessage ] = useInput("username");
-     const [ passWord, passWordChange, passWordMessage ] = useInput("password");
+    const [ authState, setAuthState ] = useState(1);
+
+    const [ username, usernameChange ] = useInput();
+    const [ password, passwordChange ] = useInput();
+
+    const [ userName, userNameChange, userNameMessage, setUserNameMessage ] = useInput("username");
+    const [ passWord, passWordChange, passWordMessage ] = useInput("password");
     const [ checkPassword, checkPasswordChange ] = useInput("checkPassword");
     const [ email, emailChange, emailMessage ] = useInput("email");
     const [ name, nameChange, nameMessage ] = useInput("name");
     const [ phone, phoneChange, phoneMessage ] = useInput("phone");
     const [ nickname, nicknameChange, nicknameMessage, setNicknameMessage ] = useInput("nickname");
+
     const [ checkPasswordMessage, setCheckPasswordMessage ] = useState(null);
-    // 아이디 찾기 모달 상태
+
     const [isFindIdModalOpen, setIsFindIdModalOpen] = useState(false);
-    // 비밀번호 찾기 모달 상태
     const [isFindPwModalOpen, setIsFindPwModalOpen] = useState(false);
 
     const authLoginMutation = useMutation({
@@ -36,33 +36,32 @@ function AuthenticationPage() {
         onSuccess: response => {
             const accessToken = response.data;
             localStorage.setItem("AccessToken", accessToken);
-            alert("로그인 완료 되었습니다.")
+            alert("로그인 완료 되었습니다.");
             window.location.replace("/");
         },
         onError: error => {
             alert(error.response.data);
         }
-    })
+    });
 
     const handleLoginSubmit = () => {
         authLoginMutation.mutate({
             username,
             password
-        })
-    }
+        });
+    };
 
     const authSignupMutation = useMutation({
         mutationKey: "authSignupMutation",
         mutationFn: authSignupRequest,
         onSuccess: response => {
-            alert("가입이 완료되었습니다.")
+            alert("가입이 완료되었습니다.");
             navigate("/");
         },
         onError: error => {
             alert(error);
-        } 
+        }
     });
-
 
     const handleSignupSubmit = () => {
         const checkFlags = [
@@ -81,33 +80,23 @@ function AuthenticationPage() {
         authSignupMutation.mutate({
             username: userName,
             password: passWord,
-            name: name,
-            phone: phone,
-            nickname: nickname,
-            email: email,
-        })
-    }
+            name,
+            phone,
+            nickname,
+            email,
+        });
+    };
 
     useEffect(() => {
         if(!checkPassword || !passWord) {
-            setCheckPasswordMessage(() => null);
+            setCheckPasswordMessage(null);
             return;
         }
 
         if(checkPassword === passWord) {
-            setCheckPasswordMessage(() => {
-                return {
-                    type: "success",
-                    text: ""
-                }
-            })
+            setCheckPasswordMessage({ type: "success", text: "" });
         } else {
-            setCheckPasswordMessage(() => {
-                return {
-                    type: "error",
-                    text: "비밀번호가 일치하지 않습니다."
-                }
-            })
+            setCheckPasswordMessage({ type: "error", text: "비밀번호가 일치하지 않습니다." });
         }
     }, [checkPassword, passWord]);
 
@@ -115,163 +104,126 @@ function AuthenticationPage() {
         if(e.key === "Enter") {
             handleLoginSubmit();
         }
-    }
-    const checkUsernameMutation = useMutation({
-    mutationKey: ["checkUsernameMutation"],
-    mutationFn: checkUsernameRequest,
-    onSuccess: (exists) => {
-        if (exists) {
-        setUserNameMessage({
-            type: "error",
-            text: "이미 사용 중인 아이디입니다."
-        });
-        } else {
-        setUserNameMessage({
-            type: "success",
-            text: "사용 가능한 아이디입니다."
-        });
-        }
-    },
+    };
 
-    onError: (error) => {
-        const errors = error.response?.data?.errors;
-           if (errors?.username) {
-        setUserNameMessage({
-            type: "error",
-            text: errors.username
-        });
-        } else {
-        setUserNameMessage({
-            type: "error",
-            text: "중복체크 실패"
-        });
+    const checkUsernameMutation = useMutation({
+        mutationKey: "checkUsernameMutation",
+        mutationFn: checkUsernameRequest,
+        onSuccess: exists => {
+            if (exists) {
+                setUserNameMessage({ type: "error", text: "이미 사용 중인 아이디입니다." });
+            } else {
+                setUserNameMessage({ type: "success", text: "사용 가능한 아이디입니다." });
+            }
+        },
+        onError: error => {
+            const errors = error.response?.data?.errors;
+            if (errors?.username) {
+                setUserNameMessage({ type: "error", text: errors.username });
+            } else {
+                setUserNameMessage({ type: "error", text: "중복체크 실패" });
+            }
         }
-    },
     });
 
     const handleUsernameCheck = () => {
-          if (!userName.trim()) {
-            setUserNameMessage({
-            type: "error",
-            text: "아이디를 입력해주세요."
-            });
+        if (!userName.trim()) {
+            setUserNameMessage({ type: "error", text: "아이디를 입력해주세요." });
             return;
         }
-        checkUsernameMutation.mutate({
-            username:userName
-        })
-    }
-
-    
-    const checkNicknameMutation = useMutation({
-    mutationKey: ["checkNicknameMutation"],
-    mutationFn: checkNicknameRequest, // API 요청 함수
-    onSuccess: (exists) => {
-        if (exists) {
-        setNicknameMessage({
-            type: "error",
-            text: "이미 사용 중인 닉네임입니다."
-        });
-        } else {
-        setNicknameMessage({
-            type: "success",
-            text: "사용 가능한 닉네임입니다."
-        });
-        }
-    },
-    onError: (error) => {
-        // 백엔드 ValidException에서 보내는 field별 메시지 확인
-        const errors = error.response?.data?.errors;
-        if (errors?.nickname) {
-        setNicknameMessage({
-            type: "error",
-            text: errors.nickname
-        });
-        } else {
-        setNicknameMessage({
-            type: "error",
-            text: "중복체크 실패"
-        });
-        }
-    },
-    });
-
-
-    const handleNicknameCheck = () => {
-    if (!nickname.trim()) {
-        setNicknameMessage({
-        type: "error",
-        text: "닉네임을 입력해주세요."
-        });
-        return;
-    }
-    checkNicknameMutation.mutate({
-        nickname:nickname
-    });
+        checkUsernameMutation.mutate({ username: userName });
     };
 
+    const checkNicknameMutation = useMutation({
+        mutationKey: "checkNicknameMutation",
+        mutationFn: checkNicknameRequest,
+        onSuccess: exists => {
+            if (exists) {
+                setNicknameMessage({ type: "error", text: "이미 사용 중인 닉네임입니다." });
+            } else {
+                setNicknameMessage({ type: "success", text: "사용 가능한 닉네임입니다." });
+            }
+        },
+        onError: error => {
+            const errors = error.response?.data?.errors;
+            if (errors?.nickname) {
+                setNicknameMessage({ type: "error", text: errors.nickname });
+            } else {
+                setNicknameMessage({ type: "error", text: "중복체크 실패" });
+            }
+        }
+    });
 
-  return (
-     <div css={s.layout}>
+    const handleNicknameCheck = () => {
+        if (!nickname.trim()) {
+            setNicknameMessage({ type: "error", text: "닉네임을 입력해주세요." });
+            return;
+        }
+        checkNicknameMutation.mutate({ nickname });
+    };
+
+    return (
+        <div css={s.layout}>
             <div css={s.container}>
                 <div css={s.header(authState)}>
                     <div onClick={() => setAuthState(1)}>로그인</div>
                     <div onClick={() => setAuthState(2)}>회원가입</div>
                 </div>
                 <div>
-                    {
-                        authState === 1 ?
-                            <>
-                                <div css={s.inputLayout}>
-                                    <div css={s.input}>
-                                        <AuthPageInput type={"text"} name={"username"} placeholder={"사용자이름"} value={username} onChange={usernameChange} />
-                                        <AuthPageInput type={"password"} name={"password"} placeholder={"비밀번호"} value={password} onChange={passwordChange} onKeyDown={submitHandleKeyDown} />
-                                    </div>
-                                    <button css={s.logInButton} onClick={handleLoginSubmit}>로그인</button>
+                    {authState === 1 ? (
+                        <>
+                            <div css={s.inputLayout}>
+                                <div css={s.input}>
+                                    <AuthPageInput type="text" placeholder="사용자이름" value={username} onChange={usernameChange} />
+                                    <AuthPageInput type="password" placeholder="비밀번호" value={password} onChange={passwordChange} onKeyDown={submitHandleKeyDown} />
                                 </div>
-                                <div css={s.signUp}>
-                                    <span onClick={() => setIsFindIdModalOpen(true)}>아이디 찾기 </span>
-                                    <span>|</span>
-                                    <span onClick={() => setIsFindPwModalOpen(true)}>비밀번호 찾기</span>
-                                    <span>|</span>
-                                    <span onClick={() => setAuthState(2)}>회원가입</span>
-                                </div>
-                                 <div css={s.oauth}>
-                                    <a href={`https://${getServerAddress()}/oauth2/authorization/google`}>
-                                        <img src="https://img.icons8.com/color/512/google-logo.png" alt="google"/>
-                                    </a>
-                                    <a href={`https://${getServerAddress()}/oauth2/authorization/kakao`}>
-                                        <img src="https://d1nuzc1w51n1es.cloudfront.net/c9b51919f15c93b05ae8.png" alt="kakao"/>
-                                    </a>
-                                    <a href={`https://${getServerAddress()}/oauth2/authorization/naver`}>
-                                        <img src="https://d1nuzc1w51n1es.cloudfront.net/6e4f331986317290b3ee.png" alt="naver"/>
-                                    </a>
-                                </div>
-                            </> 
-                            : 
-                            <>
-                                <div css={s.signUpLayout}>
-                                    <AuthPageInput type={"text"} name={"username"} placeholder={"사용자이름"} value={userName} onChange={userNameChange} message={userNameMessage} />
-                                     <button css={s.idCheckButton} onClick={handleUsernameCheck}>중복체크</button>
-                                </div>
-                                <div css={s.signUpLayoutInputList}>
-                                    <AuthPageInput type={"password"} name={"password"} placeholder={"비밀번호"} value={passWord} onChange={passWordChange} message={passWordMessage} />
-                                    <AuthPageInput type={"password"} name={"checkPassword"} placeholder={"비밀번호 확인"} value={checkPassword} onChange={checkPasswordChange} message={checkPasswordMessage} />
-                                    <AuthPageInput type={"text"} name={"name"} placeholder={"성명"} value={name} onChange={nameChange} message={nameMessage} />
-                                </div>
-                                 <div css={s.signUpLayout}>
-                                    <AuthPageInput type={"text"} name={"nickname"} placeholder={"닉네임"} value={nickname} onChange={nicknameChange} message={nicknameMessage} />
-                                    <button css={s.idCheckButton} onClick={handleNicknameCheck}>중복체크</button>
-                                </div>
-                                <div css={s.signUpLayoutInputList}>
-                                    <AuthPageInput type={"text"} name={"phone"} placeholder={"전화번호"} value={phone} onChange={phoneChange} message={phoneMessage} />
-                                    <AuthPageInput type={"text"} name={"email"} placeholder={"이메일"} value={email} onChange={emailChange} message={emailMessage} />
-                                </div>
-                                <div css={s.regiseterButton}>
-                                    <button onClick={handleSignupSubmit}>가입하기</button>
-                                </div>
-                            </> 
-                    }
+                                <button css={s.logInButton} onClick={handleLoginSubmit}>로그인</button>
+                            </div>
+                            <div css={s.signUp}>
+                                <span onClick={() => setIsFindIdModalOpen(true)}>아이디 찾기 </span>
+                                <span>|</span>
+                                <span onClick={() => setIsFindPwModalOpen(true)}>비밀번호 찾기</span>
+                                <span>|</span>
+                                <span onClick={() => setAuthState(2)}>회원가입</span>
+                            </div>
+                            <div css={s.oauth}>
+                                <a href={`https://${getServerAddress()}/oauth2/authorization/google`}>
+                                    <img src="https://img.icons8.com/color/512/google-logo.png" alt="google"/>
+                                </a>
+                                <a href={`https://${getServerAddress()}/oauth2/authorization/kakao`}>
+                                    <img src="https://d1nuzc1w51n1es.cloudfront.net/c9b51919f15c93b05ae8.png" alt="kakao"/>
+                                </a>
+                                <a href={`https://${getServerAddress()}/oauth2/authorization/naver`}>
+                                    <img src="https://d1nuzc1w51n1es.cloudfront.net/6e4f331986317290b3ee.png" alt="naver"/>
+                                </a>
+                            </div>
+                        </>
+                    )
+                    : (
+                        <>
+                            <div css={s.signUpLayout}>
+                                <AuthPageInput type="text" placeholder="사용자이름" value={userName} onChange={userNameChange} message={userNameMessage} />
+                                <button css={s.idCheckButton} onClick={handleUsernameCheck}>중복체크</button>
+                            </div>
+                            <div css={s.signUpLayoutInputList}>
+                                <AuthPageInput type="password" placeholder="비밀번호" value={passWord} onChange={passWordChange} message={passWordMessage} />
+                                <AuthPageInput type="password" placeholder="비밀번호 확인" value={checkPassword} onChange={checkPasswordChange} message={checkPasswordMessage} />
+                                <AuthPageInput type="text" placeholder="성명" value={name} onChange={nameChange} message={nameMessage} />
+                            </div>
+                            <div css={s.signUpLayout}>
+                                <AuthPageInput type="text" placeholder="닉네임" value={nickname} onChange={nicknameChange} message={nicknameMessage} />
+                                <button css={s.idCheckButton} onClick={handleNicknameCheck}>중복체크</button>
+                            </div>
+                            <div css={s.signUpLayoutInputList}>
+                                <AuthPageInput type="text" placeholder="전화번호" value={phone} onChange={phoneChange} message={phoneMessage} />
+                                <AuthPageInput type="text" placeholder="이메일" value={email} onChange={emailChange} message={emailMessage} />
+                            </div>
+                            <div css={s.regiseterButton}>
+                                <button onClick={handleSignupSubmit}>가입하기</button>
+                            </div>
+                        </>
+                    )}
+
                     <FindIdModal
                         isOpen={isFindIdModalOpen}
                         onClose={() => setIsFindIdModalOpen(false)}
@@ -283,7 +235,7 @@ function AuthenticationPage() {
                 </div>
             </div>
         </div>
-  )
+    );
 }
 
-export default AuthenticationPage
+export default AuthenticationPage;
