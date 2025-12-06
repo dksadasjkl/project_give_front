@@ -236,8 +236,43 @@ Swiper / Modal / DatePicker / Quill | UI 요소
 
 ---
 
-# 📆 프로젝트 일정  
-👉 일정표 이미지 삽입
+# 📆 프로젝트 일정
+
+## 🟥 1단계 — 백엔드 기본 구조 구축 (2025.09.09 ~ 09.20)
+- Spring Boot 초기 세팅, 회원가입/로그인 API  
+- JWT · Security 구축  
+- 기부 프로젝트 CRUD 개발  
+- 댓글/참여내역 API 구현  
+
+## 🟧 2단계 — OAuth2 · 유효성 · 계정 기능 (2025.09.21 ~ 09.29)
+- OAuth2(Google/Naver/Kakao) 로그인  
+- AOP 기반 유효성 검증  
+- 비밀번호 초기화(메일) 기능  
+
+## 🟨 3단계 — 펀딩 기능 개발 (2025.09.30 ~ 10.05)
+- 펀딩 CRUD, 리워드 기능  
+- 프로젝트 타입 구분(DONATION/FUNDING)
+
+## 🟩 4단계 — 스토어 기능 전체 구축 (2025.10.10 ~ 10.31)
+- 상품/리뷰/QnA/장바구니/주문/찜 기능  
+- PortOne 결제 연동  
+- 포인트 적립 기능  
+- 배송 자동 업데이트(Scheduler)  
+
+## 🟦 5단계 — 관리자(Admin) · 대시보드 개발 (2025.11.01 ~ 11.22)
+- 관리자 페이지 전체 기능  
+- Dashboard 통계 API 및 UI 완성  
+
+## 🟪 6단계 — 프론트엔드 전체 개발 (2025.09.22 ~ 12.06)
+- 모든 화면 UI 개발  
+- React Query · Recoil 상태관리  
+- KakaoMap · Firebase 이미지 업로드 적용  
+
+## 🔵 7단계 — 배포/CI/CD/무중단 서버 구축 (2025.11.28 ~ 12.06)
+- Docker · Nginx 기반 Blue/Green 배포  
+- GitHub Actions CI/CD  
+- CloudFront · S3 · Route53 배포  
+- 최종 무중단 배포 성공  
 
 <br/><br/>
 
