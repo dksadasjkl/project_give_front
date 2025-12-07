@@ -349,7 +349,8 @@ Swiper / Modal / DatePicker / Quill | UI 요소
 
 ### 📐 ERD 설계도  
 유저
-![Image](https://github.com/user-attachments/assets/a56d8c6d-bf84-4b4b-b422-a36fdd830fef)
+
+![Image](https://github.com/user-attachments/assets/d38a86d3-c484-4ad5-b141-4e5b3dd63766)
 기부/펀딩
 ![Image](https://github.com/user-attachments/assets/28ebb952-3994-4514-bbc8-2b815c7bfc62)
 주문/결제
