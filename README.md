@@ -250,7 +250,7 @@
 ---
 
 ### 📊 아키텍처 다이어그램  
-[배포 아키텍처.pdf](https://github.com/user-attachments/files/24014210/default.pdf)
+<img width="1471" height="1027" alt="Image" src="https://github.com/user-attachments/assets/25643049-b0d4-4dce-9494-9015b0891bfe" />
 
 <br/><br/>
 
@@ -336,7 +336,7 @@ Swiper / Modal / DatePicker / Quill | UI 요소
 ---
 
 # 📆 프로젝트 일정
-[기부 프로젝트 일정.pdf](https://github.com/user-attachments/files/24014208/default.pdf)
+<img width="1568" height="879" alt="Image" src="https://github.com/user-attachments/assets/64cb4939-b3a4-4d74-ab3c-29f4174e1821" />
 
 <br/><br/>
 
@@ -364,7 +364,7 @@ Swiper / Modal / DatePicker / Quill | UI 요소
 # 📋 메뉴 구조도
 
 ### 사용자 + 관리자 메뉴 구조  
-[GIVE_메뉴 구조도.pdf](https://github.com/user-attachments/files/24014206/GIVE_.pdf)
+<img width="2052" height="1066" alt="Image" src="https://github.com/user-attachments/assets/5db7ca5c-7db6-45d0-ad94-e8d2885ef5e0" />
 
 <br/><br/>
 
