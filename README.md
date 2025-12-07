@@ -117,7 +117,106 @@
 - API URI 규칙 정의  
 - 네이밍 통일 규칙 적용  
 
-👉 필요 시 Notion 문서 링크 추가 가능
+<a href="https://mangrove-comic-a17.notion.site/Git-Commit-Message-Convention-8e5410868b7d4bb6a9e61e976d638963">📍 커밋 컨벤션</a>
+
+<div>
+<pre background-color="#dbdbdb">
+<p>
+1. 커밋 유형 지정
+    - 커밋 유형은 영어 대문자로 작성하기
+    - 커밋 유형
+    - Feat : 새로운 기능 추가
+    - Fix : 버그 수정
+    - Docs : 문서 수정
+    - Style : 코드 formatting, 세미콜론 누락, 코드 자체의 변경이 없는 경우
+    - Refactor : 코드 리팩토링
+    - Test : 테스트 코드, 리팩토링 테스트 코드 추가
+    - Chore : 패키지 매니저 수정, 그 외 기타 수정 ex) .gitignore
+    - Design : CSS 등 사용자 UI 디자인 변경
+    - Comment : 필요한 주석 추가 및 변경
+    - Rename : 파일 또는 폴더 명을 수정하거나 옮기는 작업만인 경우
+    - Remove : 파일을 삭제하는 작업만 수행한 경우
+    - !BREAKING CHANGE : 커다란 API 변경의 경우
+    - !HOTFIX : 급하게 치명적인 버그를 고쳐야 하는 경우
+
+🧾 2. 제목과 본문을 빈행으로 분리 - 커밋 유형 이후 제목과 본문은 한글로 작성하여 내용이 잘 전달될 수 있도록 할 것 - 본문에는 변경한 내용과 이유 설명 (어떻게보다는 무엇 & 왜를 설명)
+
+#️⃣ 3. 제목 첫 글자는 대문자로, 끝에는 . 금지
+
+↩️ 4. 제목은 영문 기준 50자 이내로 할 것
+
+⏺️ 5. 자신의 코드가 직관적으로 바로 파악할 수 있다고 생각하지 말자
+
+👆 6. 여러가지 항목이 있다면 글머리 기호를 통해 가독성 높이기
+
+</p>
+</pre>
+</div>
+
+<h3>
+<a href="https://mangrove-comic-a17.notion.site/Code-Convention-ed0bf7dc4b974f17acae503ba05efc24?pvs=74">📍 코드 컨벤션</a>
+</h3>
+<div>
+<pre>
+<p>
+🛼 문자열을 처리할 때는 쌍따옴표를 사용하도록 합니다.
+
+🐫 문장이 종료될 때는 세미콜론을 붙여줍니다.
+
+💄 함수명, 변수명은 카멜케이스로 작성합니다.
+
+🐫 가독성을 위해 한 줄에 하나의 문장만 작성합니다.
+
+❓ 주석은 설명하려는 구문에 맞춰 들여쓰기 합니다.
+
+🔠 연산자 사이에는 공백을 추가하여 가독성을 높입니다.
+
+🔢 콤마 다음에 값이 올 경우 공백을 추가하여 가독성을 높입니다.
+
+💬 생성자 함수명의 맨 앞글자는 대문자로 합니다.
+
+🔚 var는 절대 사용하지 않는다. (const를 let 보다 위에 선언한다)
+
+👆 const와 let은 사용 시점에 선언 및 할당을 한다. (함수는 변수 선언문 다음에 오도록한다.)
+
+✏️ 외부 모듈과 내부 모듈을 구분하여 사용한다.
+
+🧮 배열과 객체는 반드시 리터럴로 선언한다. (new 사용 X)
+
+📠 배열 복사 시 반복문을 사용하지 않는다.
+
+😎 배열의 시작 괄호 안에 요소가 줄 바꿈으로 시작되었다면 끝 괄호 이전에도 일관된 줄 바꿈 해야한다. (일관되게 모두 줄 바꿈을 해주어야 한다.)
+
+🧶 객체의 프로퍼티가 1개인 경우에만 한 줄 정의를 허용하며, 2개 이상일 경우에는 개행을 강제한다. (객체 리터럴 정의 시 콜론 앞은 공백을 허용하지 않음 콜론 뒤는 항상 공백을 강제)
+
+🧂 메서드 문법 사용 시 메서드 사이에 개행을 추가한다.
+
+🌭 화살표 함수의 파라미터가 하나이면 괄호를 생략한다.
+
+🍳 변수 등을 조합해서 문자열을 생성하는 경우 템플릿 문자열을 이용한다.
+
+🧇 변수 등을 조합해서 문자열을 생성하는 경우 템플릿 문자열을 이용한다.
+
+🥞 wildcard import는 사용하지 않는다. (import문으로부터 직접 export하지 않는다.)
+
+🥖 한 줄짜리 블록일 경우라도 {}를 생략하지 않으며 명확히 줄 바꿈 하여 사용한다.
+
+🥯 switch-case 사용 시 첫 번째 case문을 제외하고 case문 사용 이전에 개행한다.
+
+🥐 삼중 등호 연산자인 ===, !==만 사용한다.
+
+🚐 반복문 사용은 일반화된 순회 메서드 사용을 권장한다.
+
+🚑 람다함수 안에서 밖에 있는 변수를 사용하지 말라
+
+🚚 코드 블럭 주석 처리를 위해서는 한 줄 주석을 사용한다. 여러 줄 주석을 작성할 때는 \*의 들여쓰기를 맞춘다. 주석의 첫 줄과 마지막 줄은 비워둠
+
+💫 시작 괄호 바로 다음과 끝 괄호 바로 이전에 공백이 있으면 안 된다.
+
+</p>
+</pre>
+</div>
+
 
 <br/><br/>
 
@@ -151,7 +250,7 @@
 ---
 
 ### 📊 아키텍처 다이어그램  
-👉 이 자리에 Figma로 제작한 인프라 구조도 삽입
+[배포 아키텍처.pdf](https://github.com/user-attachments/files/24014210/default.pdf)
 
 <br/><br/>
 
@@ -237,42 +336,7 @@ Swiper / Modal / DatePicker / Quill | UI 요소
 ---
 
 # 📆 프로젝트 일정
-
-## 🟥 1단계 — 백엔드 기본 구조 구축 (2025.09.09 ~ 09.20)
-- Spring Boot 초기 세팅, 회원가입/로그인 API  
-- JWT · Security 구축  
-- 기부 프로젝트 CRUD 개발  
-- 댓글/참여내역 API 구현  
-
-## 🟧 2단계 — OAuth2 · 유효성 · 계정 기능 (2025.09.21 ~ 09.29)
-- OAuth2(Google/Naver/Kakao) 로그인  
-- AOP 기반 유효성 검증  
-- 비밀번호 초기화(메일) 기능  
-
-## 🟨 3단계 — 펀딩 기능 개발 (2025.09.30 ~ 10.05)
-- 펀딩 CRUD, 리워드 기능  
-- 프로젝트 타입 구분(DONATION/FUNDING)
-
-## 🟩 4단계 — 스토어 기능 전체 구축 (2025.10.10 ~ 10.31)
-- 상품/리뷰/QnA/장바구니/주문/찜 기능  
-- PortOne 결제 연동  
-- 포인트 적립 기능  
-- 배송 자동 업데이트(Scheduler)  
-
-## 🟦 5단계 — 관리자(Admin) · 대시보드 개발 (2025.11.01 ~ 11.22)
-- 관리자 페이지 전체 기능  
-- Dashboard 통계 API 및 UI 완성  
-
-## 🟪 6단계 — 프론트엔드 전체 개발 (2025.09.22 ~ 12.06)
-- 모든 화면 UI 개발  
-- React Query · Recoil 상태관리  
-- KakaoMap · Firebase 이미지 업로드 적용  
-
-## 🔵 7단계 — 배포/CI/CD/무중단 서버 구축 (2025.11.28 ~ 12.06)
-- Docker · Nginx 기반 Blue/Green 배포  
-- GitHub Actions CI/CD  
-- CloudFront · S3 · Route53 배포  
-- 최종 무중단 배포 성공  
+[기부 프로젝트 일정.pdf](https://github.com/user-attachments/files/24014208/default.pdf)
 
 <br/><br/>
 
@@ -281,10 +345,17 @@ Swiper / Modal / DatePicker / Quill | UI 요소
 # 📄 API 명세서 & ERD
 
 ### 🛰 API 명세서  
-👉 Postman 링크 삽입
+[Postman 링크 삽입](https://documenter.getpostman.com/view/32355208/2sB3dMxWwB)
 
 ### 📐 ERD 설계도  
-👉 ERD 이미지 삽입
+유저
+![Image](https://github.com/user-attachments/assets/a56d8c6d-bf84-4b4b-b422-a36fdd830fef)
+기부/펀딩
+![Image](https://github.com/user-attachments/assets/28ebb952-3994-4514-bbc8-2b815c7bfc62)
+주문/결제
+![Image](https://github.com/user-attachments/assets/50d41869-2bdd-411c-97b8-3131046b81b5)
+스토어(공감가게)
+![Image](https://github.com/user-attachments/assets/c7096a6a-dcf2-4355-9801-c07c4a31f810)
 
 <br/><br/>
 
@@ -292,11 +363,8 @@ Swiper / Modal / DatePicker / Quill | UI 요소
 
 # 📋 메뉴 구조도
 
-### 사용자 메뉴 구조  
-👉 이미지 삽입
-
-### 관리자 메뉴 구조  
-👉 이미지 삽입
+### 사용자 + 관리자 메뉴 구조  
+[GIVE_메뉴 구조도.pdf](https://github.com/user-attachments/files/24014206/GIVE_.pdf)
 
 <br/><br/>
 
