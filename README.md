@@ -1,6 +1,6 @@
 # 🎁 GIVE – Donation · Funding · Store Platform  
-> **기부·펀딩·스토어가 하나로 통합된 All-in-One 사회공헌 플랫폼**  
-> 기부 · 펀딩 · 스토어 · 관리자 · Blue/Green 무중단 배포까지 포함한 풀스택 통합 플랫폼
+> **기부·펀딩·스토어·Admin·무중단 배포까지 포함한 실서비스 수준의 풀스택 사회공헌 플랫폼**  
+> Donation · Funding · Store · Admin · Blue/Green Deploy · OAuth2 · PortOne 결제 · Kakao Map
 
 <br/>
 
@@ -153,24 +153,26 @@ Back-End 전반의 비즈니스 로직, Front-End UI/UX까지
 # 🛠 기술 스택 (아이콘 포함)
 
 ## ✔ Back-End  
-![Java](https://img.shields.io/badge/Java-11-blue)  
-![Spring Boot](https://img.shields.io/badge/SpringBoot-2.7-green)  
-![Spring Security](https://img.shields.io/badge/Spring%20Security-JWT-brightgreen)  
-![MyBatis](https://img.shields.io/badge/MyBatis-Mapper-red)  
-![MySQL](https://img.shields.io/badge/MySQL-RDS-blue)  
-![AWS](https://img.shields.io/badge/AWS-EC2%20%7C%20S3%20%7C%20RDS-orange)  
-![Docker](https://img.shields.io/badge/Docker-Blue%2FGreen-lightgrey)  
-
----
+![Java](https://img.shields.io/badge/Java-11-blue) 
+![SpringBoot](https://img.shields.io/badge/SpringBoot-2.7-brightgreen)
+![Security](https://img.shields.io/badge/Security-JWT-yellow)
+![OAuth2](https://img.shields.io/badge/OAuth2-Google%20%7C%20Kakao%20%7C%20Naver-lightblue)
+![MyBatis](https://img.shields.io/badge/MyBatis-Mapper-red)
+![MySQL](https://img.shields.io/badge/MySQL-RDS-blue)
+![Firebase](https://img.shields.io/badge/Firebase-Storage-orange)
+![AWS](https://img.shields.io/badge/AWS-EC2%20S3%20RDS-orange)
+![Docker](https://img.shields.io/badge/Docker-Blue%2FGreen-lightgrey)
 
 ## ✔ Front-End  
-![React](https://img.shields.io/badge/React-18-blue)  
-![React Query](https://img.shields.io/badge/React%20Query-Cache-red)  
-![Recoil](https://img.shields.io/badge/Recoil-State-lightblue)  
-![Emotion](https://img.shields.io/badge/Emotion-CSS-purple)  
-![PortOne](https://img.shields.io/badge/PortOne-Payment-yellow)  
-![Kakao Maps](https://img.shields.io/badge/Kakao-Map-black)  
-![Firebase](https://img.shields.io/badge/Firebase-Storage-yellow)  
+![React](https://img.shields.io/badge/React-18-blue)
+![Query](https://img.shields.io/badge/React%20Query-Cache-red)
+![Recoil](https://img.shields.io/badge/Recoil-State-lightblue)
+![Emotion](https://img.shields.io/badge/Emotion-CSS-purple)
+![PortOne](https://img.shields.io/badge/PortOne-Payment-yellow)
+![Kakao](https://img.shields.io/badge/Kakao-Map-black)
+![Firebase](https://img.shields.io/badge/Firebase-Upload-orange)
+![Recharts](https://img.shields.io/badge/Recharts-Chart-pink)
+
 
 <br/><br/>
 
@@ -208,7 +210,9 @@ Back-End 전반의 비즈니스 로직, Front-End UI/UX까지
 ---
 
 # 🖥 화면 구현  
-> **GIF가 많아, 카테고리별로 접히는 <details> 구조로 깔끔하게 정리했습니다.**
+> 사용자 · 관리자 전체 기능을 **실제 동작 화면(GIF)** 으로 정리했습니다.  
+> UI/UX 구조, 결제 흐름, 지도 기반 기능, 리뷰/신고, 배송·포인트 운영까지  
+> **서비스 전반의 기능 흐름을 한눈에 파악할 수 있습니다.**
 
 ---
 
@@ -519,7 +523,8 @@ GIVE 프로젝트는 지금까지 진행한 프로젝트들 중
 이 모든 영역을 직접 만들어보며  
 **“풀스택 개발자”로서의 자신감과 방향성을 확실히 잡은 프로젝트**였습니다.
 
-앞으로도 이 경험을 기반으로 더 큰 프로젝트와 실무 수준의 기술에 도전할 계획입니다.
+앞으로도 확장성과 안정성을 고려한 설계를 바탕으로  
+더 완성도 높은 서비스를 개발하고자 합니다.
 
 </details>
 
